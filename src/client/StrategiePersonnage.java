@@ -1,5 +1,4 @@
 package client;
-//Yaakoub ferme ta gueule ! fegdv
 
 import java.awt.Point;
 import java.rmi.RemoteException;
