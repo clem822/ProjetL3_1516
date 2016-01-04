@@ -60,7 +60,13 @@ public class Constantes {
 	 * possible. 
 	 */
 	public static final int DISTANCE_MIN_INTERACTION = 2;
-
+	
+	/**
+	 * Distance minimale entre deux elements pour qu'une interaction à distance soit
+	 * possible. 
+	 */
+	public static final int DISTANCE_MIN_INTERACTION_DIST = 10;
+	
 	/**
 	 * Abscisse minimale de l'arene.
 	 */

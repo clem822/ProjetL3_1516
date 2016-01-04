@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.HashMap;
 
-import client.StrategieDeBase;
+import client.StrategieDeLoin;
 import logger.LoggerProjet;
 import serveur.element.Caracteristique;
 import utilitaires.Calculs;
@@ -15,12 +15,12 @@ import utilitaires.Constantes;
  * Lance une Console avec un Element sur l'Arene. 
  * A lancer apres le serveur, eventuellement plusieurs fois.
  */
-public class LancePersonnage {
+public class LancePersoDistance {
 	
 	private static String usage = "USAGE : java " + LancePersonnage.class.getName() + " [ port [ ipArene ] ]";
 
 	public static void main(String[] args) {
-		String nom = "Johnny";
+		String nom = "Luc";
 		
 		//new thing
 		// TODO remplacer la ligne suivante par votre numero de groupe
@@ -78,7 +78,7 @@ public class LancePersonnage {
 			
 			Point position = Calculs.positionAleatoireArene();
 			
-			new StrategieDeBase(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+			new StrategieDeLoin(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
 			logger.info("Lanceur", "Creation du personnage reussie");
 			
 		} catch (Exception e) {
