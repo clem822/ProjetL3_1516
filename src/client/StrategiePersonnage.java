@@ -1,5 +1,6 @@
 package client;
 //Yaakoub ferme ta gueule !
+//clement je t'obei car tu est le chef de projet :'(
 
 import java.awt.Point;
 import java.rmi.RemoteException;
