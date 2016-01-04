@@ -3,14 +3,18 @@ package interfacegraphique.interfacesimple;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -192,6 +196,15 @@ public class AreneJPanel extends JPanel {
 			Polygon p = new Polygon(); // triangle
 			p = creeTriangle(coordX + ELEMENT_SIZE/2, coordY + ELEMENT_SIZE/2 - 1, ELEMENT_SIZE);
 			g.fillPolygon(p);
+			/*Image logo;
+			try {
+				logo = ImageIO.read(new File("images/potion2.png"));
+				System.out.println("width : " + logo.getWidth(this) + " / height : " + logo.getHeight(this));
+				g.drawImage(logo, coordX - logo.getWidth(this) / 2, coordY - logo.getHeight(this) / 2, null);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}*/
 		}
 	}
 
