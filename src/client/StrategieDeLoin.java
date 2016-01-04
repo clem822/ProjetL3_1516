@@ -33,20 +33,9 @@ public class StrategieDeLoin extends StrategiePersonnage {
 			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
 			int nbTours, Point position, LoggerProjet logger) {
 		
-		super();
+		super(ipArene, port, ipConsole, new Personnage(nom, groupe, caracts), nbTours, position, logger);
 		
-		logger.info("Lanceur", "Creation de la console...");
 		
-		try {
-			console = new Console(ipArene, port, ipConsole, this, 
-					new Personnage(nom, groupe, caracts), 
-					nbTours, position, logger);
-			logger.info("Lanceur", "Creation de la console reussie");
-			
-		} catch (Exception e) {
-			logger.info("Personnage", "Erreur lors de la creation de la console : \n" + e.toString());
-			e.printStackTrace();
-		}
 	}
 	
 	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
