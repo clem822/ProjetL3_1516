@@ -57,4 +57,12 @@ public class Personnage extends Element {
 		Integer vie = caracts.get(Caracteristique.VIE);
 		return vie != null && vie > 0;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

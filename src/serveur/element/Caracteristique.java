@@ -8,6 +8,9 @@ import java.util.HashMap;
  */
 public enum Caracteristique {
 	
+	
+	//MANGE("Mange", "MAN", 0, -1, -10),
+	
 	/**
 	 * Vie : nombre de points de vie.
 	 */
