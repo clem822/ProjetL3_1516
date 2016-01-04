@@ -9,7 +9,6 @@ import java.util.HashMap;
 
 
 
-import client.controle.Console;
 import logger.LoggerProjet;
 import serveur.IArene;
 import serveur.element.Caracteristique;

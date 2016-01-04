@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 import client.controle.Console;
 import logger.LoggerProjet;
-import serveur.element.Caracteristique;
 import serveur.element.Personnage;
 
 /**

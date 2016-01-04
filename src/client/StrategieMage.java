@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 
-import client.controle.Console;
 import logger.LoggerProjet;
 import serveur.IArene;
 import serveur.element.Caracteristique;
@@ -14,7 +13,7 @@ import serveur.element.Potion;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
-public class StrategieDeLoin extends StrategiePersonnage {
+public class StrategieMage extends StrategiePersonnage {
 
 
 
@@ -29,7 +28,7 @@ public class StrategieDeLoin extends StrategiePersonnage {
 	 * @param position position initiale du personnage dans l'arene
 	 * @param logger gestionnaire de log
 	 */
-	public StrategieDeLoin(String ipArene, int port, String ipConsole, 
+	public StrategieMage(String ipArene, int port, String ipConsole, 
 			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
 			int nbTours, Point position, LoggerProjet logger) {
 		
@@ -77,17 +76,19 @@ public class StrategieDeLoin extends StrategiePersonnage {
 					
 				if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION_DIST) { // si suffisamment proches
 					// j'interagis directement
-					if(elemPlusProche instanceof Potion) { // potion
+					if(elemPlusProche instanceof Personnage) { // personnage
+						// duel
+						console.setPhrase("Tu vas faire bruler  " + elemPlusProche.getNom());
+						arene.lanceAttaqueBouleDeFeu(refRMI, refCible);
+					} else if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // potion
 						// ramassage
 						console.setPhrase("Je ramasse une potion");
 						arene.ramassePotion(refRMI, refCible);
-
-					} else { // personnage
-						// duel
-						console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
-						arene.lanceAttaqueBouleDeFeu(refRMI, refCible);
+					} else { // si voisins, mais plus eloignes
+						// je vais vers le plus proche
+						console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
+						arene.deplace(refRMI, refCible);
 					}
-					
 				} else { // si voisins, mais plus eloignes
 					// je vais vers le plus proche
 					console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
