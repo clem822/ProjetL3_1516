@@ -1,7 +1,5 @@
 package client;
 
-//Yaakousre qu'il est con mais il le saura//Un homme avertit en vaux deux 
-
 import java.awt.Point;
 import java.rmi.RemoteException;
 import java.util.HashMap;
