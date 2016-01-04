@@ -65,8 +65,10 @@ public class LancePoison {
 				
 				
 				caractsPotion.put(Caracteristique.VIE, -80);
-				caractsPotion.put(Caracteristique.FORCE, -80);
-				caractsPotion.put(Caracteristique.INITIATIVE, -80);
+				caractsPotion.put(Caracteristique.FORCE, 0);
+				caractsPotion.put(Caracteristique.INITIATIVE, 0);
+				caractsPotion.put(Caracteristique.MANA, 0);
+				
 				
 				// ajout du poison
 				arene.ajoutePotion(new Potion(nom, groupe, caractsPotion), Calculs.positionAleatoireArene());
