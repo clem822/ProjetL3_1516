@@ -7,9 +7,7 @@ import java.util.HashMap;
  *
  */
 public enum Caracteristique {
-	
 
-	
 	/**
 	 * Vie : nombre de points de vie.
 	 */
@@ -28,7 +26,7 @@ public enum Caracteristique {
 	/**
 	 * Mana : nombre de points de mana.
 	 */
-	MANA("Mana", "MAN", 0, 100, 100);
+	MANA("Mana", "MANA", 0, 100, 100);
 	
 	/**
 	 * Nom complet.
