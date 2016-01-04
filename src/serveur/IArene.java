@@ -177,7 +177,7 @@ public interface IArene extends Remote {
 	public boolean lanceAttaque(int refRMI, int refAdv) throws RemoteException;
 	
 	/**
-	 * Execute un duel entre le personnage correspondant a la console donnee 
+	 * Execute un lance de Boule De Feu entre le personnage correspondant a la console donnee 
 	 * et l'adversaire correspondant a la reference RMI donnee.
 	 * Le duel echoue si une action a deja ete executee a ce tour par 
 	 * l'attaquant, si les personnages sont trop eloignes, si l'un des deux 
@@ -187,7 +187,7 @@ public interface IArene extends Remote {
 	 * @return vrai si l'action a bien eu lieu, faux sinon
 	 * @throws RemoteException
 	 */
-	public boolean lanceAttaqueDistance(int refRMI, int refAdv) throws RemoteException;
+	public boolean lanceAttaqueBouleDeFeu(int refRMI, int refAdv) throws RemoteException;
 	
 	/**
 	 * Deplace le personnage correspondant a la console donne vers l'element 

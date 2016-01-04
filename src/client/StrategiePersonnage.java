@@ -30,8 +30,15 @@ public abstract class StrategiePersonnage {
 	 */
 	public StrategiePersonnage() {
 	}
-	
-	public void executeStrategie(HashMap<Integer, Point> voisins) throws RemoteException {
-	}
+	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
+	// une proposition de strategie (simple) est donnee ci-dessous
+	/** 
+	 * Decrit la strategie.
+	 * Les methodes pour evoluer dans le jeu doivent etre les methodes RMI
+	 * de Arene et de ConsolePersonnage. 
+	 * @param voisins element voisins de cet element (elements qu'il voit)
+	 * @throws RemoteException
+	 */
+	public abstract void executeStrategie(HashMap<Integer, Point> voisins) throws RemoteException;
 	
 }

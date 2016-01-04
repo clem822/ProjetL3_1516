@@ -75,7 +75,7 @@ public class LancePersoDistance {
 			// seule la force n'a pas sa valeur par defaut (exemple)
 			caracts.put(Caracteristique.FORCE, 
 					Calculs.valeurCaracAleatoire(Caracteristique.FORCE)); 
-			
+
 			Point position = Calculs.positionAleatoireArene();
 			
 			new StrategieDeLoin(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);

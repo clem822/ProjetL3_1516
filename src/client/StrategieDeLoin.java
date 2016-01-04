@@ -50,15 +50,16 @@ public class StrategieDeLoin extends StrategiePersonnage {
 	}
 	
 	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
-		// une proposition de strategie (simple) est donnee ci-dessous
-		/** 
-		 * Decrit la strategie.
-		 * Les methodes pour evoluer dans le jeu doivent etre les methodes RMI
-		 * de Arene et de ConsolePersonnage. 
-		 * @param voisins element voisins de cet element (elements qu'il voit)
-		 * @throws RemoteException
-		 */
-		public void executeStrategie(HashMap<Integer, Point> voisins) throws RemoteException {
+	// une proposition de strategie (simple) est donnee ci-dessous
+	/** 
+	 * Decrit la strategie.
+	 * Les methodes pour evoluer dans le jeu doivent etre les methodes RMI
+	 * de Arene et de ConsolePersonnage. 
+	 * @param voisins element voisins de cet element (elements qu'il voit)
+	 * @throws RemoteException
+	 */
+	@Override
+	public void executeStrategie(HashMap<Integer, Point> voisins) throws RemoteException {
 			// arene
 			IArene arene = console.getArene();
 			
@@ -95,7 +96,7 @@ public class StrategieDeLoin extends StrategiePersonnage {
 					} else { // personnage
 						// duel
 						console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
-						arene.lanceAttaqueDistance(refRMI, refCible);
+						arene.lanceAttaqueBouleDeFeu(refRMI, refCible);
 					}
 					
 				} else { // si voisins, mais plus eloignes

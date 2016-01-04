@@ -21,6 +21,7 @@ import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Personnage;
 import serveur.element.Potion;
+import serveur.interaction.BouleDeFeu;
 import serveur.interaction.Deplacement;
 import serveur.interaction.Duel;
 import serveur.interaction.Ramassage;
@@ -796,7 +797,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 	}
 	
 	
-	public boolean lanceAttaqueDistance(int refRMI, int refRMIAdv) throws RemoteException {
+	public boolean lanceAttaqueBouleDeFeu(int refRMI, int refRMIAdv) throws RemoteException {
 		boolean res = false;
 		
 		VuePersonnage client = personnages.get(refRMI);
@@ -829,7 +830,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 					logger.info(Constantes.nomClasse(this), nomRaccourciClient(refRMI) + 
 							" attaque " + nomRaccourciClient(consoleAdv.getRefRMI()));
 			
-					new Duel(this, client, clientAdv).interagit();
+					new BouleDeFeu(this, client, clientAdv).interagit();
 					personnages.get(refRMI).executeAction();
 					
 					// si l'adversaire est mort
