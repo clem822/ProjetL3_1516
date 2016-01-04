@@ -1,6 +1,6 @@
 package client;
 
-//Yaakoub ne sait pas encore qu'il est con mais il le saura en lisant ça
+//Yaakoub ne sait pas encore qu'il est con mais il le saura en lisant ï¿½a
 //Un homme avertit en vaux deux 
 
 import java.awt.Point;
