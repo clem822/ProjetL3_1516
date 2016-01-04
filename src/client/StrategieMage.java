@@ -9,13 +9,14 @@ import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Personnage;
-import serveur.element.Potion;
+import serveur.vuelement.VueElement;
+import serveur.vuelement.VuePersonnage;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
 public class StrategieMage extends StrategiePersonnage {
 
-
+	
 
 	/**
 	 * Cree un personnage, la console associe et sa strategie.
@@ -38,9 +39,8 @@ public class StrategieMage extends StrategiePersonnage {
 	}
 	
 	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
-	// une proposition de strategie (simple) est donnee ci-dessous
 	/** 
-	 * Decrit la strategie.
+	 * Decrit la strategie du mage
 	 * Les methodes pour evoluer dans le jeu doivent etre les methodes RMI
 	 * de Arene et de ConsolePersonnage. 
 	 * @param voisins element voisins de cet element (elements qu'il voit)
@@ -73,13 +73,24 @@ public class StrategieMage extends StrategiePersonnage {
 				int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 
 				Element elemPlusProche = arene.elementFromRef(refCible);
+				
 					
 				if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION_DIST) { // si suffisamment proches
 					// j'interagis directement
 					if(elemPlusProche instanceof Personnage) { // personnage
-						// duel
-						console.setPhrase("Tu vas faire bruler  " + elemPlusProche.getNom());
-						arene.lanceAttaqueBouleDeFeu(refRMI, refCible);
+						if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // Porte d'attaque au corps a corps
+							console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
+							arene.lanceAttaque(refRMI, refCible);
+						} else {
+							/*if (monMage.getElement().getCaract(Caracteristique.MANA) > 19){ // Envoie d'une boule de feu a distance si mana suffisant*/
+								console.setPhrase("Tu vas faire bruler  " + elemPlusProche.getNom());
+								arene.lanceAttaqueBouleDeFeu(refRMI, refCible);
+							/*} else { // Se dirige vers le voisin le plus proche
+								console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
+								arene.deplace(refRMI, refCible);
+							}*/
+						}
+						
 					} else if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // potion
 						// ramassage
 						console.setPhrase("Je ramasse une potion");
@@ -97,4 +108,5 @@ public class StrategieMage extends StrategiePersonnage {
 			}
 		}
 
+	
 }

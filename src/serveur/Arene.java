@@ -1033,8 +1033,6 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		return Constantes.nomRaccourciClient(vueFromRef(refRMI));
 	}
 
-	
-	
 
 
 	/**************************************************************************
