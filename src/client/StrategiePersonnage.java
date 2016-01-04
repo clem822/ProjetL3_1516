@@ -1,5 +1,9 @@
 package client;
 
+//jhjhj
+//Yaakoub ne sait pas encore qu'il est con mais il le saura en lisant ça
+//Un homme avertit en vaux deukjktfgf
+
 import java.awt.Point;
 import java.rmi.RemoteException;
 import java.util.HashMap;
