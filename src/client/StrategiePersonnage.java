@@ -1,18 +1,5 @@
 package client;
 
-
-//Yaakoub ne sait pas encore qu'il est con mais il le saura en lisant �a
-//Un homme avertit en vaux deux 
-
-
-//jhjhj
-//Yaakoub ne sait pas encore qu'il est con mais il le saura en lisant �a
-//Un homme avertit en vaux deukjktfgf
-//dsdqqsdsqsqdssq
-//Yaakousre qu'il est con mais il le saura//Un homme avertit en vaux deux 
-//testttttt
-//hkh
-
 import java.awt.Point;
 import java.rmi.RemoteException;
 import java.util.HashMap;
