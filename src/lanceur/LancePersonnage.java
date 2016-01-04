@@ -22,6 +22,7 @@ public class LancePersonnage {
 	public static void main(String[] args) {
 		String nom = "Johnny";
 		
+		//new thing
 		// TODO remplacer la ligne suivante par votre numero de groupe
 		String groupe = "G" + 17; 
 		
