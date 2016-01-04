@@ -9,7 +9,7 @@ import java.util.HashMap;
 public enum Caracteristique {
 	
 	
-	//MANGE("Mange", "MAN", 0, -1, -10),
+	MANGE("Mange", "MAN", 0, 100, 5),
 	
 	/**
 	 * Vie : nombre de points de vie.
@@ -76,6 +76,7 @@ public enum Caracteristique {
 	public static HashMap<Caracteristique,Integer> mapCaracteristiquesDefaut() {
 		HashMap<Caracteristique, Integer> caractsValues = new HashMap<Caracteristique, Integer>();
 		
+		//Va initialiser chaque caracéristique par la valeur initaliale.
 		for (Caracteristique caract : values()) {
 			caractsValues.put(caract, caract.init);
 		}
