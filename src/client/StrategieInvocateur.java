@@ -7,25 +7,32 @@ import java.awt.Point;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 
-
+import javax.swing.text.Position;
 
 import logger.LoggerProjet;
 import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
-import serveur.element.Personnage;
+import serveur.element.Invocateur;
 import serveur.element.Potion;
+import serveur.element.Sbire;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
 /**
- * @author guillaume
+ * @author clement
  *
  */
-public class StrategieDeBase extends StrategiePersonnage {
+public class StrategieInvocateur extends StrategiePersonnage {
 	
-
-
+	String ipArene;
+	int port;
+	String ipConsole;
+	String nom;
+	String groupe;
+	int nbTours;
+	LoggerProjet logger;
+	
 	/**
 	 * Cree un personnage, la console associe et sa strategie.
 	 * @param ipArene ip de communication avec l'arene
@@ -37,23 +44,26 @@ public class StrategieDeBase extends StrategiePersonnage {
 	 * @param position position initiale du personnage dans l'arene
 	 * @param logger gestionnaire de log
 	 */
-	public StrategieDeBase(String ipArene, int port, String ipConsole, 
+	public StrategieInvocateur(String ipArene, int port, String ipConsole, 
 			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
 			int nbTours, Point position, LoggerProjet logger) {
 		
-		super(ipArene, port, ipConsole, new Personnage(nom, groupe, caracts), nbTours, position, logger);
+		super(ipArene, port, ipConsole, new Invocateur(nom, groupe, caracts), nbTours, position, logger);
+		this.ipArene = ipArene;
+		this.port= port;
+		this.ipConsole = ipConsole;
+		this.nom = nom;
+		this.groupe = groupe;
+		this.nbTours = nbTours;
+		this.logger = logger;
 	}
-
-	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
-	// une proposition de strategie (simple) est donnee ci-dessous
-	/** 
-	 * Decrit la strategie.
-	 * Les methodes pour evoluer dans le jeu doivent etre les methodes RMI
-	 * de Arene et de ConsolePersonnage. 
-	 * @param voisins element voisins de cet element (elements qu'il voit)
-	 * @throws RemoteException
+	
+	/* (non-Javadoc)
+	 * @see client.StrategiePersonnage#executeStrategie(java.util.HashMap)
 	 */
+	@Override
 	public void executeStrategie(HashMap<Integer, Point> voisins) throws RemoteException {
+		// TODO Auto-generated method stub
 		// arene
 		IArene arene = console.getArene();
 		
@@ -69,8 +79,15 @@ public class StrategieDeBase extends StrategiePersonnage {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		Element moi = arene.elementFromRef(refRMI);
+		System.out.println(moi.getCaract(Caracteristique.MANA));
 		
-		if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
+		if (moi.getCaract(Caracteristique.MANA) >= 80)
+		{
+			console.setPhrase("J'invoque des sbires !");
+			arene.invoquer(refRMI, 5);
+		}
+		else if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
 			console.setPhrase("J'erre...");
 			arene.deplace(refRMI, 0); 
 			
@@ -79,8 +96,13 @@ public class StrategieDeBase extends StrategiePersonnage {
 			int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 
 			Element elemPlusProche = arene.elementFromRef(refCible);
-				
-			if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
+			
+			if (elemPlusProche instanceof Sbire && ((Sbire)elemPlusProche).getMaitre() == refRMI)
+			{
+				console.setPhrase("J'erre...");
+				arene.deplace(refRMI, 0); 
+			}
+			else if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if(elemPlusProche instanceof Potion) { // potion
 					// ramassage
@@ -100,5 +122,4 @@ public class StrategieDeBase extends StrategiePersonnage {
 			}
 		}
 	}
-
 }

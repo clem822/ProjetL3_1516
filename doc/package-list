@@ -1,0 +1,17 @@
+client
+client.controle
+interfacegraphique
+interfacegraphique.interfacesimple
+interfacegraphique.interfacesimple.components
+interfacegraphique.interfacetournoi
+interfacegraphique.interfacetournoi.components
+interfacegraphique.interfacetournoi.exceptionSaisie
+interfacegraphique.tablemodel
+interfacegraphique.tablerenderer
+lanceur
+logger
+serveur
+serveur.element
+serveur.interaction
+serveur.vuelement
+utilitaires

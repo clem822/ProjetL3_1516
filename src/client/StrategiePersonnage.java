@@ -3,11 +3,12 @@ package client;
 import java.awt.Point;
 import java.rmi.RemoteException;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 import client.controle.Console;
 import logger.LoggerProjet;
-import serveur.element.Caracteristique;
 import serveur.element.Personnage;
+import serveur.vuelement.VuePersonnage;
 
 /**
  * Strategie d'un personnage. 
@@ -19,6 +20,7 @@ public abstract class StrategiePersonnage {
 	 * (l'arene).
 	 */
 	protected Console console;
+	
 
 	/**
 	 * Cree un personnage, la console associe et sa strategie.
@@ -33,6 +35,7 @@ public abstract class StrategiePersonnage {
 	 */
 	public StrategiePersonnage(String ipArene, int port, String ipConsole, 
 			Personnage personnage, int nbTours, Point position, LoggerProjet logger) {
+		
 		
 		logger.info("Lanceur", "Creation de la console...");
 		
