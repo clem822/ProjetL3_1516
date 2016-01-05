@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.HashMap;
 
-import client.StrategieDeBase;
+import client.StrategieInvocateur;
 import logger.LoggerProjet;
 import serveur.element.Caracteristique;
 import utilitaires.Calculs;
@@ -20,7 +20,7 @@ public class LancePersonnage {
 	private static String usage = "USAGE : java " + LancePersonnage.class.getName() + " [ port [ ipArene ] ]";
 
 	public static void main(String[] args) {
-		String nom = "Johnny";
+		String nom = "Ben";
 		
 		//new thing
 		// TODO remplacer la ligne suivante par votre numero de groupe
@@ -78,8 +78,9 @@ public class LancePersonnage {
 			
 			Point position = Calculs.positionAleatoireArene();
 			
-			new StrategieDeBase(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+			new StrategieInvocateur(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
 			logger.info("Lanceur", "Creation du personnage reussie");
+			
 			
 		} catch (Exception e) {
 			logger.severe("Lanceur", "Erreur lancement :\n" + e.getCause());
