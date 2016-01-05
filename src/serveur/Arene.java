@@ -28,6 +28,7 @@ import serveur.interaction.DeplacementRapide;
 import serveur.interaction.Duel;
 import serveur.interaction.Invocation;
 import serveur.interaction.Ramassage;
+import serveur.interaction.Soin;
 import serveur.vuelement.VueElement;
 import serveur.vuelement.VuePersonnage;
 import serveur.vuelement.VuePotion;
@@ -895,7 +896,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 					console.log(Level.INFO, Constantes.nomClasse(this), 
 							"Je decoupe " + nomRaccourciClient(refRMIAdv));
 					consoleAdv.log(Level.INFO, Constantes.nomClasse(this), 
-							"Je me fait massacrer par " + nomRaccourciClient(refRMI));
+							"Je me fait decouper par " + nomRaccourciClient(refRMI));
 					
 					logger.info(Constantes.nomClasse(this), nomRaccourciClient(refRMI) + 
 							" attaque " + nomRaccourciClient(consoleAdv.getRefRMI()));
@@ -994,6 +995,19 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		}
 		
 		return res;
+	}
+	
+	@Override
+	public boolean soin(int refRMI, int mana, int pv) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+		VuePersonnage pASoigner = personnages.get(refRMI);
+		IConsole console = consoleFromRef(refRMI);
+		console.log(Level.INFO, Constantes.nomClasse(this), 
+				"Je me soigne de " + pv + " contre " + mana);
+		new Soin(this, pASoigner).soigner(mana,pv);
+		
+		return true;
 	}
 
 	/**

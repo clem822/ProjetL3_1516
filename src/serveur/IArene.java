@@ -182,7 +182,7 @@ public interface IArene extends Remote {
 	 * Le duel echoue si une action a deja ete executee a ce tour par 
 	 * l'attaquant, si les personnages sont trop eloignes, si l'un des deux 
 	 * n'est plus actif (mort)
-	 * @param refRMI reference RMI de l'attaquant, qui demande un duel
+	 * @param refRMI reference RMI de l'attaquant, qui lance la boule de feu
 	 * @param refAdv reference RMI du defenseur
 	 * @return vrai si l'action a bien eu lieu, faux sinon
 	 * @throws RemoteException
@@ -195,12 +195,26 @@ public interface IArene extends Remote {
 	 * Le duel echoue si une action a deja ete executee a ce tour par 
 	 * l'attaquant, si les personnages sont trop eloignes, si l'un des deux 
 	 * n'est plus actif (mort)
-	 * @param refRMI reference RMI de l'attaquant, qui demande un duel
+	 * @param refRMI reference RMI de l'attaquant, qui lance le coup de hache
 	 * @param refAdv reference RMI du defenseur
 	 * @return vrai si l'action a bien eu lieu, faux sinon
 	 * @throws RemoteException
 	 */
 	public boolean lanceCoupDeHache(int refRMI, int refRMIAdv) throws RemoteException;
+	
+	/**
+	 * Execute un soin entre le personnage correspondant a la console donnee 
+	 * et l'adversaire correspondant a la reference RMI donnee.
+	 * Le duel echoue si une action a deja ete executee a ce tour par 
+	 * l'attaquant, si les personnages sont trop eloignes, si l'un des deux 
+	 * n'est plus actif (mort)
+	 * @param refRMI reference RMI du personnage, qui se soigne
+	 * @param mana cout en mana
+	 * @param pv nombre de point de vie gagne
+	 * @return vrai si l'action a bien eu lieu, faux sinon
+	 * @throws RemoteException
+	 */
+	public boolean soin(int refRMI, int mana, int pv)throws RemoteException;
 	
 	/**
 	 * Deplace le personnage correspondant a la console donne vers l'element 
@@ -301,6 +315,8 @@ public interface IArene extends Remote {
 	 * @throws RemoteException
 	 */
 	public void lancePotion(Potion potion, Point position, String motDePasse) throws RemoteException;
+
+	
 	
 }
 
