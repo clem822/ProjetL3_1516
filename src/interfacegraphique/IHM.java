@@ -170,7 +170,7 @@ public class IHM extends JFrame implements Runnable {
 		setLocation(screenSize.width / 10, screenSize.height / 10);
 
 		// cree un titre de la fenetre
-		String titre = "Arene";
+		String titre = "Jeu";
 		setTitle(titre);
 
 		// ajoute une operation si le bouton de fermeture de la fenetre est cliquee
@@ -238,8 +238,8 @@ public class IHM extends JFrame implements Runnable {
 
 		JMenu affichageMenu = new JMenu("Affichage");
 
-		JCheckBoxMenuItem affichageJauge = new JCheckBoxMenuItem("Jauge de vie");
-		affichageJauge.addActionListener(new ActionListener() {
+		JCheckBoxMenuItem affichageJaugeVie = new JCheckBoxMenuItem("Jauge de vie/mana");
+		affichageJaugeVie.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -247,9 +247,12 @@ public class IHM extends JFrame implements Runnable {
 				arenePanel.setAffichageJauge(cb.isSelected());
 			}
 		});
+		
+		
 
 
-		affichageMenu.add(affichageJauge);
+
+		affichageMenu.add(affichageJaugeVie);
 		// affichageMenu.add(controleAction);
 		menuBar.add(affichageMenu);
 		setJMenuBar(menuBar);

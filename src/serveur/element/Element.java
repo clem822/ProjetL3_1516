@@ -49,6 +49,7 @@ public abstract class Element implements Serializable {
 
 		// toutes les caracteristiques sont toujours initialisees
 		// les caracteristiques donnees remplacent celles par defaut
+		//pas le même caracts
 		for(Caracteristique c : caracts.keySet()) {
 			this.caracts.put(c, caracts.get(c));			//put permet d'obtenir
 		}

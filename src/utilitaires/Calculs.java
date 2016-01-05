@@ -126,6 +126,32 @@ public class Calculs {
 		return refPlusProche;
 	}
 	
+	
+	/* Elargir son chap de vision
+	 * Plus dangereux
+	 */
+	
+	
+	
+	
+	public static int chercheElementProcheVisionElargie(Point origine, HashMap<Integer, Point> voisins) {
+		int distPlusProche = 100;
+		int refPlusProche = 0;
+		
+		for(int refVoisin : voisins.keySet()) {
+			Point target = voisins.get(refVoisin);
+			
+			if (distanceChebyshev(origine, target) <= distPlusProche) {
+				distPlusProche = Calculs.distanceChebyshev(origine, target);
+				refPlusProche = refVoisin;
+			}
+		}
+		
+		return refPlusProche;
+	}
+	
+	
+	
 	/**
 	 * Genere un entier dans un intervalle donne.
 	 * @param min borne inferieure de l'intervalle

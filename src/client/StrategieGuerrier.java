@@ -74,8 +74,7 @@ public class StrategieGuerrier extends StrategiePersonnage {
 		
 		if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
 			console.setPhrase("J'erre...");
-			arene.deplace(refRMI, 0);
-			
+			arene.deplaceRapidement(refRMI, 0);
 			
 		} else {
 			int refCible = Calculs.chercheElementProche(position, voisins);
@@ -99,7 +98,7 @@ public class StrategieGuerrier extends StrategiePersonnage {
 			} else { // si voisins, mais plus eloignes
 				// je vais vers le plus proche
 				console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
-				arene.deplace(refRMI, refCible);
+				arene.deplaceRapidement(refRMI, refCible);
 			}
 			
 		}

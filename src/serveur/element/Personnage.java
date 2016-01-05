@@ -14,6 +14,8 @@ import utilitaires.Calculs;
  */
 public class Personnage extends Element {
 	
+	// A modifier
+	private int carburant = 0;
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -33,10 +35,17 @@ public class Personnage extends Element {
 	 * @param c caracteristique
 	 * @param inc increment (peut etre positif ou negatif)
 	 */
-	public void incrementeCaract(Caracteristique c, int inc) {		
-		if(caracts.containsKey(c)) {
+	public void incrementeCaract(Caracteristique c, int inc) {	
+		
+		
+		if (c == Caracteristique.VITESSE)
+			caracts.put(c, Calculs.restreintCarac(c, inc));
+		//caractéristique appartient à la vitesse.
+		else if(caracts.containsKey(c)) {
 			caracts.put(c, Calculs.restreintCarac(c, caracts.get(c) + inc));
-		} else {
+		}
+		
+		else {
 			caracts.put(c, Calculs.restreintCarac(c, inc));
 		}
 	}

@@ -5,19 +5,18 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.HashMap;
 
-
 import client.StrategieNinja;
 import logger.LoggerProjet;
 import serveur.element.Caracteristique;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
-public class LanceNinja {
+public class LancePersonnageNinja {
 
 	private static String usage = "USAGE : java " + LanceNinja.class.getName() + " [ port [ ipArene ] ]";
 
 	public static void main(String[] args) {
-		String nom = "naruto";
+		String nom = "Ninja";
 		
 		//new thing
 		// TODO remplacer la ligne suivante par votre numero de groupe
@@ -70,15 +69,12 @@ public class LanceNinja {
 			// caracteristiques du personnage
 			HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
 			// seule la force n'a pas sa valeur par defaut (exemple)
-			caracts.put(Caracteristique.FORCE,Calculs.valeurCaracAleatoire(Caracteristique.FORCE)); 
-			// on met sa vitesse à 2
-			caracts.put(Caracteristique.VITESSE, 2);
+			caracts.put(Caracteristique.FORCE, 50); 
 			
 			Point position = Calculs.positionAleatoireArene();
 			
 			new StrategieNinja(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
 			logger.info("Lanceur", "Creation du personnage reussie");
-			
 			
 		} catch (Exception e) {
 			logger.severe("Lanceur", "Erreur lancement :\n" + e.getCause());
@@ -86,5 +82,5 @@ public class LanceNinja {
 			System.exit(ErreurLancement.suivant);
 		}
 	}
-
 }
+
