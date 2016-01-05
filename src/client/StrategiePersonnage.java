@@ -3,8 +3,12 @@ package client;
 import java.awt.Point;
 import java.rmi.RemoteException;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 import client.controle.Console;
+import logger.LoggerProjet;
+import serveur.element.Personnage;
+import serveur.vuelement.VuePersonnage;
 
 /**
  * Strategie d'un personnage. 
@@ -16,6 +20,7 @@ public abstract class StrategiePersonnage {
 	 * (l'arene).
 	 */
 	protected Console console;
+	
 
 	/**
 	 * Cree un personnage, la console associe et sa strategie.
@@ -28,7 +33,21 @@ public abstract class StrategiePersonnage {
 	 * @param position position initiale du personnage dans l'arene
 	 * @param logger gestionnaire de log
 	 */
-	public StrategiePersonnage() {
+	public StrategiePersonnage(String ipArene, int port, String ipConsole, 
+			Personnage personnage, int nbTours, Point position, LoggerProjet logger) {
+		
+		
+		logger.info("Lanceur", "Creation de la console...");
+		
+		try {
+			console = new Console(ipArene, port, ipConsole, this, 
+					personnage, nbTours, position, logger);
+			logger.info("Lanceur", "Creation de la console reussie");
+			
+		} catch (Exception e) {
+			logger.info("Personnage", "Erreur lors de la creation de la console : \n" + e.toString());
+			e.printStackTrace();
+		}
 	}
 	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
 	// une proposition de strategie (simple) est donnee ci-dessous

@@ -214,6 +214,17 @@ public interface IArene extends Remote {
 	 */
 	public boolean deplace(int refRMI, Point objectif) throws RemoteException;
 	
+	/**
+	 * Invoque nbSbires
+	 * L'invocation echoue si une action a deja ete executee a ce tour par 
+	 * ce personnage.
+	 * @param refRMI reference RMI du personnage voulant invoquer
+	 * @param nbSbire nombre de sbires à invoquer
+	 * @return vrai si l'action a bien eu lieu, faux sinon
+	 * @throws RemoteException
+	 */
+	public boolean invoquer(int refRMI, int nbSbire) throws RemoteException;
+	
 	
 
 	

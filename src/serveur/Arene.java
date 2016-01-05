@@ -24,6 +24,7 @@ import serveur.element.Potion;
 import serveur.interaction.BouleDeFeu;
 import serveur.interaction.Deplacement;
 import serveur.interaction.Duel;
+import serveur.interaction.Invocation;
 import serveur.interaction.Ramassage;
 import serveur.vuelement.VueElement;
 import serveur.vuelement.VuePersonnage;
@@ -905,6 +906,27 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		return res;
 	}
 
+	@Override
+	public boolean invoquer(int refRMI, int nbSbires) throws RemoteException {
+		// TODO Auto-generated method stub
+		boolean res = false;
+		
+		VuePersonnage invoqueur = personnages.get(refRMI);
+		
+		if (invoqueur.isActionExecutee()) {
+			// si une action a deja ete executee
+			logActionDejaExecutee(refRMI);
+		} else {
+			// sinon, on tente de jouer l'interaction
+			new Invocation(this, invoqueur, nbSbires).invoquerSbires();
+			invoqueur.executeAction();
+
+			res = true;
+		}
+		
+		return res;
+	}
+
 	/**
 	 * Ajoute l'increment donne a la caracteristique donne de l'element 
 	 * correspondant a la vue donnee. 
@@ -1033,8 +1055,6 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		return Constantes.nomRaccourciClient(vueFromRef(refRMI));
 	}
 
-	
-	
 
 
 	/**************************************************************************
