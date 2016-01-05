@@ -79,16 +79,32 @@ public class StrategieNinja extends StrategiePersonnage {
 
 				} else { // personnage
 					// duel
-					console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
-					arene.lanceAttaque(refRMI, refCible);
+			
+						console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
+						arene.lanceAttaque(refRMI, refCible);					
+					
 				}
 				
 			} else { // si voisins, mais plus eloignes
 				// je vais vers le plus proche
-				console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
-				arene.deplaceRapidement(refRMI, refCible);
-			}
-		}
+				if (elemPlusProche instanceof Personnage ){
+					
+						if(elemPlusProche.getCaract(Caracteristique.FORCE ) > arene.elementFromRef(refRMI).getCaract(Caracteristique.VIE )){
+							console.setPhrase("Je m'échappe, il est trop fort pour moi . " + elemPlusProche.getNom());
+							arene.deplaceRapidement(refRMI, 0);
+						}
+						else{
+							console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
+							arene.deplaceRapidement(refRMI, refCible);
+			
+					}
+					
+				}
+				else{
+						console.setPhrase("Je vais vers cette potion " + elemPlusProche.getNom());
+						arene.deplaceRapidement(refRMI, refCible);
+				}
+		}	}
 	}
-
+		
 }

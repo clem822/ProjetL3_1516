@@ -32,8 +32,7 @@ public class PotionTableModel extends ElementTableModel<VuePotion> {
 			colonnes.add(new InformationColonne<VuePotion>(car.toString(), 40, Integer.class, new ValeurColonneCaract(car)));
 		}
 		
-		// phrase du personnage
-		colonnes.add(new InformationColonne<VuePotion>("Phrase", 300, String.class, new ValeurColonnePhrase())); 
+		
 	}
    
 }
