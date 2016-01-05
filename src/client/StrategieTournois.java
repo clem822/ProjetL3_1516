@@ -88,5 +88,4 @@ public class StrategieTournois extends StrategiePersonnage {
 			}
 		}
 	}
-
 }
