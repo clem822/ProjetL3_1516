@@ -190,6 +190,19 @@ public interface IArene extends Remote {
 	public boolean lanceAttaqueBouleDeFeu(int refRMI, int refAdv) throws RemoteException;
 	
 	/**
+	 * Execute un coup de hache entre le personnage correspondant a la console donnee 
+	 * et l'adversaire correspondant a la reference RMI donnee.
+	 * Le duel echoue si une action a deja ete executee a ce tour par 
+	 * l'attaquant, si les personnages sont trop eloignes, si l'un des deux 
+	 * n'est plus actif (mort)
+	 * @param refRMI reference RMI de l'attaquant, qui demande un duel
+	 * @param refAdv reference RMI du defenseur
+	 * @return vrai si l'action a bien eu lieu, faux sinon
+	 * @throws RemoteException
+	 */
+	public boolean lanceCoupDeHache(int refRMI, int refRMIAdv) throws RemoteException;
+	
+	/**
 	 * Deplace le personnage correspondant a la console donne vers l'element 
 	 * correspondant a la reference RMI cible.
 	 * Le deplacement echoue si une action a deja ete executee a ce tour par 
@@ -226,7 +239,7 @@ public interface IArene extends Remote {
 	public boolean invoquer(int refRMI, int nbSbire) throws RemoteException;
 	
 	/**
-	 * DeplaceRapidement déplace deux fois plus vite que deplace, le personnage correspondant a la console donne vers le point 
+	 * DeplaceRapidement dï¿½place deux fois plus vite que deplace, le personnage correspondant a la console donne vers le point 
 	 * cible.
 	 * Le deplacement echoue si une action a deja ete executee a ce tour par 
 	 * ce personnage.

@@ -79,7 +79,13 @@ public class StrategieGuerrier extends StrategiePersonnage {
 			int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 
 			Element elemPlusProche = arene.elementFromRef(refCible);
-				
+			
+			/*Element moi = arene.elementFromRef(refRMI);
+			if(moi.getCaract(Caracteristique.MANA) > 40){
+				console.setPhrase("Un plaisir!");
+				arene.Bandage(refRMI, refCible);
+			}*/
+			
 			if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if(elemPlusProche instanceof Potion) { // potion
@@ -88,9 +94,9 @@ public class StrategieGuerrier extends StrategiePersonnage {
 					arene.ramassePotion(refRMI, refCible);
 
 				} else { // personnage
-					// duel
+					// Coup de Hache
 					console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
-					arene.lanceAttaque(refRMI, refCible);
+					arene.lanceCoupDeHache(refRMI, refCible);
 				}
 				
 			} else { // si voisins, mais plus eloignes

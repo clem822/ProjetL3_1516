@@ -20,7 +20,7 @@ public class LanceGuerrier {
 	private static String usage = "USAGE : java " + LanceGuerrier.class.getName() + " [ port [ ipArene ] ]";
 
 	public static void main(String[] args) {
-		String nom = "Ben";
+		String nom = "Grudu";
 		
 		//new thing
 		// TODO remplacer la ligne suivante par votre numero de groupe
@@ -73,6 +73,7 @@ public class LanceGuerrier {
 			// caracteristiques du personnage
 			HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
 			// seule la force n'a pas sa valeur par defaut (exemple)
+			caracts.put(Caracteristique.MANA,0);
 			caracts.put(Caracteristique.FORCE,Calculs.valeurCaracAleatoire(Caracteristique.FORCE)); 
 			
 			Point position = Calculs.positionAleatoireArene();
