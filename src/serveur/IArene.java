@@ -163,6 +163,21 @@ public interface IArene extends Remote {
 	 */
 	public boolean ramassePotion(int refRMI, int refPotion) throws RemoteException;
 	
+	
+	/**
+	 * Execute le ramassage d'une potion par un personnage, si possible.
+	 * Celle-ci reste et ne disparaît pas.
+	 * Le ramassage echoue si une action a deja ete executee ce tour par ce 
+	 * personnage, ou si la potion est trop loin du personnage.
+	 * @param refRMI reference RMI du personnage voulant ramasser une potion
+	 * @param refPotion reference RMI de la potion qui doit etre ramasse
+	 * @return vrai si l'action a ete effectuee, faux sinon
+	 * @throws RemoteException
+	 */
+	public boolean Conduire(int refRMI, int refPotion) throws RemoteException;
+	
+	
+	
 	/**
 	 * Execute un duel entre le personnage correspondant a la console donnee 
 	 * et l'adversaire correspondant a la reference RMI donnee.
@@ -201,6 +216,22 @@ public interface IArene extends Remote {
 	 * @throws RemoteException
 	 */
 	public boolean lanceCoupDeHache(int refRMI, int refRMIAdv) throws RemoteException;
+	
+	
+	/**
+	 * Execute la vampirisation entre le personnage correspondant a la console donnee 
+	 * et l'adversaire correspondant a la reference RMI donnee.
+	 * Le duel echoue si une action a deja ete executee a ce tour par 
+	 * l'attaquant, si les personnages sont trop eloignes, si l'un des deux 
+	 * n'est plus actif (mort)
+	 * @param refRMI reference RMI de l'attaquant, qui demande un duel
+	 * @param refAdv reference RMI du defenseur
+	 * @return vrai si l'action a bien eu lieu, faux sinon
+	 * @throws RemoteException
+	 */
+	public boolean Vampirise(int refRMI, int refRMIAdv) throws RemoteException;
+	
+	
 	
 	/**
 	 * Deplace le personnage correspondant a la console donne vers l'element 

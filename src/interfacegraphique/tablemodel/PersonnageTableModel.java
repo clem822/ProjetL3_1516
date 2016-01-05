@@ -1,5 +1,6 @@
 package interfacegraphique.tablemodel;
 
+import javax.swing.JButton;
 import java.util.ArrayList;
 
 import serveur.element.Caracteristique;
@@ -12,9 +13,11 @@ import serveur.vuelement.VuePersonnage;
 public class PersonnageTableModel extends ElementTableModel<VuePersonnage> {
 
 	private static final long serialVersionUID = 1L;
+
     
 	
 	public PersonnageTableModel() {
+		
 		colonnes = new ArrayList<InformationColonne<VuePersonnage>>();
 		indexNom = 1;
 		
@@ -34,5 +37,8 @@ public class PersonnageTableModel extends ElementTableModel<VuePersonnage> {
 		
 		// phrase du personnage
 		colonnes.add(new InformationColonne<VuePersonnage>("Phrase", 300, String.class, new ValeurColonnePhrase())); 
+		
+		
+
 	}
 }

@@ -16,6 +16,7 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -117,6 +118,7 @@ public class ElementsJPanel extends JPanel {
         initTablePersonnages();        
         initTablePotions();
         
+        
         // initialisation du menu de clic droit
         initMenuClickDroit();
 
@@ -164,6 +166,9 @@ public class ElementsJPanel extends JPanel {
 			}
 		});
 	}
+    
+    
+    
 
 	/**
      * Initialise la table des personnages.
@@ -215,6 +220,11 @@ public class ElementsJPanel extends JPanel {
         jScrollPanePersonnages.setViewportView(jTablePersonnages);
 	}
 
+	
+	
+	
+	
+	
     /**
      * Initialise la table des potions.
      */
