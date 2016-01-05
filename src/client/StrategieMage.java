@@ -8,6 +8,7 @@ import logger.LoggerProjet;
 import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
+import serveur.element.Mage;
 import serveur.element.Personnage;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
@@ -31,7 +32,7 @@ public class StrategieMage extends StrategiePersonnage {
 			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
 			int nbTours, Point position, LoggerProjet logger) {
 		
-		super(ipArene, port, ipConsole, new Personnage(nom, groupe, caracts), nbTours, position, logger);
+		super(ipArene, port, ipConsole, new Mage(nom, groupe, caracts), nbTours, position, logger);
 		
 		
 	}
@@ -80,13 +81,14 @@ public class StrategieMage extends StrategiePersonnage {
 							console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
 							arene.lanceAttaque(refRMI, refCible);
 						} else {
-							/*if (monMage.getElement().getCaract(Caracteristique.MANA) > 19){ // Envoie d'une boule de feu a distance si mana suffisant*/
+							Element moi = arene.elementFromRef(refRMI);
+							if (moi.getCaract(Caracteristique.MANA) > 19){ // Envoie d'une boule de feu a distance si mana suffisant
 								console.setPhrase("Tu vas faire bruler  " + elemPlusProche.getNom());
 								arene.lanceAttaqueBouleDeFeu(refRMI, refCible);
-							/*} else { // Se dirige vers le voisin le plus proche
+							} else { // Se dirige vers le voisin le plus proche
 								console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
 								arene.deplace(refRMI, refCible);
-							}*/
+							}
 						}
 						
 					} else if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // potion

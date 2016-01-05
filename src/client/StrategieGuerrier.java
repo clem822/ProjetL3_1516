@@ -1,10 +1,14 @@
+/**
+ * 
+ */
 package client;
 
 import java.awt.Point;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 
-import client.controle.Console;
+
+
 import logger.LoggerProjet;
 import serveur.IArene;
 import serveur.element.Caracteristique;
@@ -14,8 +18,12 @@ import serveur.element.Potion;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
-public class StrategieDeLoin extends StrategiePersonnage {
-
+/**
+ * @author guillaume
+ *
+ */
+public class StrategieGuerrier extends StrategiePersonnage {
+	
 
 
 	/**
@@ -29,15 +37,13 @@ public class StrategieDeLoin extends StrategiePersonnage {
 	 * @param position position initiale du personnage dans l'arene
 	 * @param logger gestionnaire de log
 	 */
-	public StrategieDeLoin(String ipArene, int port, String ipConsole, 
+	public StrategieGuerrier(String ipArene, int port, String ipConsole, 
 			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
 			int nbTours, Point position, LoggerProjet logger) {
 		
 		super(ipArene, port, ipConsole, new Personnage(nom, groupe, caracts), nbTours, position, logger);
-		
-		
 	}
-	
+
 	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
 	// une proposition de strategie (simple) est donnee ci-dessous
 	/** 
@@ -47,7 +53,6 @@ public class StrategieDeLoin extends StrategiePersonnage {
 	 * @param voisins element voisins de cet element (elements qu'il voit)
 	 * @throws RemoteException
 	 */
-	@Override
 	public void executeStrategie(HashMap<Integer, Point> voisins) throws RemoteException {
 		// arene
 		IArene arene = console.getArene();
@@ -75,7 +80,7 @@ public class StrategieDeLoin extends StrategiePersonnage {
 
 			Element elemPlusProche = arene.elementFromRef(refCible);
 				
-			if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION_DIST) { // si suffisamment proches
+			if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if(elemPlusProche instanceof Potion) { // potion
 					// ramassage
@@ -85,7 +90,7 @@ public class StrategieDeLoin extends StrategiePersonnage {
 				} else { // personnage
 					// duel
 					console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
-					arene.lanceAttaqueBouleDeFeu(refRMI, refCible);
+					arene.lanceAttaque(refRMI, refCible);
 				}
 				
 			} else { // si voisins, mais plus eloignes

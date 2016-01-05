@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.HashMap;
 
-import client.StrategieMage;
+import client.StrategieInvocateur;
 import logger.LoggerProjet;
 import serveur.element.Caracteristique;
 import utilitaires.Calculs;
@@ -15,12 +15,12 @@ import utilitaires.Constantes;
  * Lance une Console avec un Element sur l'Arene. 
  * A lancer apres le serveur, eventuellement plusieurs fois.
  */
-public class LanceMage {
+public class LanceInvocateur {
 	
-	private static String usage = "USAGE : java " + LanceMage.class.getName() + " [ port [ ipArene ] ]";
+	private static String usage = "USAGE : java " + LanceInvocateur.class.getName() + " [ port [ ipArene ] ]";
 
 	public static void main(String[] args) {
-		String nom = "Luc";
+		String nom = "Ben";
 		
 		//new thing
 		// TODO remplacer la ligne suivante par votre numero de groupe
@@ -73,13 +73,13 @@ public class LanceMage {
 			// caracteristiques du personnage
 			HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
 			// seule la force n'a pas sa valeur par defaut (exemple)
-			caracts.put(Caracteristique.FORCE, 
-					Calculs.valeurCaracAleatoire(Caracteristique.FORCE)); 
-
+			caracts.put(Caracteristique.FORCE,Calculs.valeurCaracAleatoire(Caracteristique.FORCE)); 
+			
 			Point position = Calculs.positionAleatoireArene();
 			
-			new StrategieMage(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+			new StrategieInvocateur(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
 			logger.info("Lanceur", "Creation du personnage reussie");
+			
 			
 		} catch (Exception e) {
 			logger.severe("Lanceur", "Erreur lancement :\n" + e.getCause());
