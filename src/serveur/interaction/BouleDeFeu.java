@@ -46,7 +46,7 @@ public class BouleDeFeu extends Interaction<VuePersonnage> {
 				if (perteVie > 0) {
 					arene.incrementeCaractElement(defenseur, Caracteristique.VIE, -perteVie);
 					
-					logs(Level.INFO, Constantes.nomRaccourciClient(attaquant) + " colle une beigne ("
+					logs(Level.INFO, Constantes.nomRaccourciClient(attaquant) + " envoie boule de feu ("
 							+ perteVie + " points de degats) a " + Constantes.nomRaccourciClient(defenseur));
 				}
 				

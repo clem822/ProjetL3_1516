@@ -23,6 +23,7 @@ import serveur.element.Personnage;
 import serveur.element.Potion;
 import serveur.interaction.BouleDeFeu;
 import serveur.interaction.Deplacement;
+import serveur.interaction.DeplacementRapide;
 import serveur.interaction.Duel;
 import serveur.interaction.Invocation;
 import serveur.interaction.Ramassage;
@@ -1074,6 +1075,47 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 
 	@Override
 	public void lancePotion(Potion potion, Point position, String motDePasse) throws RemoteException {}
+
+	@Override
+	public boolean deplaceRapidement(int refRMI, Point objectif) throws RemoteException {
+		boolean res = false;
+		
+		VuePersonnage client = personnages.get(refRMI);
+		
+		if (client.isActionExecutee()) {
+			// si une action a deja ete executee
+			logActionDejaExecutee(refRMI);
+		} else {
+			// sinon, on tente de jouer l'interaction
+			new DeplacementRapide(client, getVoisins(refRMI)).seDirigeVers(objectif);
+			client.executeAction();
+
+			res = true;
+		}
+		
+		return res;
+	}
+
+	@Override
+	public boolean deplaceRapidement(int refRMI, int refCible) throws RemoteException {
+		boolean res = false;
+		
+		VuePersonnage client = personnages.get(refRMI);
+		
+		if (client.isActionExecutee()) {
+			// si une action a deja ete executee
+			logActionDejaExecutee(refRMI);
+			
+		} else {
+			// sinon, on tente de jouer l'interaction
+			new DeplacementRapide(client, getVoisins(refRMI)).seDirigeVers(refCible);
+			client.executeAction();
+			
+			res = true;
+		}
+		
+		return res;
+	}
 
 	
 }

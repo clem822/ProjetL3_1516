@@ -225,8 +225,32 @@ public interface IArene extends Remote {
 	 */
 	public boolean invoquer(int refRMI, int nbSbire) throws RemoteException;
 	
+	/**
+	 * DeplaceRapidement déplace deux fois plus vite que deplace, le personnage correspondant a la console donne vers le point 
+	 * cible.
+	 * Le deplacement echoue si une action a deja ete executee a ce tour par 
+	 * ce personnage.
+	 * @param refRMI reference RMI du personnage voulant se deplacer
+	 * @param objectif point vers lequel on veut se deplacer
+	 * @return vrai si l'action a bien eu lieu, faux sinon
+	 * @throws RemoteException
+	 */
+	public boolean deplaceRapidement(int refRMI, Point objectif) throws RemoteException;
 	
+	/**
+	 * Deplace rapidement le personnage correspondant a la console donne vers l'element 
+	 * correspondant a la reference RMI cible.
+	 * Le deplacement echoue si une action a deja ete executee a ce tour par 
+	 * ce personnage.
+	 * @param refRMI reference RMI du personnage voulant se deplacer
+	 * @param refCible reference RMI de l'element vers lequel on veut se 
+	 * deplacer, ou 0 si on veut se deplacer aleatoirement
+	 * @return vrai si l'action a bien eu lieu, faux sinon
+	 * @throws RemoteException
+	 */
+	public boolean deplaceRapidement(int refRMI, int refCible) throws RemoteException;
 
+	
 	
 
 	/**************************************************************************
