@@ -12,6 +12,7 @@ import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Invocateur;
+import serveur.element.Personnage;
 import serveur.element.Potion;
 import serveur.element.Sbire;
 import utilitaires.Calculs;
@@ -62,8 +63,16 @@ public class StrategieSbire extends StrategiePersonnage {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
-		if (voisins.isEmpty())
+
+		Sbire moi = (Sbire)arene.elementFromRef(refRMI);
+/*		Personnage persoMaitre = (Personnage) arene.elementFromRef(moi.getMaitre());
+//		System.out.println(persoMaitre.getNom());
+//		if (!persoMaitre.estVivant())
+//		{
+//			System.out.println("svdv");
+//			moi.tue();
+//		}
+		else*/ if (voisins.isEmpty())
 		{ // je n'ai pas de voisins, j'erre
 			console.setPhrase("J'erre...");
 			arene.deplace(refRMI, 0); 
@@ -75,7 +84,6 @@ public class StrategieSbire extends StrategiePersonnage {
 			int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 
 			Element elemPlusProche = arene.elementFromRef(refCible);
-			Sbire moi = (Sbire)arene.elementFromRef(refRMI);
 
 			if (refCible == moi.getMaitre() || (elemPlusProche instanceof Sbire && ((Sbire)elemPlusProche).getMaitre() == moi.getMaitre()))
 			{

@@ -18,6 +18,7 @@ import utilitaires.Constantes;
  */
 public class ThreadInvocation extends Thread {
 
+	Arene arene;
 	String ipArene;
 	int port;
 	String ipConsole;
@@ -29,11 +30,10 @@ public class ThreadInvocation extends Thread {
 	LoggerProjet logger;
 	int maitre;
 	
-	
-	
-	public ThreadInvocation(String ipArene, int port, String ipConsole, String nom, String groupe,
+	public ThreadInvocation(Arene arene, String ipArene, int port, String ipConsole, String nom, String groupe,
 			HashMap<Caracteristique, Integer> caracts, int nbTours, Point position, LoggerProjet logger, int maitre) {
 		super();
+		this.arene = arene;
 		this.ipArene = ipArene;
 		this.port = port;
 		this.ipConsole = ipConsole;

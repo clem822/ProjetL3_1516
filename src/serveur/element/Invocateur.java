@@ -1,10 +1,15 @@
 package serveur.element;
 
 import java.util.HashMap;
+import java.util.Vector;
 
 public class Invocateur extends Personnage {
 
-
+	/**
+	 * Nombres de sbires créés par invocations 
+	 */
+	public static final int NB_SBIRES = 5;
+	
 	/**
 	 * 
 	 */

@@ -16,6 +16,7 @@ import serveur.element.Element;
 import serveur.element.Invocateur;
 import serveur.element.Potion;
 import serveur.element.Sbire;
+import serveur.element.Personnage;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
@@ -65,12 +66,17 @@ public class StrategieInvocateur extends StrategiePersonnage {
 			e.printStackTrace();
 		}
 		Element moi = arene.elementFromRef(refRMI);
-		System.out.println(moi.getCaract(Caracteristique.MANA));
+//		System.out.println(((Personnage)moi).getCaract(Caracteristique.VIE)); // a enlever
+//		((Personnage)moi).tue();// a enlever
+//		System.out.println(((Personnage)moi).getCaract(Caracteristique.VIE)); // a enlever
 		
 		if (moi.getCaract(Caracteristique.MANA) >= 80)
 		{
 			console.setPhrase("J'invoque des sbires !");
-			arene.invoquer(refRMI, 5);
+			arene.invoquer(refRMI, Invocateur.NB_SBIRES);
+//			System.out.println(((Personnage)moi).getNom()); // a enlever
+//			((Personnage)moi).tue();// a enlever
+//			System.out.println(((Personnage)moi).getCaract(Caracteristique.VIE)); // a enlever
 		}
 		else if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
 			console.setPhrase("J'erre...");

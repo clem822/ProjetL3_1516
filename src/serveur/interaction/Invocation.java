@@ -9,12 +9,10 @@ import java.net.InetAddress;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 
-import client.StrategieSbire;
 import lanceur.ErreurLancement;
 import logger.LoggerProjet;
 import serveur.Arene;
 import serveur.ThreadInvocation;
-import serveur.ThreadStrategie;
 import serveur.element.Caracteristique;
 import serveur.vuelement.VuePersonnage;
 import utilitaires.Calculs;
@@ -26,7 +24,6 @@ import utilitaires.Constantes;
  */
 public class Invocation {
 
-	protected ThreadInvocation t ;
 	/**
 	 * Arene (serveur).
 	 */
@@ -89,11 +86,7 @@ public class Invocation {
 				
 				Point position = Calculs.positionAleatoireArene();//a changer pour qu'ils apparaissent près du perso
 				
-				t = new ThreadInvocation(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger, personnage.getRefRMI());
-				// attente de la fin (temps d'attente max 1 seconde)
-				/*t.join(1000);*/
-				
-				//new StrategieSbire(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger, personnage.getRefRMI());
+				new ThreadInvocation(arene, ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger, personnage.getRefRMI());
 				logger.info("Lanceur", "Creation du personnage reussie");
 				
 			} catch (Exception e) {
