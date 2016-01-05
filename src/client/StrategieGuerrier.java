@@ -9,10 +9,12 @@ import java.util.HashMap;
 
 
 
+
 import logger.LoggerProjet;
 import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
+import serveur.element.Guerrier;
 import serveur.element.Personnage;
 import serveur.element.Potion;
 import utilitaires.Calculs;
@@ -41,7 +43,7 @@ public class StrategieGuerrier extends StrategiePersonnage {
 			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
 			int nbTours, Point position, LoggerProjet logger) {
 		
-		super(ipArene, port, ipConsole, new Personnage(nom, groupe, caracts), nbTours, position, logger);
+		super(ipArene, port, ipConsole, new Guerrier(nom, groupe, caracts), nbTours, position, logger);
 	}
 
 	// TODO etablir une strategie afin d'evoluer dans l'arene de combat

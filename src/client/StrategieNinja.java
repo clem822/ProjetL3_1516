@@ -8,6 +8,7 @@ import logger.LoggerProjet;
 import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
+import serveur.element.Ninja;
 import serveur.element.Personnage;
 import serveur.element.Potion;
 import utilitaires.Calculs;
@@ -32,7 +33,7 @@ public class StrategieNinja extends StrategiePersonnage {
 			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
 			int nbTours, Point position, LoggerProjet logger) {
 		
-		super(ipArene, port, ipConsole, new Personnage(nom, groupe, caracts), nbTours, position, logger);
+		super(ipArene, port, ipConsole, new Ninja(nom, groupe, caracts), nbTours, position, logger);
 		// TODO Auto-generated constructor stub
 	}
 

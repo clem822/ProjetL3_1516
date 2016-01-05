@@ -20,6 +20,13 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import serveur.element.Caracteristique;
+import serveur.element.Element;
+import serveur.element.Guerrier;
+import serveur.element.Invocateur;
+import serveur.element.Mage;
+import serveur.element.Ninja;
+import serveur.element.Sbire;
+import serveur.element.Vampire;
 import serveur.vuelement.VueElement;
 import serveur.vuelement.VuePersonnage;
 import serveur.vuelement.VuePotion;
@@ -198,8 +205,70 @@ public class AreneJPanel extends JPanel {
 			g.setColor(vueElement.getCouleur());
 		}
 		
+		
+		
 		if(vueElement instanceof VuePersonnage) {
-			g.fillOval(coordX, coordY, ELEMENT_SIZE, ELEMENT_SIZE);	
+			Element perso = vueElement.getElement();
+			if(perso instanceof Mage){ // Image Mage
+				Image logo;
+				try {
+					logo = ImageIO.read(new File("images/Mage.png"));
+					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else if(perso instanceof Guerrier){ // Image Guerrier
+					Image logo;
+					try {
+						logo = ImageIO.read(new File("images/Guerrier.png"));
+						g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
+			} else if(perso instanceof Ninja){ // Image Ninja
+				Image logo;
+				try {
+					logo = ImageIO.read(new File("images/Ninja.png"));
+					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}else if(perso instanceof Vampire){ // Image Vampire
+				Image logo;
+				try {
+					logo = ImageIO.read(new File("images/Vampire.png"));
+					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else if(perso instanceof Invocateur){ // Image Invocateur
+				Image logo;
+				try {
+					logo = ImageIO.read(new File("images/Invocateur.png"));
+					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else if(perso instanceof Sbire){ // Image Sbire
+				Image logo;
+				try {
+					logo = ImageIO.read(new File("images/Sbire.png"));
+					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			else {
+				g.fillOval(coordX, coordY, ELEMENT_SIZE, ELEMENT_SIZE);	
+			}
 		} else {
 			/*
 			Polygon p = new Polygon(); // triangle

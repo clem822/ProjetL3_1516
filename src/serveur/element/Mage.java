@@ -5,10 +5,6 @@ package serveur.element;
 
 import java.util.HashMap;
 
-/**
- * @author guillaume
- *
- */
 public class Mage extends Personnage{
 	
 	/**
