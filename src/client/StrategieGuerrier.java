@@ -70,21 +70,17 @@ public class StrategieGuerrier extends StrategiePersonnage {
 			e.printStackTrace();
 		}
 		
+		Element moi = arene.elementFromRef(refRMI);
+		
 		if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
 			console.setPhrase("J'erre...");
-			arene.deplace(refRMI, 0); 
+			arene.deplaceRapidement(refRMI, 0);
 			
 		} else {
 			int refCible = Calculs.chercheElementProche(position, voisins);
 			int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 
 			Element elemPlusProche = arene.elementFromRef(refCible);
-			
-			/*Element moi = arene.elementFromRef(refRMI);
-			if(moi.getCaract(Caracteristique.MANA) > 40){
-				console.setPhrase("Un plaisir!");
-				arene.Bandage(refRMI, refCible);
-			}*/
 			
 			if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
@@ -95,15 +91,20 @@ public class StrategieGuerrier extends StrategiePersonnage {
 
 				} else { // personnage
 					// Coup de Hache
-					console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
+					console.setPhrase("Je vais ecraser " + elemPlusProche.getNom());
 					arene.lanceCoupDeHache(refRMI, refCible);
 				}
 				
 			} else { // si voisins, mais plus eloignes
 				// je vais vers le plus proche
 				console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
-				arene.deplace(refRMI, refCible);
+				arene.deplaceRapidement(refRMI, refCible);
 			}
+			
+		}
+		if(moi.getCaract(Caracteristique.MANA) > 40 && moi.getCaract(Caracteristique.VIE) < 80){//peut se soigner
+				console.setPhrase("Un plaisir!");
+				arene.soin(refRMI, 40, 20);
 		}
 	}
 

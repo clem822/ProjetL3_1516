@@ -5,19 +5,22 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.HashMap;
 
-
-import client.StrategieNinja;
+import client.StrategieVampire;
 import logger.LoggerProjet;
 import serveur.element.Caracteristique;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
-public class LanceNinja {
-
-	private static String usage = "USAGE : java " + LanceNinja.class.getName() + " [ port [ ipArene ] ]";
+/**
+ * Lance une Console avec un Element sur l'Arene. 
+ * A lancer apres le serveur, eventuellement plusieurs fois.
+ */
+public class LanceVampire {
+	
+	private static String usage = "USAGE : java " + LanceVampire.class.getName() + " [ port [ ipArene ] ]";
 
 	public static void main(String[] args) {
-		String nom = "ninja";
+		String nom = "Vampire";
 		
 		//new thing
 		// TODO remplacer la ligne suivante par votre numero de groupe
@@ -70,15 +73,12 @@ public class LanceNinja {
 			// caracteristiques du personnage
 			HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
 			// seule la force n'a pas sa valeur par defaut (exemple)
-			caracts.put(Caracteristique.FORCE,Calculs.valeurCaracAleatoire(Caracteristique.FORCE)); 
-			// on met sa vitesse à 2
-			caracts.put(Caracteristique.VITESSE, 2);
-			
+			caracts.put(Caracteristique.MANA, 0); 
+
 			Point position = Calculs.positionAleatoireArene();
 			
-			new StrategieNinja(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+			new StrategieVampire(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
 			logger.info("Lanceur", "Creation du personnage reussie");
-			
 			
 		} catch (Exception e) {
 			logger.severe("Lanceur", "Erreur lancement :\n" + e.getCause());
@@ -86,5 +86,4 @@ public class LanceNinja {
 			System.exit(ErreurLancement.suivant);
 		}
 	}
-
 }

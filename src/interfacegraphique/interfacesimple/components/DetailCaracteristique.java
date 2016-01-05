@@ -43,6 +43,8 @@ public class DetailCaracteristique extends JPanel {
 			couleur = Color.GREEN; 
 			break;
 		case INITIATIVE: 
+			couleur = Color.ORANGE;
+		case MANA:
 			couleur = Color.BLUE;
 			break;
 		}

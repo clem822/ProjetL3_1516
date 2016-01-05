@@ -1,5 +1,6 @@
 package interfacegraphique.interfacesimple;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -175,6 +176,10 @@ public class AreneJPanel extends JPanel {
 		}
 	}
 
+	
+	
+
+	
 	/**
 	 * Dessine la representation geometrique de l'element (cercle pour un 
 	 * personnage, triangle pour une potion).
@@ -185,6 +190,9 @@ public class AreneJPanel extends JPanel {
 	 */
 	private void dessineElementGeometrique(Graphics g, VueElement<?> vueElement, int coordX, int coordY) {
 		if (vueElement.isSelectionne()) {
+			
+			
+			
 			g.setColor(SELECTED_COLOR);
 			g.fillOval(coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10);
 			g.setColor(vueElement.getCouleur());
@@ -193,18 +201,20 @@ public class AreneJPanel extends JPanel {
 		if(vueElement instanceof VuePersonnage) {
 			g.fillOval(coordX, coordY, ELEMENT_SIZE, ELEMENT_SIZE);	
 		} else {
+			/*
 			Polygon p = new Polygon(); // triangle
 			p = creeTriangle(coordX + ELEMENT_SIZE/2, coordY + ELEMENT_SIZE/2 - 1, ELEMENT_SIZE);
 			g.fillPolygon(p);
-			/*Image logo;
+			*/
+			Image logo;
 			try {
 				logo = ImageIO.read(new File("images/potion2.png"));
-				System.out.println("width : " + logo.getWidth(this) + " / height : " + logo.getHeight(this));
-				g.drawImage(logo, coordX - logo.getWidth(this) / 2, coordY - logo.getHeight(this) / 2, null);
+				//System.out.println("width : " + logo.getWidth(this) + " / height : " + logo.getHeight(this));
+				g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
 
 			} catch (IOException e) {
 				e.printStackTrace();
-			}*/
+			}
 		}
 	}
 
@@ -264,6 +274,7 @@ public class AreneJPanel extends JPanel {
 		int barWidth = 80;
 		int barHeight = 13;
 		int barStart = (barWidth/2) - (ELEMENT_SIZE/2);
+	
 		
 		// gestion du debordement de la barre
 		int coordXBar = Math.max(coordX - barStart, 2);
@@ -273,6 +284,7 @@ public class AreneJPanel extends JPanel {
 		}
 		
 		int coordYBar = coordY - 38;
+		int coordYBarMana = coordY - 52;
 		
 		if (coordYBar < 0) {
 			if (descendu) {
@@ -282,13 +294,34 @@ public class AreneJPanel extends JPanel {
 			}
 		}
 		
+		
+		if (coordYBarMana < 0) {
+			if (descendu) {
+				coordYBarMana = coordY + 55;
+			} else {
+				coordYBarMana = coordY + 39;
+			}
+		}	
+		
+		
+		
 		// dessin du contour de la jauge
 		g.drawRect(coordXBar - 1, coordYBar - 1, barWidth + 1, barHeight + 1);
 		g.drawRect(coordXBar - 2, coordYBar - 2, barWidth + 3, barHeight + 3);
 		
+		
+		// dessin du contour de la jauge de mana
+		g.drawRect(coordXBar - 1, coordYBarMana - 1, barWidth + 1, barHeight + 1);
+		g.drawRect(coordXBar - 2, coordYBarMana - 2, barWidth + 3, barHeight + 3);
+		
 		// remplissage du fond de jauge
 		g.setColor(new Color(183, 28, 28, 100));
 		g.fillRect(coordXBar, coordYBar, barWidth, barHeight);
+		
+		// remplissage du fond de jauge de mana
+		g.setColor(new Color(0,0,255, 100));
+		g.fillRect(coordXBar, coordYBarMana, barWidth, barHeight);
+		
 		
 		// remplissage de la jauge
 		Integer hp = vueElement.getElement().getCaract(Caracteristique.VIE);
@@ -297,16 +330,31 @@ public class AreneJPanel extends JPanel {
 		g.setColor(new Color(183, 28, 28));
 		g.fillRect(coordXBar, coordYBar, hpWidth, barHeight);
 		
+		// remplissage de la jauge de mana
+		Integer mana = vueElement.getElement().getCaract(Caracteristique.MANA);
+		int manapWidth = mana * barWidth / 100;
+				
+		g.setColor(new Color(26, 137, 223));
+		g.fillRect(coordXBar, coordYBarMana, manapWidth, barHeight);
+		
+		
 		// ecriture de la valeur
-		g.setColor(elementColor );
+		g.setColor(elementColor);
 
 		Font fontSave = g.getFont();
-		g.setFont(new Font("Arial",Font.PLAIN,12));
+		g.setFont(new Font("Arial",Font.BOLD,12));
+		
+		//barre de HP
 		String hpString = hp.toString();
 		int hpStringWidth = (int) g.getFontMetrics().getStringBounds(hpString, g).getWidth();
-		
 		int coordXHp = coordXBar + ((barWidth - hpStringWidth) / 2);
 		g.drawString(hpString, coordXHp, coordYBar + 11);
+		
+		//barre de mana
+		String manaString = mana.toString();
+		int manaStringWidth = (int) g.getFontMetrics().getStringBounds(manaString, g).getWidth();
+		int coordXMana = coordXBar + ((barWidth - manaStringWidth) / 2);
+		g.drawString(manaString, coordXMana, coordYBarMana + 11);
 		
 		g.setFont(fontSave);			
 	}
