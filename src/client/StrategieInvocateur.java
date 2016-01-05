@@ -25,14 +25,6 @@ import utilitaires.Constantes;
  */
 public class StrategieInvocateur extends StrategiePersonnage {
 	
-	String ipArene;
-	int port;
-	String ipConsole;
-	String nom;
-	String groupe;
-	int nbTours;
-	LoggerProjet logger;
-	
 	/**
 	 * Cree un personnage, la console associe et sa strategie.
 	 * @param ipArene ip de communication avec l'arene
@@ -49,13 +41,6 @@ public class StrategieInvocateur extends StrategiePersonnage {
 			int nbTours, Point position, LoggerProjet logger) {
 		
 		super(ipArene, port, ipConsole, new Invocateur(nom, groupe, caracts), nbTours, position, logger);
-		this.ipArene = ipArene;
-		this.port= port;
-		this.ipConsole = ipConsole;
-		this.nom = nom;
-		this.groupe = groupe;
-		this.nbTours = nbTours;
-		this.logger = logger;
 	}
 	
 	/* (non-Javadoc)
