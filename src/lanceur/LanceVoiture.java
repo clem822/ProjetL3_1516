@@ -62,8 +62,12 @@ public class LanceVoiture {
 			// caracteristiques de la potion
 			HashMap<Caracteristique, Integer> caractsPotion = new HashMap<Caracteristique, Integer>();
 			
-			//nombre aléatoire entre 2 et 5(vitesse max)
+			//nombre aléatoire entre 2 et 4(vitesse max)
 			caractsPotion.put(Caracteristique.VITESSE, Calculs.nombreAleatoire(2,4));
+			caractsPotion.put(Caracteristique.FORCE, 0);
+			caractsPotion.put(Caracteristique.VIE, 0);
+			caractsPotion.put(Caracteristique.MANA, 0);
+			caractsPotion.put(Caracteristique.INITIATIVE, 0);
 			
 			// ajout de la potion
 			arene.ajoutePotion(new Potion(nom, groupe, caractsPotion), Calculs.positionAleatoireArene());
