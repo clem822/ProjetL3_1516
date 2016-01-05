@@ -65,7 +65,7 @@ public class StrategieMage extends StrategiePersonnage {
 			
 			if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
 				console.setPhrase("J'erre...");
-				arene.deplaceRapidement(refRMI, 0);; 
+				arene.deplaceRapidement(refRMI, 0); 
 				
 			} else {
 				int refCible = Calculs.chercheElementProche(position, voisins);
