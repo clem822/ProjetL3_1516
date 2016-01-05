@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package lanceur;
 
 import java.awt.Point;
@@ -5,22 +8,23 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.HashMap;
 
+import client.StrategieGuerrier;
 import client.StrategieInvocateur;
+import client.StrategieTournois;
 import logger.LoggerProjet;
 import serveur.element.Caracteristique;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
 /**
- * Lance une Console avec un Element sur l'Arene. 
- * A lancer apres le serveur, eventuellement plusieurs fois.
+ * @author clement
+ *
  */
-public class LanceInvocateur {
-	
-	private static String usage = "USAGE : java " + LanceInvocateur.class.getName() + " [ port [ ipArene ] ]";
+public class LancePersoTournois {
+	private static String usage = "USAGE : java " + LancePersoTournois.class.getName() + " [ port [ ipArene ] ]";
 
 	public static void main(String[] args) {
-		String nom = "Invocateur";
+		String nom = "Tournois";
 		
 		//new thing
 		// TODO remplacer la ligne suivante par votre numero de groupe
@@ -73,12 +77,17 @@ public class LanceInvocateur {
 			// caracteristiques du personnage
 			HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
 			// seule la force n'a pas sa valeur par defaut (exemple)
-			caracts.put(Caracteristique.FORCE,Calculs.valeurCaracAleatoire(Caracteristique.FORCE)); 
+			caracts.put(Caracteristique.FORCE,1/*Calculs.valeurCaracAleatoire(Caracteristique.FORCE)*/); 
 			
 			Point position = Calculs.positionAleatoireArene();
 			
-			new StrategieInvocateur(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+			new StrategieTournois(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
 			logger.info("Lanceur", "Creation du personnage reussie");
+			
+//			position = new Point(60, 70);
+//			
+//			new StrategieGuerrier(ipArene, port, ipConsole, "Guerrier", groupe, caracts, nbTours, position, logger);
+//			logger.info("Lanceur", "Creation du personnage reussie");
 			
 			
 		} catch (Exception e) {

@@ -14,10 +14,4 @@ public class Invocateur extends Personnage {
 		super(nom, groupe, caracts);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-	
-	
-
 }
