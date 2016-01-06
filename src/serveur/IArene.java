@@ -6,7 +6,9 @@ import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import client.controle.IConsole;
+import serveur.element.Caracteristique;
 import serveur.element.Element;
+import serveur.element.Mage;
 import serveur.element.Personnage;
 import serveur.element.Potion;
 import serveur.vuelement.VueElement;
@@ -355,6 +357,7 @@ public interface IArene extends Remote {
 	 * @throws RemoteException
 	 */
 	public void lancePotion(Potion potion, Point position, String motDePasse) throws RemoteException;
+
 
 	
 	

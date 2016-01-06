@@ -19,6 +19,7 @@ import client.controle.IConsole;
 import logger.LoggerProjet;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
+import serveur.element.Mage;
 import serveur.element.Personnage;
 import serveur.element.Potion;
 import serveur.interaction.Conduire;
@@ -1155,6 +1156,10 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		int refRMI = vuePersonnage.getRefRMI();
 		IConsole console = consoleFromRef(refRMI);
 		Personnage pers = vuePersonnage.getElement();
+		
+		if(carac == Caracteristique.VIE && pers instanceof Mage && increment < 0) {
+			increment += ((Mage) pers).getBouclier();
+		}
 		
 		// increment de la caracteristique
 		pers.incrementeCaract(carac, increment);
