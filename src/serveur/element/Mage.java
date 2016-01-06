@@ -6,8 +6,6 @@ package serveur.element;
 import java.util.HashMap;
 import java.util.Random;
 
-import utilitaires.Calculs;
-
 public class Mage extends Personnage{
 	
 	/**
@@ -24,12 +22,12 @@ public class Mage extends Personnage{
 	 */
 
 	public Mage(String nom, String groupe) {
-		super(nom, groupe,caractMage());
+		super(nom, groupe,caract());
 		
 	}
 	
 	// caracteristiques du personnage
-	private static HashMap<Caracteristique, Integer> caractMage (){
+	private static HashMap<Caracteristique, Integer> caract (){
 		HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
 		caracts.put(Caracteristique.VIE, 
 				70);

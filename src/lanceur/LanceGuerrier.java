@@ -78,7 +78,7 @@ public class LanceGuerrier {
 			
 			Point position = Calculs.positionAleatoireArene();
 			
-			new StrategieGuerrier(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+			new StrategieGuerrier(ipArene, port, ipConsole, nom, groupe, nbTours, position, logger);
 			logger.info("Lanceur", "Creation du personnage reussie");
 			
 			

@@ -19,7 +19,6 @@ import client.controle.IConsole;
 import logger.LoggerProjet;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
-import serveur.element.Mage;
 import serveur.element.Personnage;
 import serveur.element.Potion;
 import serveur.interaction.DeplacementTeleleportation;
@@ -1142,7 +1141,34 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 	}
 	
 	
-	
+	@Override
+	public boolean Fuite(int refRMI, int refRMIaFuir) throws RemoteException {
+		boolean res = false;
+		
+		VuePersonnage client = personnages.get(refRMI);
+		
+		
+		
+		if (client.isActionExecutee()) {
+			// si une action a deja ete executee
+			logActionDejaExecutee(refRMI);
+		} else {
+			Point pMoi = this.getPosition(refRMI);
+			Point pAFuir = this.getPosition(refRMIaFuir);
+			Point objectif = pMoi;
+			if(pMoi.getX()-pAFuir.getX() > 0) objectif.x ++;
+			else objectif.x --;
+			if(pMoi.getY()-pAFuir.getY() > 0) objectif.y ++;
+			else objectif.y --;
+			// sinon, on tente de jouer l'interaction
+			new Deplacement(client, getVoisins(refRMI)).seDirigeVers(objectif);
+			client.executeAction();
+
+			res = true;
+		}
+		
+		return res;
+	}
 	
 
 	@Override

@@ -91,8 +91,9 @@ public class StrategieNinja extends StrategiePersonnage {
 				if (elemPlusProche instanceof Personnage ){
 					
 						if(elemPlusProche.getCaract(Caracteristique.FORCE ) > arene.elementFromRef(refRMI).getCaract(Caracteristique.VIE )){
-							console.setPhrase("Je m'échappe, il est trop fort pour moi . " + elemPlusProche.getNom());
-							arene.deplaceRapidement(refRMI, 0);
+							console.setPhrase("Je m'echappe, il est trop fort pour moi . " + elemPlusProche.getNom());
+							
+							arene.Fuite(refRMI, refCible);
 						}
 						else{
 							console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());

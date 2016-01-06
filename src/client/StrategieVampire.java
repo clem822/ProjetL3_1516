@@ -15,6 +15,7 @@ import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Personnage;
 import serveur.element.Potion;
+import serveur.element.Vampire;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
@@ -41,7 +42,7 @@ public class StrategieVampire extends StrategiePersonnage {
 			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
 			int nbTours, Point position, LoggerProjet logger) {
 		
-		super(ipArene, port, ipConsole, new Personnage(nom, groupe, caracts), nbTours, position, logger);
+		super(ipArene, port, ipConsole, new Vampire(nom, groupe, caracts), nbTours, position, logger);
 	}
 
 	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
@@ -79,12 +80,6 @@ public class StrategieVampire extends StrategiePersonnage {
 			int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 
 			Element elemPlusProche = arene.elementFromRef(refCible);
-			
-			/*Element moi = arene.elementFromRef(refRMI);
-			if(moi.getCaract(Caracteristique.MANA) > 40){
-				console.setPhrase("Un plaisir!");
-				arene.Bandage(refRMI, refCible);
-			}*/
 			
 			if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement

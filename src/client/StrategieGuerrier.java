@@ -15,7 +15,6 @@ import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Guerrier;
-import serveur.element.Personnage;
 import serveur.element.Potion;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
@@ -40,10 +39,10 @@ public class StrategieGuerrier extends StrategiePersonnage {
 	 * @param logger gestionnaire de log
 	 */
 	public StrategieGuerrier(String ipArene, int port, String ipConsole, 
-			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
+			String nom, String groupe,
 			int nbTours, Point position, LoggerProjet logger) {
 		
-		super(ipArene, port, ipConsole, new Guerrier(nom, groupe, caracts), nbTours, position, logger);
+		super(ipArene, port, ipConsole, new Guerrier(nom, groupe), nbTours, position, logger);
 	}
 
 	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
@@ -71,6 +70,8 @@ public class StrategieGuerrier extends StrategiePersonnage {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		
+		
 		
 		Element moi = arene.elementFromRef(refRMI);
 		
