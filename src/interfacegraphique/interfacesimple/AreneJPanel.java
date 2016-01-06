@@ -25,6 +25,7 @@ import serveur.element.Guerrier;
 import serveur.element.Invocateur;
 import serveur.element.Mage;
 import serveur.element.Ninja;
+import serveur.element.PersonnageTeleporteur;
 import serveur.element.Sbire;
 import serveur.element.Vampire;
 import serveur.vuelement.VueElement;
@@ -263,6 +264,15 @@ public class AreneJPanel extends JPanel {
 				Image logo;
 				try {
 					logo = ImageIO.read(new File("images/Invocateur.png"));
+					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else if(perso instanceof PersonnageTeleporteur){ // Image Teleporteur
+				Image logo;
+				try {
+					logo = ImageIO.read(new File("images/Teleporteur.png"));
 					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
 
 				} catch (IOException e) {

@@ -2,12 +2,11 @@ package serveur.element;
 
 import java.util.HashMap;
 
-import utilitaires.Calculs;
 
 /**
- * Une voiture sera une extension de la classe Potion. On utilisera l'upcasting
+ * Un poison sera une extension de la classe Potion. On utilisera l'upcasting
  */
-public class Voiture extends Potion {
+public class Poison extends Potion {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -17,21 +16,20 @@ public class Voiture extends Potion {
 	 * @param nom nom de la potion
 	 * @param groupe groupe d'etudiants de la potion
 	 */
-	public Voiture(String nom, String groupe) {
+	public Poison(String nom, String groupe) {
 		super(nom, groupe, caract());
 	}
 	
 	
 	/**
-	 * Etablit les caracteristique de la voiture
-	 * @return caracts caracteristique de la voiture
+	 * Etablit les caracteristique du poison
+	 * @return caracts caracteristique du poison
 	 */
 	private static HashMap<Caracteristique, Integer> caract (){
 		HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
-		//nombre aleatoire entre 2 et 4(vitesse max)
-		caracts.put(Caracteristique.VITESSE, Calculs.nombreAleatoire(2,4));
+		caracts.put(Caracteristique.VITESSE, 0);
 		caracts.put(Caracteristique.FORCE, 0);
-		caracts.put(Caracteristique.VIE, 0);
+		caracts.put(Caracteristique.VIE, -80);
 		caracts.put(Caracteristique.MANA, 0);
 		caracts.put(Caracteristique.INITIATIVE, 0);
 		caracts.put(Caracteristique.ARMURE,0);

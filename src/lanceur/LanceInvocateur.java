@@ -3,11 +3,9 @@ package lanceur;
 import java.awt.Point;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.HashMap;
 
 import client.StrategieInvocateur;
 import logger.LoggerProjet;
-import serveur.element.Caracteristique;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
@@ -70,14 +68,10 @@ public class LanceInvocateur {
 			
 			logger.info("Lanceur", "Creation du personnage...");
 			
-			// caracteristiques du personnage
-			HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
-			// seule la force n'a pas sa valeur par defaut (exemple)
-			caracts.put(Caracteristique.FORCE,Calculs.valeurCaracAleatoire(Caracteristique.FORCE)); 
 			
 			Point position = Calculs.positionAleatoireArene();
 			
-			new StrategieInvocateur(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+			new StrategieInvocateur(ipArene, port, ipConsole, nom, groupe, nbTours, position, logger);
 			logger.info("Lanceur", "Creation du personnage reussie");
 			
 			

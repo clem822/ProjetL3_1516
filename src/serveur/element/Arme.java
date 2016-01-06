@@ -5,7 +5,7 @@ import java.util.HashMap;
 import utilitaires.Calculs;
 
 /**
- * Une Arme sera une extension de la classe Potion. On utilisera l'upcasting
+ * Une arme sera une extension de la classe Potion. On utilisera l'upcasting
  */
 public class Arme extends Potion {
 
@@ -16,17 +16,17 @@ public class Arme extends Potion {
 	 * caracteristiques (ajoutees lorsqu'un Personnage ramasse cette potion).
 	 * @param nom nom de la potion
 	 * @param groupe groupe d'etudiants de la potion
-	 * @param caracts caracteristiques de la potion
 	 */
 	public Arme(String nom, String groupe) {
 		super(nom, groupe, caract());
 	}
 	
-	
-	// caracteristiques de la voiture
+	/**
+	 * Etablit les caracteristique de l'arme
+	 * @return caracts caracteristique de l'arme
+	 */
 	private static HashMap<Caracteristique, Integer> caract (){
 		HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
-		//nombre aleatoire entre 2 et 4(vitesse max)
 		caracts.put(Caracteristique.VITESSE, 0);
 		caracts.put(Caracteristique.FORCE, Calculs.nombreAleatoire(10,30));
 		caracts.put(Caracteristique.VIE, 0);

@@ -61,7 +61,7 @@ public class Duel extends Interaction<VuePersonnage> {
 	 * @param defenseur defenseur
 	 * @throws RemoteException
 	 */
-	private void incrementeInitiative(VuePersonnage defenseur) throws RemoteException {
+	protected void incrementeInitiative(VuePersonnage defenseur) throws RemoteException {
 		arene.incrementeCaractElement(defenseur, Caracteristique.INITIATIVE, 
 				Constantes.INCR_DECR_INITIATIVE_DUEL);
 	}
@@ -71,7 +71,7 @@ public class Duel extends Interaction<VuePersonnage> {
 	 * @param attaquant attaquant
 	 * @throws RemoteException
 	 */
-	private void decrementeInitiative(VuePersonnage attaquant) throws RemoteException {
+	protected void decrementeInitiative(VuePersonnage attaquant) throws RemoteException {
 		arene.incrementeCaractElement(attaquant, Caracteristique.INITIATIVE, 
 				-Constantes.INCR_DECR_INITIATIVE_DUEL);
 	}
@@ -84,7 +84,7 @@ public class Duel extends Interaction<VuePersonnage> {
 	 * @param forceAtt force de l'attaquant
 	 * @return position d'ejection du personnage
 	 */
-	private Point positionEjection(Point posDefenseur, Point positionAtt, int forceAtt) {
+	protected Point positionEjection(Point posDefenseur, Point positionAtt, int forceAtt) {
 		int distance = forceVersDistance(forceAtt);
 		
 		// abscisses 

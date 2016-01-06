@@ -4,7 +4,8 @@
 package serveur.element;
 
 import java.util.HashMap;
-import java.util.Random;
+
+import utilitaires.Calculs;
 
 public class Mage extends Personnage{
 	
@@ -18,7 +19,6 @@ public class Mage extends Personnage{
 	 * Cree un Mage avec un nom et un groupe.
 	 * @param nom du personnage
 	 * @param groupe d'etudiants du personnage
-	 * @param caracts caracteristiques du personnage
 	 */
 
 	public Mage(String nom, String groupe) {
@@ -26,12 +26,14 @@ public class Mage extends Personnage{
 		
 	}
 	
-	// caracteristiques du personnage
+	/**
+	 * Etablit les caracteristique du personnage
+	 * @return caracts caracteristique du personnage
+	 */
 	private static HashMap<Caracteristique, Integer> caract (){
 		HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
 		caracts.put(Caracteristique.VIE, 70);
-		caracts.put(Caracteristique.FORCE, 
-				(new Random().nextInt(20)+10));
+		caracts.put(Caracteristique.FORCE, Calculs.nombreAleatoire(10,30));
 		return caracts;
 	}
 	

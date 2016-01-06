@@ -21,7 +21,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 	Panneau pan = new Panneau();
 	Bouton b=new Bouton("Partie local","");
 	Bouton b0=new Bouton("Partie reseau","");
-	Bouton b11=new Bouton("Perso Tournois","images/Invocateur.png");
+	Bouton b11=new Bouton("Perso Tournois","");
 	Bouton b1=new Bouton("potion","images/potion.png");
 	Bouton b2=new Bouton("poison","images/poison.png");
 	Bouton b3=new Bouton("Ninja","images/Ninja.png");
@@ -32,7 +32,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 	Bouton b7=new Bouton("armes","");
 	Bouton b8=new Bouton("Voiture","");
 	Bouton b9=new Bouton("bouclier","");
-	Bouton b12=new Bouton("Teleporteur","");
+	Bouton b12=new Bouton("Teleporteur","images/Teleporteur.png");
 	private JPanel container = new JPanel();
 /*	private JPanel syst = new JPanel();
 	private JPanel perso = new JPanel();
@@ -107,26 +107,28 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 	 
 	 
 	 public void actionPerformed(ActionEvent arg0) {
+		 
 
-		  if(arg0.getSource() == b){
+		 if(arg0.getSource() == b){
 			  LanceArene.main(arg);
 			  LanceIHM.main(arg);
-			 
-		  }
-
-		  if(arg0.getSource() == b1){
+		 }
+		 
+		 if(arg0.getSource() == b1){
 			  LancePotion.main(arg);
 			  
-		  }  if(arg0.getSource() == b2){
+		 }
+		 
+		 if(arg0.getSource() == b2){
 			 LancePoison.main(arg);
-		  }
+		 }
 
-		  if(arg0.getSource() == b3){
+		 if(arg0.getSource() == b3){
 			  LanceNinja.main(arg);
 			  
-		  }  if(arg0.getSource() == b4){
+		 }  if(arg0.getSource() == b4){
 			 LanceMage.main(arg);
-		  }
+		 }
 
 		  if(arg0.getSource() == b5){
 
@@ -137,7 +139,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		  }
 
 		  if(arg0.getSource() == b7){
-			//Lancearmes.main(arg);
+			  LanceArme.main(arg);
 			  
 		  
 		}
@@ -146,7 +148,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 				  
 			  }
 		  if(arg0.getSource() == b9){
-				//Lancearmes.main(arg);
+				LanceBouclier.main(arg);
 				  
 			  }
 
@@ -156,13 +158,13 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 			  }
 
 		  if(arg0.getSource() == b11){
-				//Lancearmes.main(arg);
+			  //LancePersoTournois.main(arg);
 				  
 			  }
-			   if(arg0.getSource() == b12){
-				 LancePersonnageTeleporteur.main(arg);  
-			  }
-		  
+		  if(arg0.getSource() == b12){
+			  LanceTeleporteur.main(arg);  
+		  }
+	  
 		   
 
 		}

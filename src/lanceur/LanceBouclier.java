@@ -1,30 +1,22 @@
 package lanceur;
 
-import java.awt.Point;
 import java.io.IOException;
-import java.net.InetAddress;
 
-
-import client.StrategieNinja;
 import logger.LoggerProjet;
+import serveur.IArene;
+import serveur.element.Bouclier;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
-public class LanceNinja {
-
-	private static String usage = "USAGE : java " + LanceNinja.class.getName() + " [ port [ ipArene ] ]";
+public class LanceBouclier {
+	
+	private static String usage = "USAGE : java " + LanceVoiture.class.getName() + " [ port [ ipArene ] ]";
 
 	public static void main(String[] args) {
-		String nom = "ninja";
+		String nom = "Bouclier";
 		
-		//new thing
 		// TODO remplacer la ligne suivante par votre numero de groupe
 		String groupe = "G" + 17; 
-		
-		// nombre de tours pour ce personnage avant d'etre deconnecte 
-		// (30 minutes par defaut)
-		// si negatif, illimite
-		int nbTours = Constantes.NB_TOURS_PERSONNAGE_DEFAUT;
 		
 		// init des arguments
 		int port = Constantes.PORT_DEFAUT;
@@ -53,23 +45,21 @@ public class LanceNinja {
 		// creation du logger
 		LoggerProjet logger = null;
 		try {
-			logger = new LoggerProjet(true, "personnage_" + nom + groupe);
+			logger = new LoggerProjet(true, "potion_"+nom+groupe);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(ErreurLancement.suivant);
 		}
 		
-		// lancement du serveur
+		// lancement de la Bouclier
 		try {
-			String ipConsole = InetAddress.getLocalHost().getHostAddress();
+			IArene arene = (IArene) java.rmi.Naming.lookup(Constantes.nomRMI(ipArene, port, "Arene"));
+
+			logger.info("Lanceur", "Lancement du douclier sur le serveur...");
 			
-			logger.info("Lanceur", "Creation du personnage...");
-			
-			Point position = Calculs.positionAleatoireArene();
-			
-			new StrategieNinja(ipArene, port, ipConsole, nom, groupe, nbTours, position, logger);
-			logger.info("Lanceur", "Creation du personnage reussie");
-			
+			// ajout de la Bouclier
+			arene.ajoutePotion(new Bouclier(nom, groupe), Calculs.positionAleatoireArene());
+			logger.info("Lanceur", "Lancement du bouclier reussi");
 			
 		} catch (Exception e) {
 			logger.severe("Lanceur", "Erreur lancement :\n" + e.getCause());
@@ -77,5 +67,4 @@ public class LanceNinja {
 			System.exit(ErreurLancement.suivant);
 		}
 	}
-
 }

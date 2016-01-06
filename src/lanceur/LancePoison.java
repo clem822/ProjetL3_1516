@@ -2,12 +2,10 @@ package lanceur;
 
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import logger.LoggerProjet;
 import serveur.IArene;
-import serveur.element.Caracteristique;
-import serveur.element.Potion;
+import serveur.element.Poison;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
@@ -60,18 +58,9 @@ public class LancePoison {
 
 				logger.info("Lanceur", "Lancement du Poison sur le serveur...");
 				
-				// caracteristiques du Poison
-				HashMap<Caracteristique, Integer> caractsPotion = new HashMap<Caracteristique, Integer>();
-				
-				
-				caractsPotion.put(Caracteristique.VIE, -80);
-				caractsPotion.put(Caracteristique.FORCE, 0);
-				caractsPotion.put(Caracteristique.INITIATIVE, 0);
-				caractsPotion.put(Caracteristique.MANA, 0);
-				
 				
 				// ajout du poison
-				arene.ajoutePotion(new Potion(nom, groupe, caractsPotion), Calculs.positionAleatoireArene());
+				arene.ajoutePotion(new Poison(nom, groupe), Calculs.positionAleatoireArene());
 				logger.info("Lanceur", "Lancement du poison reussi");
 				
 			} catch (Exception e) {

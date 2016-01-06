@@ -7,8 +7,6 @@ import java.awt.Point;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 
-import javax.swing.text.Position;
-
 import logger.LoggerProjet;
 import serveur.IArene;
 import serveur.element.Caracteristique;
@@ -38,10 +36,9 @@ public class StrategieInvocateur extends StrategiePersonnage {
 	 * @param logger gestionnaire de log
 	 */
 	public StrategieInvocateur(String ipArene, int port, String ipConsole, 
-			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
-			int nbTours, Point position, LoggerProjet logger) {
+			String nom, String groupe, int nbTours, Point position, LoggerProjet logger) {
 		
-		super(ipArene, port, ipConsole, new Invocateur(nom, groupe, caracts), nbTours, position, logger);
+		super(ipArene, port, ipConsole, new Invocateur(nom, groupe), nbTours, position, logger);
 	}
 	
 	/* (non-Javadoc)

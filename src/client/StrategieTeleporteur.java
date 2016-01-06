@@ -11,16 +11,15 @@ import serveur.element.Element;
 import serveur.element.Personnage;
 import serveur.element.PersonnageTeleporteur;
 import serveur.element.Potion;
-import serveur.element.Voiture;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
-public class StrategiePersonnageTeleporteur extends StrategiePersonnage {
+public class StrategieTeleporteur extends StrategiePersonnage {
 
 	
 
 	/**
-	 * Cree un personnage t�l�port, la console associe et sa strategie.
+	 * Cree un personnage teleporteur, la console associe et sa strategie.
 	 * @param ipArene ip de communication avec l'arene
 	 * @param port port de communication avec l'arene
 	 * @param ipConsole ip de la console du personnage
@@ -32,7 +31,7 @@ public class StrategiePersonnageTeleporteur extends StrategiePersonnage {
 	 */
 	
 	
-	public StrategiePersonnageTeleporteur(String ipArene, int port, String ipConsole, 
+	public StrategieTeleporteur(String ipArene, int port, String ipConsole, 
 			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
 			int nbTours, Point position, LoggerProjet logger) {
 		
@@ -68,7 +67,7 @@ public class StrategiePersonnageTeleporteur extends StrategiePersonnage {
 
 		if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
 			console.setPhrase("J'erre...");
-			arene.deplace(refRMI, 0); // La particularit� de ce personnage est qu'il ne peut pas profiter du bonus des potions de vitesse m�me si il peut les prendre
+			arene.deplace(refRMI, 0); // La particularite de ce personnage est qu'il ne peut pas profiter du bonus des potions de vitesse meme si il peut les prendre
 
 		} else {
 			int refCible = Calculs.chercheElementProche(position, voisins);
@@ -77,24 +76,29 @@ public class StrategiePersonnageTeleporteur extends StrategiePersonnage {
 			Element elemPlusProche = arene.elementFromRef(refCible);
 			Element moi = arene.elementFromRef(refRMI);
 			
-			//Caract�ristique vitesse de l'adversaire
+			//Caracteristique vitesse de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			//Si je suis d�j� invisible ou que la r�f�rence est un personnage et qu'en plus son invisibilit� est � 1 alors je ne l'attaque pas car je ne peux pas attaquer en �tant invisible.
-			//De plus il ne peut pas ramasser les potions en �tant invisible.			
+			//Si je suis deja invisible ou que la reference est un personnage et qu'en plus son invisibilite est a 1 alors je ne l'attaque pas car je ne peux pas attaquer en �tant invisible.
+			//De plus il ne peut pas ramasser les potions en etant invisible.			
 			if (((invAdv == 1) && (elemPlusProche instanceof Personnage))  || (moi.getCaract(Caracteristique.INVISIBILITE) == 1 )) 
 			{
 				console.setPhrase("Je ne peux qu'errer.");																	
-				arene.deplaceRapidement(refRMI, 0);	
-			}
+				arene.deplace(refRMI, 0);	
+			} else {
 			
-			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
+			if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if (elemPlusProche instanceof Potion) { // potion
 					// ramassage
 					console.setPhrase("Je ramasse une potion");
 					arene.ramassePotion(refRMI, refCible);
 
+				} else if (elemPlusProche.getCaract(Caracteristique.VIE) > arene.elementFromRef(refRMI).getCaract(Caracteristique.VIE)
+							&& arene.elementFromRef(refRMI).getCaract(Caracteristique.MANA) > 24) {
+					console.setPhrase("Il est trop fort. Je dois me teleporter ailleurs. . " + elemPlusProche.getNom());
+					arene.deplaceTeleportation(refRMI, 0);
+					arene.regenerationMana(refRMI, -25);
 				} else { // personnage
 					// duel
 					console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
@@ -110,28 +114,31 @@ public class StrategiePersonnageTeleporteur extends StrategiePersonnage {
 						// Il se base selon la vie de l'adversaie et non pas sa
 						// force.
 						if (elemPlusProche.getCaract(Caracteristique.VIE) > arene.elementFromRef(refRMI).getCaract(Caracteristique.VIE)) {
-							console.setPhrase("Il est trop fort. Je dois me teleporter ailleurs. . " + elemPlusProche.getNom());
-							arene.deplaceTeleportation(refRMI, 0);
+							if (arene.elementFromRef(refRMI).getCaract(Caracteristique.MANA) > 24) {
+								console.setPhrase("Il est trop fort. Je dois me teleporter ailleurs. . " + elemPlusProche.getNom());
+								arene.deplaceTeleportation(refRMI, 0);
+								arene.regenerationMana(refRMI, -25);
+							} else {
+								arene.deplace(refRMI, 0);
+							}
 						} else {
-							console.setPhrase("Je me teleporte comme un eclair " + elemPlusProche.getNom());
-							arene.deplaceTeleportation(refRMI, refCible);
+							if (arene.elementFromRef(refRMI).getCaract(Caracteristique.MANA) > 24) {
+								console.setPhrase("Je me teleporte comme un eclair " + elemPlusProche.getNom());
+								arene.deplaceTeleportation(refRMI, refCible);
+								arene.regenerationMana(refRMI, -25);
+							} else {
+								arene.deplace(refRMI, 0);
+							}
 						}
 
 				} else {// il se dirige vers une potion
-					
-					//Si je suis d�j� invisible, je ne vais pas vers la potion
-					if (moi.getCaract(Caracteristique.INVISIBILITE) == 1)
-					{
-						console.setPhrase("Je ne peux qu'errer.");
-						arene.deplace(refRMI, 0);
-					}
-					//sinon j'y vais
-					else {
 						console.setPhrase("Je vais vers cette potion " + elemPlusProche.getNom());
 						arene.deplace(refRMI, refCible);
 					}
 				}
 			}
+			// regeneration passive de mana
+			arene.regenerationMana(refRMI, 2);
 		}
 		
 	}

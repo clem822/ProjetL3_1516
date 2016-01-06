@@ -6,15 +6,15 @@ import java.net.InetAddress;
 import java.util.HashMap;
 
 
-import client.StrategiePersonnageTeleporteur;
+import client.StrategieTeleporteur;
 import logger.LoggerProjet;
 import serveur.element.Caracteristique;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
-public class LancePersonnageTeleporteur {
+public class LanceTeleporteur {
 
-	private static String usage = "USAGE : java " + LancePersonnageTeleporteur.class.getName() + " [ port [ ipArene ] ]";
+	private static String usage = "USAGE : java " + LanceTeleporteur.class.getName() + " [ port [ ipArene ] ]";
 
 	public static void main(String[] args) {
 		String nom = "Houdini";
@@ -75,7 +75,7 @@ public class LancePersonnageTeleporteur {
 			
 			Point position = Calculs.positionAleatoireArene();
 			
-			new StrategiePersonnageTeleporteur(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+			new StrategieTeleporteur(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
 			logger.info("Lanceur", "Creation du personnage reussie");
 			
 			

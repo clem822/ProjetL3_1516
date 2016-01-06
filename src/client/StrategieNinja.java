@@ -30,10 +30,9 @@ public class StrategieNinja extends StrategiePersonnage {
 	 * @param logger gestionnaire de log
 	 */
 	public StrategieNinja(String ipArene, int port, String ipConsole, 
-			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
-			int nbTours, Point position, LoggerProjet logger) {
+			String nom, String groupe, int nbTours, Point position, LoggerProjet logger) {
 		
-		super(ipArene, port, ipConsole, new Ninja(nom, groupe, caracts), nbTours, position, logger);
+		super(ipArene, port, ipConsole, new Ninja(nom, groupe), nbTours, position, logger);
 		// TODO Auto-generated constructor stub
 	}
 
