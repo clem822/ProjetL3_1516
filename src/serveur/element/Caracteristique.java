@@ -46,7 +46,7 @@ public enum Caracteristique {
 	INVISIBILITE("Invisibilite", "INV", 0, 1, 0);
 	
 
-
+ 
 	/**
 	 * Nom complet.
 	 */
