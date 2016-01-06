@@ -1,19 +1,21 @@
 package lanceur;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import logger.LoggerProjet;
 import serveur.IArene;
-import serveur.element.Voiture;
+import serveur.element.Caracteristique;
+import serveur.element.Potion;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
-public class LanceVoiture {
+public class LanceInvisibilite{
 	
-	private static String usage = "USAGE : java " + LanceVoiture.class.getName() + " [ port [ ipArene ] ]";
+	private static String usage = "USAGE : java " + LanceInvisibilite.class.getName() + " [ port [ ipArene ] ]";
 
 	public static void main(String[] args) {
-		String nom = "Voiture";
+		String nom = "Invisible";
 		
 		// TODO remplacer la ligne suivante par votre numero de groupe
 		String groupe = "G" + 17; 
@@ -51,15 +53,26 @@ public class LanceVoiture {
 			System.exit(ErreurLancement.suivant);
 		}
 		
-		// lancement de la Voiture
+		// lancement de la potion
 		try {
 			IArene arene = (IArene) java.rmi.Naming.lookup(Constantes.nomRMI(ipArene, port, "Arene"));
 
-			logger.info("Lanceur", "Lancement de la Voiture sur le serveur...");
+			logger.info("Lanceur", "Lancement de la potion sur le serveur...");
 			
-			// ajout de la Voiture
-			arene.ajoutePotion(new Voiture(nom, groupe), Calculs.positionAleatoireArene());
-			logger.info("Lanceur", "Lancement de la Voiture reussi");
+			// caracteristiques de la potion
+			HashMap<Caracteristique, Integer> caractsPotion = new HashMap<Caracteristique, Integer>();
+			
+			//Invisibilité à 1. Les autres caractéristiques à 0
+			caractsPotion.put(Caracteristique.VITESSE, 0);
+			caractsPotion.put(Caracteristique.FORCE, 0);
+			caractsPotion.put(Caracteristique.VIE, 0);
+			caractsPotion.put(Caracteristique.MANA, 0);
+			caractsPotion.put(Caracteristique.INITIATIVE, 0);
+			caractsPotion.put(Caracteristique.INVISIBILITE, 1);
+			
+			// ajout de la potion
+			arene.ajoutePotion(new Potion(nom, groupe, caractsPotion), Calculs.positionAleatoireArene());
+			logger.info("Lanceur", "Lancement de la potion reussi");
 			
 		} catch (Exception e) {
 			logger.severe("Lanceur", "Erreur lancement :\n" + e.getCause());

@@ -1,33 +1,22 @@
 package lanceur;
 
-import java.awt.Point;
 import java.io.IOException;
-import java.net.InetAddress;
 
-import client.StrategieMage;
 import logger.LoggerProjet;
+import serveur.IArene;
+import serveur.element.Arme;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
-/**
- * Lance une Console avec un Element sur l'Arene. 
- * A lancer apres le serveur, eventuellement plusieurs fois.
- */
-public class LanceMage {
+public class LanceArme {
 	
-	private static String usage = "USAGE : java " + LanceMage.class.getName() + " [ port [ ipArene ] ]";
+	private static String usage = "USAGE : java " + LanceVoiture.class.getName() + " [ port [ ipArene ] ]";
 
 	public static void main(String[] args) {
-		String nom = "Luc";
+		String nom = "Arme";
 		
-		//new thing
 		// TODO remplacer la ligne suivante par votre numero de groupe
 		String groupe = "G" + 17; 
-		
-		// nombre de tours pour ce personnage avant d'etre deconnecte 
-		// (30 minutes par defaut)
-		// si negatif, illimite
-		int nbTours = Constantes.NB_TOURS_PERSONNAGE_DEFAUT;
 		
 		// init des arguments
 		int port = Constantes.PORT_DEFAUT;
@@ -56,22 +45,21 @@ public class LanceMage {
 		// creation du logger
 		LoggerProjet logger = null;
 		try {
-			logger = new LoggerProjet(true, "personnage_" + nom + groupe);
+			logger = new LoggerProjet(true, "potion_"+nom+groupe);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(ErreurLancement.suivant);
 		}
 		
-		// lancement du serveur
+		// lancement de l'arme
 		try {
-			String ipConsole = InetAddress.getLocalHost().getHostAddress();
-			
-			logger.info("Lanceur", "Creation du personnage...");
+			IArene arene = (IArene) java.rmi.Naming.lookup(Constantes.nomRMI(ipArene, port, "Arene"));
 
-			Point position = Calculs.positionAleatoireArene();
+			logger.info("Lanceur", "Lancement de l'arme sur le serveur...");
 			
-			new StrategieMage(ipArene, port, ipConsole, nom, groupe, nbTours, position, logger);
-			logger.info("Lanceur", "Creation du personnage reussie");
+			// ajout de l'arme
+			arene.ajoutePotion(new Arme(nom, groupe), Calculs.positionAleatoireArene());
+			logger.info("Lanceur", "Lancement de l'arme reussi");
 			
 		} catch (Exception e) {
 			logger.severe("Lanceur", "Erreur lancement :\n" + e.getCause());

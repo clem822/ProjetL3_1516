@@ -25,6 +25,7 @@ import serveur.interaction.BouleDeFeu;
 import serveur.interaction.CoupDeHache;
 import serveur.interaction.Deplacement;
 import serveur.interaction.DeplacementRapide;
+import serveur.interaction.DeplacementTeleleportation;
 import serveur.interaction.Duel;
 import serveur.interaction.Invocation;
 import serveur.interaction.Ramassage;
@@ -975,6 +976,81 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		return res;
 	}
 
+
+	
+	
+	@Override
+	public boolean deplaceTeleportation(int refRMI, int refCible) throws RemoteException {		
+		boolean res = false;
+		
+		VuePersonnage client = personnages.get(refRMI);
+		
+		if (client.isActionExecutee()) {
+			// si une action a deja ete executee
+			logActionDejaExecutee(refRMI);
+			
+		} else {
+			// sinon, on tente de jouer l'interaction
+			new DeplacementTeleleportation(client, getVoisins(refRMI)).seDirigeVers(refCible);
+			client.executeAction();
+			
+			res = true;
+		}
+		
+		return res;
+	}
+	
+	@Override
+	public boolean deplaceTeleportation(int refRMI, Point objectif) throws RemoteException {
+		boolean res = false;
+		
+		VuePersonnage client = personnages.get(refRMI);
+		
+		if (client.isActionExecutee()) {
+			// si une action a deja ete executee
+			logActionDejaExecutee(refRMI);
+		} else {
+			// sinon, on tente de jouer l'interaction
+			new DeplacementTeleleportation(client, getVoisins(refRMI)).seDirigeVers(objectif);
+			client.executeAction();
+
+			res = true;
+		}
+		
+		return res;
+	}
+	
+	
+	@Override
+	public boolean Fuite(int refRMI, int refRMIaFuir) throws RemoteException {
+		boolean res = false;
+		
+		VuePersonnage client = personnages.get(refRMI);
+		
+		
+		
+		if (client.isActionExecutee()) {
+			// si une action a deja ete executee
+			logActionDejaExecutee(refRMI);
+		} else {
+			Point pMoi = this.getPosition(refRMI);
+			Point pAFuir = this.getPosition(refRMIaFuir);
+			Point objectif = pMoi;
+			if(pMoi.getX()-pAFuir.getX() > 0) objectif.x ++;
+			else objectif.x --;
+			if(pMoi.getY()-pAFuir.getY() > 0) objectif.y ++;
+			else objectif.y --;
+			// sinon, on tente de jouer l'interaction
+			new Deplacement(client, getVoisins(refRMI)).seDirigeVers(objectif);
+			client.executeAction();
+
+			res = true;
+		}
+		
+		return res;
+	}
+	
+
 	@Override
 	public boolean invoquer(int refRMI, int nbSbires) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -1209,17 +1285,6 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		return false;
 	}
 
-	@Override
-	public boolean deplaceTeleportation(int refRMI, int refCible) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deplaceTeleportation(int refRMI, Point objectif) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean ajouteArmure(int refRMI, int armure) throws RemoteException {

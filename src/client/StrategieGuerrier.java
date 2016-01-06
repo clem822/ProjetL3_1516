@@ -40,10 +40,10 @@ public class StrategieGuerrier extends StrategiePersonnage {
 	 * @param logger gestionnaire de log
 	 */
 	public StrategieGuerrier(String ipArene, int port, String ipConsole, 
-			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
+			String nom, String groupe,
 			int nbTours, Point position, LoggerProjet logger) {
 		
-		super(ipArene, port, ipConsole, new Guerrier(nom, groupe, caracts), nbTours, position, logger);
+		super(ipArene, port, ipConsole, new Guerrier(nom, groupe), nbTours, position, logger);
 	}
 
 	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
@@ -72,6 +72,8 @@ public class StrategieGuerrier extends StrategiePersonnage {
 			e.printStackTrace();
 		}
 		
+		
+		
 		Element moi = arene.elementFromRef(refRMI);
 		
 		if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
@@ -84,7 +86,19 @@ public class StrategieGuerrier extends StrategiePersonnage {
 
 			Element elemPlusProche = arene.elementFromRef(refCible);
 			
-			if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
+			//Caract�ristique vitesse de l'adversaire
+			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
+			
+			//Si je suis d�j� invisible ou que la r�f�rence est un personnage et qu'en plus son invisibilit� est � 1 alors je ne l'attaque pas car je ne peux pas attaquer en �tant invisible.
+			//De plus il ne peut pas ramasser les potions en �tant invisible.			
+			if (((invAdv == 1) && (elemPlusProche instanceof Personnage))  || (moi.getCaract(Caracteristique.INVISIBILITE) == 1 )) 
+			{
+				console.setPhrase("Je ne peux qu'errer.");																	
+				arene.deplaceRapidement(refRMI, 0);	
+			}	
+			
+			
+			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if(elemPlusProche instanceof Potion) { // potion
 					// ramassage

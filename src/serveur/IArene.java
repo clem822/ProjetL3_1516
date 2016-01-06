@@ -6,9 +6,7 @@ import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import client.controle.IConsole;
-import serveur.element.Caracteristique;
 import serveur.element.Element;
-import serveur.element.Mage;
 import serveur.element.Personnage;
 import serveur.element.Potion;
 import serveur.vuelement.VueElement;
@@ -359,8 +357,14 @@ public interface IArene extends Remote {
 	public boolean ajouteArmure(int refRMI, int armure) throws RemoteException;
 	
 	
-
-	
+	/**
+	 * Applique la fuite d'un personnage
+	 * @param refRMI reference RMI du personnage qui fuit
+	 * @param refRMIafuir reference RMI du personnage a fuir
+	 * @return vrai si l'action a bien eu lieu, faux sinon
+	 * @throws RemoteException
+	 */
+	public boolean Fuite(int refRMI, int refRMIafuir) throws RemoteException;
 	
 
 	/**************************************************************************
