@@ -63,6 +63,7 @@ public class StrategieMage extends StrategiePersonnage {
 				e.printStackTrace();
 			}
 			
+			
 			if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
 				console.setPhrase("J'erre...");
 				arene.deplaceRapidement(refRMI, 0); 
@@ -72,7 +73,6 @@ public class StrategieMage extends StrategiePersonnage {
 				int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 
 				Element elemPlusProche = arene.elementFromRef(refCible);
-				
 					
 				if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION_DIST) { // si suffisamment proches
 					// j'interagis directement
@@ -106,7 +106,12 @@ public class StrategieMage extends StrategiePersonnage {
 					arene.deplaceRapidement(refRMI, refCible);
 				}
 			}
+			
+			// regeneration passive de mana
+			arene.regenerationMana(refRMI,3);
 		}
+	
+	
 
 	
 }

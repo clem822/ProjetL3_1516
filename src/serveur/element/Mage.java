@@ -11,6 +11,7 @@ public class Mage extends Personnage{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 
 	/**
 	 * Cree un Mage avec un nom et un groupe.
@@ -23,5 +24,6 @@ public class Mage extends Personnage{
 		super(nom, groupe, caracts);
 		// TODO Auto-generated constructor stub
 	}
+
 
 }
