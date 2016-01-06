@@ -1094,7 +1094,9 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		int refRMI = vuePersonnage.getRefRMI();
 		IConsole console = consoleFromRef(refRMI);
 		Personnage pers = vuePersonnage.getElement();
-		
+		if(carac == Caracteristique.VIE && increment < 0) {
+			increment = (increment*(100-pers.getCaract(Caracteristique.ARMURE)))/100;
+		}
 		if (carac == Caracteristique.INVISIBILITE && ((pers instanceof Invocateur ) || (pers instanceof Sbire))) {
 			
 		} else {
