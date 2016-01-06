@@ -19,8 +19,10 @@ import client.controle.IConsole;
 import logger.LoggerProjet;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
+import serveur.element.Invocateur;
 import serveur.element.Personnage;
 import serveur.element.Potion;
+import serveur.element.Sbire;
 import serveur.interaction.DeplacementTeleleportation;
 import serveur.interaction.Conduire;
 import serveur.interaction.RegenerationMana;
@@ -1247,20 +1249,25 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 			increment = (increment*(100-pers.getCaract(Caracteristique.ARMURE)))/100;
 		}
 		
-		// increment de la caracteristique
-		pers.incrementeCaract(carac, increment);
+		if (carac == Caracteristique.INVISIBILITE && ((pers instanceof Invocateur ) || (pers instanceof Sbire))) {
+			
+		} else {
 		
-		if(pers.estVivant()) {
-			if (increment < 0) {
-				console.log(Level.INFO, Constantes.nomClasse(this), "J'ai perdu " + -increment + " points de " + carac);
-				
-				if (carac == Caracteristique.VIE) {
-					setPhrase(refRMI, "Ouch, j'ai perdu " + increment + " points de vie.");
+			// increment de la caracteristique
+			pers.incrementeCaract(carac, increment);
+			
+			if(pers.estVivant()) {
+				if (increment < 0) {
+					console.log(Level.INFO, Constantes.nomClasse(this), "J'ai perdu " + -increment + " points de " + carac);
+					
+					if (carac == Caracteristique.VIE) {
+						setPhrase(refRMI, "Ouch, j'ai perdu " + increment + " points de vie.");
+					}
+					
+				} else {
+					console.log(Level.INFO, Constantes.nomClasse(this), 
+							"J'ai gagne " + increment + " points de " + carac);
 				}
-				
-			} else {
-				console.log(Level.INFO, Constantes.nomClasse(this), 
-						"J'ai gagne " + increment + " points de " + carac);
 			}
 		}
 	}

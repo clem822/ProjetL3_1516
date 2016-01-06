@@ -20,7 +20,7 @@ public class StrategiePersonnageTeleporteur extends StrategiePersonnage {
 	
 
 	/**
-	 * Cree un personnage téléport, la console associe et sa strategie.
+	 * Cree un personnage tï¿½lï¿½port, la console associe et sa strategie.
 	 * @param ipArene ip de communication avec l'arene
 	 * @param port port de communication avec l'arene
 	 * @param ipConsole ip de la console du personnage
@@ -30,6 +30,8 @@ public class StrategiePersonnageTeleporteur extends StrategiePersonnage {
 	 * @param position position initiale du personnage dans l'arene
 	 * @param logger gestionnaire de log
 	 */
+	
+	
 	public StrategiePersonnageTeleporteur(String ipArene, int port, String ipConsole, 
 			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
 			int nbTours, Point position, LoggerProjet logger) {
@@ -66,7 +68,7 @@ public class StrategiePersonnageTeleporteur extends StrategiePersonnage {
 
 		if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
 			console.setPhrase("J'erre...");
-			arene.deplace(refRMI, 0); // La particularité de ce personnage est qu'il ne peut pas profiter du bonus des potions de vitesse même si il peut les prendre
+			arene.deplace(refRMI, 0); // La particularitï¿½ de ce personnage est qu'il ne peut pas profiter du bonus des potions de vitesse mï¿½me si il peut les prendre
 
 		} else {
 			int refCible = Calculs.chercheElementProche(position, voisins);
@@ -75,11 +77,11 @@ public class StrategiePersonnageTeleporteur extends StrategiePersonnage {
 			Element elemPlusProche = arene.elementFromRef(refCible);
 			Element moi = arene.elementFromRef(refRMI);
 			
-			//Caractéristique vitesse de l'adversaire
+			//Caractï¿½ristique vitesse de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			//Si je suis déjà invisible ou que la référence est un personnage et qu'en plus son invisibilité est à 1 alors je ne l'attaque pas car je ne peux pas attaquer en étant invisible.
-			//De plus il ne peut pas ramasser les potions en étant invisible.			
+			//Si je suis dï¿½jï¿½ invisible ou que la rï¿½fï¿½rence est un personnage et qu'en plus son invisibilitï¿½ est ï¿½ 1 alors je ne l'attaque pas car je ne peux pas attaquer en ï¿½tant invisible.
+			//De plus il ne peut pas ramasser les potions en ï¿½tant invisible.			
 			if (((invAdv == 1) && (elemPlusProche instanceof Personnage))  || (moi.getCaract(Caracteristique.INVISIBILITE) == 1 )) 
 			{
 				console.setPhrase("Je ne peux qu'errer.");																	
@@ -108,16 +110,16 @@ public class StrategiePersonnageTeleporteur extends StrategiePersonnage {
 						// Il se base selon la vie de l'adversaie et non pas sa
 						// force.
 						if (elemPlusProche.getCaract(Caracteristique.VIE) > arene.elementFromRef(refRMI).getCaract(Caracteristique.VIE)) {
-							console.setPhrase("Il est trop fort. Je dois me téléporter ailleurs. . " + elemPlusProche.getNom());
+							console.setPhrase("Il est trop fort. Je dois me teleporter ailleurs. . " + elemPlusProche.getNom());
 							arene.deplaceTeleportation(refRMI, 0);
 						} else {
-							console.setPhrase("Je me téléporte comme un éclair " + elemPlusProche.getNom());
+							console.setPhrase("Je me teleporte comme un eclair " + elemPlusProche.getNom());
 							arene.deplaceTeleportation(refRMI, refCible);
 						}
 
 				} else {// il se dirige vers une potion
 					
-					//Si je suis déjà invisible, je ne vais pas vers la potion
+					//Si je suis dï¿½jï¿½ invisible, je ne vais pas vers la potion
 					if (moi.getCaract(Caracteristique.INVISIBILITE) == 1)
 					{
 						console.setPhrase("Je ne peux qu'errer.");
@@ -131,6 +133,7 @@ public class StrategiePersonnageTeleporteur extends StrategiePersonnage {
 				}
 			}
 		}
+		
 	}
 }
 	
