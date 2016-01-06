@@ -126,7 +126,20 @@ public class AreneJPanel extends JPanel {
 			message = null;
 			g.setFont(of);				
 		}
-		
+		try {
+
+		      Image img = ImageIO.read(new File("images/fondArene.png"));
+
+
+		      //Pour une image de fond
+
+		      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+
+		    } catch (IOException e) {
+
+		      e.printStackTrace();
+
+		    }    
 		// dessiner les elements
 		for(VuePotion vuePotion : potions) {
 			dessineElement(g, vuePotion);
