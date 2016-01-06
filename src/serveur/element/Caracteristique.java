@@ -43,16 +43,10 @@ public enum Caracteristique {
 	/**
 	 * Invisibilité : Définit l'invisibilité. Lorsque la valeur est à 0 alors le personnage est visible.
 	 */
-	INVISIBILITE("Invisibilite", "INV", 0, 1, 0),
+	INVISIBILITE("Invisibilite", "INV", 0, 1, 0);
 	
-	
-	/**
-	 * Invisibilité : Définit l'invisibilité. Lorsque la valeur est à 0 alors le personnage est visible.
-	 */
-	DEFENSE("Defense", "DEF", 0, 50, 0);
-	
-	
-	
+
+
 	/**
 	 * Nom complet.
 	 */
