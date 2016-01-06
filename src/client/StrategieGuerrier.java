@@ -84,7 +84,19 @@ public class StrategieGuerrier extends StrategiePersonnage {
 
 			Element elemPlusProche = arene.elementFromRef(refCible);
 			
-			if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
+			//Caractéristique vitesse de l'adversaire
+			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
+			
+			//Si je suis déjà invisible ou que la référence est un personnage et qu'en plus son invisibilité est à 1 alors je ne l'attaque pas car je ne peux pas attaquer en étant invisible.
+			//De plus il ne peut pas ramasser les potions en étant invisible.			
+			if (((invAdv == 1) && (elemPlusProche instanceof Personnage))  || (moi.getCaract(Caracteristique.INVISIBILITE) == 1 )) 
+			{
+				console.setPhrase("Je ne peux qu'errer.");																	
+				arene.deplaceRapidement(refRMI, 0);	
+			}	
+			
+			
+			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if(elemPlusProche instanceof Potion) { // potion
 					// ramassage

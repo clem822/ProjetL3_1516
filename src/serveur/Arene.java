@@ -22,6 +22,8 @@ import serveur.element.Element;
 import serveur.element.Mage;
 import serveur.element.Personnage;
 import serveur.element.Potion;
+import serveur.element.Invocateur;
+import serveur.element.Sbire;
 import serveur.interaction.DeplacementTeleleportation;
 import serveur.interaction.Conduire;
 import serveur.interaction.RegenerationMana;
@@ -770,7 +772,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 					console.log(Level.INFO, Constantes.nomClasse(this), 
 							"J'attaque " + nomRaccourciClient(refRMIAdv));
 					consoleAdv.log(Level.INFO, Constantes.nomClasse(this), 
-							"Je me fait attaquer par " + nomRaccourciClient(refRMI));
+							"Je me fais attaquer par " + nomRaccourciClient(refRMI));
 					
 					logger.info(Constantes.nomClasse(this), nomRaccourciClient(refRMI) + 
 							" attaque " + nomRaccourciClient(consoleAdv.getRefRMI()));
@@ -1212,6 +1214,11 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 			increment += ((Mage) pers).getBouclier();
 		}
 		
+		//Si c'est un invocateur ou un sbire et qu'on marche sur une potion d'invisibilité alors increment vaut 0
+		if ((carac == Caracteristique.INVISIBILITE) && ((pers instanceof Invocateur) || (pers instanceof Sbire))) {
+			increment = 0;
+		}
+				
 		// increment de la caracteristique
 		pers.incrementeCaract(carac, increment);
 		

@@ -84,8 +84,20 @@ public class StrategieSbire extends StrategiePersonnage {
 			int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 
 			Element elemPlusProche = arene.elementFromRef(refCible);
+			
+			
+			//Caractéristique vitesse de l'adversaire
+			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
+			
+			//L'invocateur ne peut pas acquérir l'invisibilité mais quand même prendre les potions pour empêcher les autres adversaires de les prendre.		
+			if ((invAdv == 1) && (elemPlusProche instanceof Personnage))
+			{
+				console.setPhrase("Je ne peux qu'errer.");																	
+				arene.deplaceRapidement(refRMI, 0);	
+			}	
+			
 
-			if (refCible == moi.getMaitre() || (elemPlusProche instanceof Sbire && ((Sbire)elemPlusProche).getMaitre() == moi.getMaitre()))
+			else if (refCible == moi.getMaitre() || (elemPlusProche instanceof Sbire && ((Sbire)elemPlusProche).getMaitre() == moi.getMaitre()))
 			{
 				console.setPhrase("J'erre...");
 				arene.deplace(refRMI, 0); 

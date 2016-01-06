@@ -81,8 +81,20 @@ public class StrategieMage extends StrategiePersonnage {
 				int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 
 				Element elemPlusProche = arene.elementFromRef(refCible);
+				
+				
+				//Caractéristique vitesse de l'adversaire
+				int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
+				
+				//Si je suis déjà invisible ou que la référence est un personnage et qu'en plus son invisibilité est à 1 alors je ne l'attaque pas car je ne peux pas attaquer en étant invisible.
+				//De plus il ne peut pas ramasser les potions en étant invisible.			
+				if (((invAdv == 1) && (elemPlusProche instanceof Personnage))  || (moi.getCaract(Caracteristique.INVISIBILITE) == 1 )) 
+				{
+					console.setPhrase("Je ne peux qu'errer.");																	
+					arene.deplaceRapidement(refRMI, 0);	
+				}	
 					
-				if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION_DIST) { // si suffisamment proches
+				else if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION_DIST) { // si suffisamment proches
 					// j'interagis directement
 					if(elemPlusProche instanceof Personnage) { // personnage
 						if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // Porte d'attaque au corps a corps

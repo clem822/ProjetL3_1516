@@ -38,7 +38,8 @@ public class Personnage extends Element {
 	public void incrementeCaract(Caracteristique c, int inc) {	
 		
 		
-		if (c == Caracteristique.VITESSE)
+		//Faire en sorte que la vitesse ne s'aditionne pas mais se remplace par la nouvelle valeur
+		if ((c == Caracteristique.VITESSE) && (inc != 0))
 			caracts.put(c, Calculs.restreintCarac(c, inc));
 		//caractéristique appartient à la vitesse.
 		else if(caracts.containsKey(c)) {
