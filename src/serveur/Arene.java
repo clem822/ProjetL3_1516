@@ -1175,15 +1175,15 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		// TODO Auto-generated method stub
 		boolean res = false;
 		
-		VuePersonnage invoqueur = personnages.get(refRMI);
+		VuePersonnage invocateur = personnages.get(refRMI);
 		
-		if (invoqueur.isActionExecutee()) {
+		if (invocateur.isActionExecutee()) {
 			// si une action a deja ete executee
 			logActionDejaExecutee(refRMI);
 		} else {
 			// sinon, on tente de jouer l'interaction
-			new Invocation(this, invoqueur, nbSbires).invoquerSbires();
-			invoqueur.executeAction();
+			new Invocation(this, invocateur, nbSbires).invoquerSbires();
+			invocateur.executeAction();
 
 			res = true;
 		}

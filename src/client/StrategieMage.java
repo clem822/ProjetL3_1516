@@ -135,10 +135,10 @@ public class StrategieMage extends StrategiePersonnage {
 				}
 			}
 			
-			// regeneration passive de mana
-			arene.regenerationMana(refRMI,3);
 		}
-	
+			
+		// regeneration passive de mana
+		arene.regenerationMana(refRMI,3);		
 	
 
 	

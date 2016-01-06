@@ -9,7 +9,7 @@ import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Personnage;
-import serveur.element.PersonnageTeleporteur;
+import serveur.element.Teleporteur;
 import serveur.element.Potion;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
@@ -35,7 +35,7 @@ public class StrategieTeleporteur extends StrategiePersonnage {
 			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
 			int nbTours, Point position, LoggerProjet logger) {
 		
-		super(ipArene, port, ipConsole, new PersonnageTeleporteur(nom, groupe, caracts), nbTours, position, logger);
+		super(ipArene, port, ipConsole, new Teleporteur(nom, groupe), nbTours, position, logger);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -119,7 +119,8 @@ public class StrategieTeleporteur extends StrategiePersonnage {
 								arene.deplaceTeleportation(refRMI, 0);
 								arene.regenerationMana(refRMI, -25);
 							} else {
-								arene.deplace(refRMI, 0);
+								console.setPhrase("Il est trop fort. Je dois fuir. " + elemPlusProche.getNom());
+								arene.Fuite(refRMI, refCible);
 							}
 						} else {
 							if (arene.elementFromRef(refRMI).getCaract(Caracteristique.MANA) > 24) {
@@ -127,7 +128,8 @@ public class StrategieTeleporteur extends StrategiePersonnage {
 								arene.deplaceTeleportation(refRMI, refCible);
 								arene.regenerationMana(refRMI, -25);
 							} else {
-								arene.deplace(refRMI, 0);
+								console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
+								arene.deplace(refRMI, refCible);
 							}
 						}
 

@@ -4,13 +4,11 @@
 package serveur;
 
 import java.awt.Point;
-import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import client.StrategieSbire;
 import logger.LoggerProjet;
 import serveur.element.Caracteristique;
-import utilitaires.Constantes;
 
 /**
  * @author clement
@@ -31,7 +29,7 @@ public class ThreadInvocation extends Thread {
 	int maitre;
 	
 	public ThreadInvocation(Arene arene, String ipArene, int port, String ipConsole, String nom, String groupe,
-			HashMap<Caracteristique, Integer> caracts, int nbTours, Point position, LoggerProjet logger, int maitre) {
+			int nbTours, Point position, LoggerProjet logger, int maitre) {
 		super();
 		this.arene = arene;
 		this.ipArene = ipArene;
@@ -39,7 +37,6 @@ public class ThreadInvocation extends Thread {
 		this.ipConsole = ipConsole;
 		this.nom = nom;
 		this.groupe = groupe;
-		this.caracts = caracts;
 		this.nbTours = nbTours;
 		this.position = position;
 		this.logger = logger;

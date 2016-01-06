@@ -7,7 +7,6 @@ import java.awt.Point;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.rmi.RemoteException;
-import java.util.HashMap;
 
 import lanceur.ErreurLancement;
 import logger.LoggerProjet;
@@ -35,7 +34,7 @@ public class Invocation {
 	private VuePersonnage personnage;
 
 	/**
-	 * Nombre de sbires à invoquer
+	 * Nombre de sbires a� invoquer
 	 */
 	private int nbSbires;
 
@@ -78,15 +77,9 @@ public class Invocation {
 				
 				logger.info("Lanceur", "Creation du personnage...");
 				
-				// caracteristiques du personnage
-				HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
-				// seule la force n'a pas sa valeur par defaut (exemple)
-				caracts.put(Caracteristique.FORCE, 20);
-				caracts.put(Caracteristique.MANA, 0);
+				Point position = Calculs.positionAleatoireArene();//a changer pour qu'ils apparaissent pres du perso
 				
-				Point position = Calculs.positionAleatoireArene();//a changer pour qu'ils apparaissent près du perso
-				
-				new ThreadInvocation(arene, ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger, personnage.getRefRMI());
+				new ThreadInvocation(arene, ipArene, port, ipConsole, nom, groupe, nbTours, position, logger, personnage.getRefRMI());
 				logger.info("Lanceur", "Creation du personnage reussie");
 				
 			} catch (Exception e) {

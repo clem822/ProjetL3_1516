@@ -11,7 +11,6 @@ import logger.LoggerProjet;
 import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
-import serveur.element.Invocateur;
 import serveur.element.Personnage;
 import serveur.element.Potion;
 import serveur.element.Sbire;
