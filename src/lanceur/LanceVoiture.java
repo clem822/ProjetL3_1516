@@ -1,12 +1,10 @@
 package lanceur;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import logger.LoggerProjet;
 import serveur.IArene;
-import serveur.element.Caracteristique;
-import serveur.element.Potion;
+import serveur.element.Voiture;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
@@ -53,25 +51,15 @@ public class LanceVoiture {
 			System.exit(ErreurLancement.suivant);
 		}
 		
-		// lancement de la potion
+		// lancement de la Voiture
 		try {
 			IArene arene = (IArene) java.rmi.Naming.lookup(Constantes.nomRMI(ipArene, port, "Arene"));
 
-			logger.info("Lanceur", "Lancement de la potion sur le serveur...");
+			logger.info("Lanceur", "Lancement de la Voiture sur le serveur...");
 			
-			// caracteristiques de la potion
-			HashMap<Caracteristique, Integer> caractsPotion = new HashMap<Caracteristique, Integer>();
-			
-			//nombre aléatoire entre 2 et 4(vitesse max)
-			caractsPotion.put(Caracteristique.VITESSE, Calculs.nombreAleatoire(2,4));
-			caractsPotion.put(Caracteristique.FORCE, 0);
-			caractsPotion.put(Caracteristique.VIE, 0);
-			caractsPotion.put(Caracteristique.MANA, 0);
-			caractsPotion.put(Caracteristique.INITIATIVE, 0);
-			
-			// ajout de la potion
-			arene.ajoutePotion(new Potion(nom, groupe, caractsPotion), Calculs.positionAleatoireArene());
-			logger.info("Lanceur", "Lancement de la potion reussi");
+			// ajout de la Voiture
+			arene.ajoutePotion(new Voiture(nom, groupe), Calculs.positionAleatoireArene());
+			logger.info("Lanceur", "Lancement de la Voiture reussi");
 			
 		} catch (Exception e) {
 			logger.severe("Lanceur", "Erreur lancement :\n" + e.getCause());
