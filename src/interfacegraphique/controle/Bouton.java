@@ -1,4 +1,4 @@
-package lanceur;
+package interfacegraphique.controle;
 
 import java.awt.Color;
 
@@ -29,15 +29,24 @@ public class Bouton extends JButton implements MouseListener{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String name;
+	  private Image img;
 
 	
 
-	  public Bouton(String str){
+	  public Bouton(String str,String image){
 
 	    super(str);
 
 	    this.name = str;
+	    try {
 
+	        img = ImageIO.read(new File(image));
+
+	      } catch (IOException e) {
+
+	        e.printStackTrace();
+
+	      }
 
 	    //Grâce à cette instruction, notre objet va s'écouter
 
@@ -47,6 +56,30 @@ public class Bouton extends JButton implements MouseListener{
 
 	  }
 
+	  
+	  public void paintComponent(Graphics g){
+
+		    Graphics2D g2d = (Graphics2D)g;
+
+		    GradientPaint gp = new GradientPaint(0, 0, Color.white, 0, 20, Color.white, true);
+
+		    g2d.setPaint(gp);
+		   
+		    g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
+		    g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+		    g2d.setColor(Color.black);
+		    g2d.fillRect(0, this.getHeight()-13, this.getWidth(), this.getHeight());
+		    g2d.setColor(Color.white);
+		    g2d.drawString(this.name, 2, this.getHeight()-2);
+		    
+		    if (name=="Partie local" || name=="Partie reseau"){
+		    	  g2d.setColor(Color.black);
+		    	 g2d.drawString("SERVEUR", this.getWidth() / 2 -25 , (this.getHeight() / 2) -10);
+		    	 g2d.drawString("ET", this.getWidth() / 2 - (this.getWidth() / 2 /4), (this.getHeight() / 2) );
+		    	 g2d.drawString("IHM", this.getWidth() / 2 - (this.getWidth() / 2 /3), (this.getHeight() / 2) +10);
+		    }
+
+		  }
 
 
 	  //Méthode appelée lors du clic de souris

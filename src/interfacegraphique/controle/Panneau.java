@@ -1,4 +1,4 @@
-package lanceur;
+package interfacegraphique.controle;
 
 import java.awt.Graphics;
 import java.awt.Image;
