@@ -19,8 +19,10 @@ import client.controle.IConsole;
 import logger.LoggerProjet;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
+import serveur.element.Invocateur;
 import serveur.element.Personnage;
 import serveur.element.Potion;
+import serveur.element.Sbire;
 import serveur.interaction.BouleDeFeu;
 import serveur.interaction.CoupDeHache;
 import serveur.interaction.Deplacement;
@@ -1089,8 +1091,12 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		IConsole console = consoleFromRef(refRMI);
 		Personnage pers = vuePersonnage.getElement();
 		
-		// increment de la caracteristique
-		pers.incrementeCaract(carac, increment);
+		if(carac == Caracteristique.VIE && increment < 0) {
+			increment = (increment*(100-pers.getCaract(Caracteristique.ARMURE)))/100;
+		}
+		if (carac == Caracteristique.INVISIBILITE && ((pers instanceof Invocateur ) || (pers instanceof Sbire))) {
+			
+		} else {
 		
 		if(pers.estVivant()) {
 			if (increment < 0) {
@@ -1103,7 +1109,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 			} else {
 				console.log(Level.INFO, Constantes.nomClasse(this), 
 						"J'ai gagne " + increment + " points de " + carac);
-			}
+			} }
 		}
 	}
 	

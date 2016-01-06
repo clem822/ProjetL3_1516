@@ -29,9 +29,9 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 	Bouton b5=new Bouton("Guerrier","images/Guerrier.png");
 	Bouton b6=new Bouton("Invocateur","images/Invocateur.png");
 	Bouton b10=new Bouton("Vampire","images/Vampire.png");
-	Bouton b7=new Bouton("armes","");
-	Bouton b8=new Bouton("Voiture","");
-	Bouton b9=new Bouton("bouclier","");
+	Bouton b7=new Bouton("armes","images/epee.png");
+	Bouton b8=new Bouton("Cheval","images/cheval.png");
+	Bouton b9=new Bouton("bouclier","images/Bouclier.png");
 	Bouton b12=new Bouton("Teleporteur","");
 	private JPanel container = new JPanel();
 /*	private JPanel syst = new JPanel();

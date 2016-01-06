@@ -25,8 +25,10 @@ import serveur.element.Guerrier;
 import serveur.element.Invocateur;
 import serveur.element.Mage;
 import serveur.element.Ninja;
+import serveur.element.Potion;
 import serveur.element.Sbire;
 import serveur.element.Vampire;
+import serveur.element.Voiture;
 import serveur.vuelement.VueElement;
 import serveur.vuelement.VuePersonnage;
 import serveur.vuelement.VuePotion;
@@ -288,15 +290,29 @@ public class AreneJPanel extends JPanel {
 			p = creeTriangle(coordX + ELEMENT_SIZE/2, coordY + ELEMENT_SIZE/2 - 1, ELEMENT_SIZE);
 			g.fillPolygon(p);
 			*/
-			Image logo;
-			try {
-				logo = ImageIO.read(new File("images/potion2.png"));
-				//System.out.println("width : " + logo.getWidth(this) + " / height : " + logo.getHeight(this));
-				g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
+			Element objet = vueElement.getElement();
+			if(objet instanceof Potion){ // Image Mage
+				Image logo;
+				try {
+					
+					logo = ImageIO.read(new File("images/potion2.png"));
+					//System.out.println("width : " + logo.getWidth(this) + " / height : " + logo.getHeight(this));
+					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}else if(objet instanceof Voiture){ // Image Sbire
+				Image logo;
+				try {
+					logo = ImageIO.read(new File("images/cheval.png"));
+					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} 
+			
 		}
 	}
 

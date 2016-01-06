@@ -29,8 +29,7 @@ public class Mage extends Personnage{
 	// caracteristiques du personnage
 	private static HashMap<Caracteristique, Integer> caract (){
 		HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
-		caracts.put(Caracteristique.VIE, 
-				70);
+		caracts.put(Caracteristique.VIE, 70);
 		caracts.put(Caracteristique.FORCE, 
 				(new Random().nextInt(20)+10));
 		return caracts;
