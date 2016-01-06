@@ -6,7 +6,9 @@ import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import client.controle.IConsole;
+import serveur.element.Caracteristique;
 import serveur.element.Element;
+import serveur.element.Mage;
 import serveur.element.Personnage;
 import serveur.element.Potion;
 import serveur.vuelement.VueElement;
@@ -231,6 +233,15 @@ public interface IArene extends Remote {
 	 */
 	public boolean soin(int refRMI, int mana, int pv)throws RemoteException;
 	
+	/**
+	 * Rend un montant de mana indique au personnage cible
+	 * @param refRMI reference RMI de la cible
+	 * @param mana montant du mana rendu
+	 * @return vrai si l'action a bien eu lieu, faux sinon
+	 * @throws RemoteException
+	 */
+	public boolean regenerationMana(int refRMI, int mana) throws RemoteException;
+	
 	
 	/**
 	 * Execute la vampirisation entre le personnage correspondant a la console donnee 
@@ -378,6 +389,7 @@ public interface IArene extends Remote {
 	 * @throws RemoteException
 	 */
 	public void lancePotion(Potion potion, Point position, String motDePasse) throws RemoteException;
+
 
 	
 	

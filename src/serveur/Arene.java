@@ -19,10 +19,12 @@ import client.controle.IConsole;
 import logger.LoggerProjet;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
+import serveur.element.Mage;
 import serveur.element.Personnage;
 import serveur.element.Potion;
 import serveur.interaction.DeplacementTeleleportation;
 import serveur.interaction.Conduire;
+import serveur.interaction.RegenerationMana;
 import serveur.interaction.Vampirise;
 import serveur.interaction.BouleDeFeu;
 import serveur.interaction.CoupDeHache;
@@ -1176,6 +1178,18 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		
 		return true;
 	}
+	
+	@Override
+	public boolean regenerationMana(int refRMI, int mana) throws RemoteException{
+		
+		VuePersonnage pCible = personnages.get(refRMI);
+		IConsole console = consoleFromRef(refRMI);
+		console.log(Level.INFO, Constantes.nomClasse(this), 
+				"Je me regagne " + mana + " Mana ");
+		new RegenerationMana(this, pCible).regenMana(mana);
+		
+		return true;
+	}
 
 	/**
 	 * Ajoute l'increment donne a la caracteristique donne de l'element 
@@ -1193,6 +1207,10 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		int refRMI = vuePersonnage.getRefRMI();
 		IConsole console = consoleFromRef(refRMI);
 		Personnage pers = vuePersonnage.getElement();
+		
+		if(carac == Caracteristique.VIE && pers instanceof Mage && increment < 0) {
+			increment += ((Mage) pers).getBouclier();
+		}
 		
 		// increment de la caracteristique
 		pers.incrementeCaract(carac, increment);

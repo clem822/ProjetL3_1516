@@ -38,6 +38,12 @@ public class Soin {
 		this.personnage = pASoigner;
 	}
 	
+	/**
+	 * Soigne le personnage contre une quantite de mana
+	 * @param mana
+	 * @param pv
+	 */
+	
 	public void soigner(int mana, int pv){
 		
 		try {

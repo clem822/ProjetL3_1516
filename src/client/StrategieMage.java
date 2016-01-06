@@ -10,6 +10,8 @@ import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Mage;
 import serveur.element.Personnage;
+import serveur.element.Sbire;
+import serveur.vuelement.VuePersonnage;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
@@ -63,6 +65,13 @@ public class StrategieMage extends StrategiePersonnage {
 				e.printStackTrace();
 			}
 			
+			Mage moi = (Mage)arene.elementFromRef(refRMI);
+			/*if(moi.getBouclier() == 0 && moi.getCaract(Caracteristique.MANA) > 29){
+				arene.regenerationMana(refRMI,-30);
+				moi.setBouclier(20);
+			}*/
+			
+			
 			if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
 				console.setPhrase("J'erre...");
 				arene.deplaceRapidement(refRMI, 0); 
@@ -72,7 +81,6 @@ public class StrategieMage extends StrategiePersonnage {
 				int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 
 				Element elemPlusProche = arene.elementFromRef(refCible);
-				
 					
 				if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION_DIST) { // si suffisamment proches
 					// j'interagis directement
@@ -81,7 +89,6 @@ public class StrategieMage extends StrategiePersonnage {
 							console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
 							arene.lanceAttaque(refRMI, refCible);
 						} else {
-							Element moi = arene.elementFromRef(refRMI);
 							if (moi.getCaract(Caracteristique.MANA) > 19){ // Envoie d'une boule de feu a distance si mana suffisant
 								console.setPhrase("Tu vas faire bruler  " + elemPlusProche.getNom());
 								arene.lanceAttaqueBouleDeFeu(refRMI, refCible);
@@ -106,7 +113,12 @@ public class StrategieMage extends StrategiePersonnage {
 					arene.deplaceRapidement(refRMI, refCible);
 				}
 			}
+			
+			// regeneration passive de mana
+			arene.regenerationMana(refRMI,3);
 		}
+	
+	
 
 	
 }
