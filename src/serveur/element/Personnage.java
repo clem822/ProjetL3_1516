@@ -40,7 +40,7 @@ public class Personnage extends Element {
 		
 		if (c == Caracteristique.VITESSE)
 			caracts.put(c, Calculs.restreintCarac(c, inc));
-		//caractéristique appartient à la vitesse.
+		//caracteristique appartient a la vitesse.
 		else if(caracts.containsKey(c)) {
 			caracts.put(c, Calculs.restreintCarac(c, caracts.get(c) + inc));
 		}
@@ -66,12 +66,6 @@ public class Personnage extends Element {
 		Integer vie = caracts.get(Caracteristique.VIE);
 		return vie != null && vie > 0;
 	}
-	
-	
-	
-	
-	
-	
-	
+		
 	
 }

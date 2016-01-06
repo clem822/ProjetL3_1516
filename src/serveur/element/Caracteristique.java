@@ -21,6 +21,11 @@ public enum Caracteristique {
 	VIE("Vie", "VIE", 0, 100, 100),
 	
 	/**
+	 * Armure : nombre de points de armure.
+	 */
+	ARMURE("Armure", "ARM", 0, 50, 20),
+	
+	/**
 	 * Force : indique les degats infliges. 
 	 */
 	FORCE("Force", "FOR", 0, 100, 10),
@@ -34,6 +39,7 @@ public enum Caracteristique {
 	 * Mana : nombre de points de mana.
 	 */
 	MANA("Mana", "MANA", 0, 100, 100);
+	
 	
 	/**
 	 * Nom complet.

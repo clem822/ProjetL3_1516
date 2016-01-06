@@ -168,7 +168,7 @@ public interface IArene extends Remote {
 	
 	/**
 	 * Execute le ramassage d'une potion par un personnage, si possible.
-	 * Celle-ci reste et ne disparaît pas.
+	 * Celle-ci reste et ne disparaï¿½t pas.
 	 * Le ramassage echoue si une action a deja ete executee ce tour par ce 
 	 * personnage, ou si la potion est trop loin du personnage.
 	 * @param refRMI reference RMI du personnage voulant ramasser une potion
@@ -295,7 +295,7 @@ public interface IArene extends Remote {
 	public boolean invoquer(int refRMI, int nbSbire) throws RemoteException;
 	
 	/**
-	 * DeplaceRapidement se déplace plus rapidement selon sa caractéristique viesse,
+	 * DeplaceRapidement se dï¿½place plus rapidement selon sa caractï¿½ristique viesse,
 	 *  le personnage correspondant a la console donne vers le point  cible.
 	 * Le deplacement echoue si une action a deja ete executee a ce tour par 
 	 * ce personnage.
@@ -348,6 +348,15 @@ public interface IArene extends Remote {
 	 * @throws RemoteException
 	 */
 	public boolean deplaceTeleportation(int refRMI, Point objectif) throws RemoteException;
+	
+	/**
+	 * Ajoute un montant d'armure
+	 * @param refRMI reference RMI du personnage cible
+	 * @param armure armure a ajouter
+	 * @return vrai si l'action a bien eu lieu, faux sinon
+	 * @throws RemoteException
+	 */
+	public boolean ajouteArmure(int refRMI, int armure) throws RemoteException;
 	
 	
 

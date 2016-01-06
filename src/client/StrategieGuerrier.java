@@ -92,9 +92,15 @@ public class StrategieGuerrier extends StrategiePersonnage {
 					arene.ramassePotion(refRMI, refCible);
 
 				} else { // personnage
-					// Coup de Hache
-					console.setPhrase("Je vais ecraser " + elemPlusProche.getNom());
-					arene.lanceCoupDeHache(refRMI, refCible);
+					//peut faire passer l'armure d'un personnage a 10 
+					if (elemPlusProche.getCaract(Caracteristique.ARMURE) > 10 && moi.getCaract(Caracteristique.MANA) > 14) {
+						arene.ajouteArmure(refRMI, elemPlusProche.getCaract(Caracteristique.ARMURE)-10);
+						arene.regenerationMana(refRMI,-14);
+					}else {
+						// Coup de Hache
+						console.setPhrase("Je vais ecraser " + elemPlusProche.getNom());
+						arene.lanceCoupDeHache(refRMI, refCible);
+					}
 				}
 				
 			} else { // si voisins, mais plus eloignes
