@@ -36,10 +36,9 @@ public class StrategieSbire extends StrategiePersonnage {
 	 * @param logger gestionnaire de log
 	 */
 	public StrategieSbire(String ipArene, int port, String ipConsole, 
-			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
-			int nbTours, Point position, LoggerProjet logger, int maitre) {
+			String nom, String groupe, int nbTours, Point position, LoggerProjet logger, int maitre) {
 		
-		super(ipArene, port, ipConsole, new Sbire(nom, groupe, caracts, maitre), nbTours, position, logger);
+		super(ipArene, port, ipConsole, new Sbire(nom, groupe, maitre), nbTours, position, logger);
 	}
 	
 	/* (non-Javadoc)

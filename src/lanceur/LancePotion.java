@@ -66,6 +66,8 @@ public class LancePotion {
 			caractsPotion.put(Caracteristique.VIE, Calculs.valeurCaracAleatoirePosNeg(Caracteristique.VIE));
 			caractsPotion.put(Caracteristique.FORCE, Calculs.valeurCaracAleatoirePosNeg(Caracteristique.FORCE));
 			caractsPotion.put(Caracteristique.INITIATIVE, Calculs.valeurCaracAleatoirePosNeg(Caracteristique.INITIATIVE));
+			caractsPotion.put(Caracteristique.MANA, Calculs.valeurCaracAleatoirePosNeg(Caracteristique.MANA));
+			caractsPotion.put(Caracteristique.ARMURE,Calculs.valeurCaracAleatoirePosNeg(Caracteristique.ARMURE));
 			
 			// ajout de la potion
 			arene.ajoutePotion(new Potion(nom, groupe, caractsPotion), Calculs.positionAleatoireArene());

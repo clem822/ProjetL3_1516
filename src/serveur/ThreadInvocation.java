@@ -52,7 +52,7 @@ public class ThreadInvocation extends Thread {
 
 	@Override
 	public void run() {
-		new StrategieSbire(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger, maitre);
+		new StrategieSbire(ipArene, port, ipConsole, nom, groupe, nbTours, position, logger, maitre);
 	}
 
 

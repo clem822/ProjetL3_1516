@@ -10,8 +10,6 @@ import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Mage;
 import serveur.element.Personnage;
-import serveur.element.Sbire;
-import serveur.vuelement.VuePersonnage;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
