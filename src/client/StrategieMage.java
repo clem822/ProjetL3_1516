@@ -31,10 +31,10 @@ public class StrategieMage extends StrategiePersonnage {
 	 * @param logger gestionnaire de log
 	 */
 	public StrategieMage(String ipArene, int port, String ipConsole, 
-			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
+			String nom, String groupe,
 			int nbTours, Point position, LoggerProjet logger) {
 		
-		super(ipArene, port, ipConsole, new Mage(nom, groupe, caracts), nbTours, position, logger);
+		super(ipArene, port, ipConsole, new Mage(nom, groupe), nbTours, position, logger);
 		
 		
 	}
@@ -65,22 +65,24 @@ public class StrategieMage extends StrategiePersonnage {
 				e.printStackTrace();
 			}
 			
-			Mage moi = (Mage)arene.elementFromRef(refRMI);
-			/*if(moi.getBouclier() == 0 && moi.getCaract(Caracteristique.MANA) > 29){
-				arene.regenerationMana(refRMI,-30);
-				moi.setBouclier(20);
-			}*/
+			Element moi = arene.elementFromRef(refRMI);
 			
 			
 			if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
-				console.setPhrase("J'erre...");
-				arene.deplaceRapidement(refRMI, 0); 
+				if(moi.getCaract(Caracteristique.MANA) > 29 && moi.getCaract(Caracteristique.ARMURE) < 21){
+					arene.ajouteArmure(refRMI, 10);
+					arene.regenerationMana(refRMI,-30);
+				} else {
+					console.setPhrase("J'erre...");
+					arene.deplaceRapidement(refRMI, 0);
+				}
 				
 			} else {
 				int refCible = Calculs.chercheElementProche(position, voisins);
 				int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 
 				Element elemPlusProche = arene.elementFromRef(refCible);
+
 				
 				
 				//Caractéristique vitesse de l'adversaire
@@ -95,6 +97,12 @@ public class StrategieMage extends StrategiePersonnage {
 				}	
 					
 				else if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION_DIST) { // si suffisamment proches
+
+				if(distPlusProche < 4 &&  moi.getCaract(Caracteristique.VIE) < 15) { // panique en cas de mort proche
+					console.setPhrase("A L'AIDE...");
+					arene.deplaceRapidement(refRMI, 0);
+				}
+				if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION_DIST) { // si suffisamment proches
 					// j'interagis directement
 					if(elemPlusProche instanceof Personnage) { // personnage
 						if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // Porte d'attaque au corps a corps
@@ -114,7 +122,10 @@ public class StrategieMage extends StrategiePersonnage {
 						// ramassage
 						console.setPhrase("Je ramasse une potion");
 						arene.ramassePotion(refRMI, refCible);
-					} else { // si voisins, mais plus eloignes
+					} else if(moi.getCaract(Caracteristique.MANA) > 29 && moi.getCaract(Caracteristique.ARMURE) < 21){
+						arene.ajouteArmure(refRMI, 10);
+						arene.regenerationMana(refRMI,-30);
+					}else{ // si voisins, mais plus eloignes
 						// je vais vers le plus proche
 						console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
 						arene.deplaceRapidement(refRMI, refCible);
@@ -132,5 +143,7 @@ public class StrategieMage extends StrategiePersonnage {
 	
 	
 
+	
+	}
 	
 }

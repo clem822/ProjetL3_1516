@@ -1187,8 +1187,20 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		VuePersonnage pCible = personnages.get(refRMI);
 		IConsole console = consoleFromRef(refRMI);
 		console.log(Level.INFO, Constantes.nomClasse(this), 
-				"Je me regagne " + mana + " Mana ");
+				"Je regagne " + mana + " Mana ");
 		new RegenerationMana(this, pCible).regenMana(mana);
+		
+		return true;
+	}
+	
+	@Override
+	public boolean ajouteArmure(int refRMI, int armure) throws RemoteException{
+		
+		VuePersonnage pCible = personnages.get(refRMI);
+		IConsole console = consoleFromRef(refRMI);
+		console.log(Level.INFO, Constantes.nomClasse(this), 
+				"Je gagne " + armure + " armure ");
+		this.incrementeCaractElement(pCible, Caracteristique.ARMURE, armure);
 		
 		return true;
 	}
@@ -1210,8 +1222,8 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		IConsole console = consoleFromRef(refRMI);
 		Personnage pers = vuePersonnage.getElement();
 		
-		if(carac == Caracteristique.VIE && pers instanceof Mage && increment < 0) {
-			increment += ((Mage) pers).getBouclier();
+		if(carac == Caracteristique.VIE && increment < 0) {
+			increment = (increment*(100-pers.getCaract(Caracteristique.ARMURE)))/100;
 		}
 		
 		//Si c'est un invocateur ou un sbire et qu'on marche sur une potion d'invisibilité alors increment vaut 0

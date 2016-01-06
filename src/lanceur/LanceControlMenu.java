@@ -40,7 +40,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 	
 	 public LanceControlMenu(){
 
-		    this.setTitle("Fenêtre de controle");
+		    this.setTitle("Fenetre de controle");
 
 		    this.setSize(350,350);
 

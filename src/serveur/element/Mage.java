@@ -4,6 +4,9 @@
 package serveur.element;
 
 import java.util.HashMap;
+import java.util.Random;
+
+import utilitaires.Calculs;
 
 public class Mage extends Personnage{
 	
@@ -12,7 +15,6 @@ public class Mage extends Personnage{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int Bouclier = 0;
 
 	/**
 	 * Cree un Mage avec un nom et un groupe.
@@ -21,17 +23,19 @@ public class Mage extends Personnage{
 	 * @param caracts caracteristiques du personnage
 	 */
 
-	public Mage(String nom, String groupe, HashMap<Caracteristique, Integer> caracts) {
-		super(nom, groupe, caracts);
-		// TODO Auto-generated constructor stub
+	public Mage(String nom, String groupe) {
+		super(nom, groupe,caractMage());
+		
 	}
 	
-	public int getBouclier() {
-		return Bouclier;
+	// caracteristiques du personnage
+	private static HashMap<Caracteristique, Integer> caractMage (){
+		HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
+		caracts.put(Caracteristique.VIE, 
+				70);
+		caracts.put(Caracteristique.FORCE, 
+				(new Random().nextInt(20)+10));
+		return caracts;
 	}
-
-	public void setBouclier(int bouclier) {
-		Bouclier = bouclier;
-	}
-
+	
 }

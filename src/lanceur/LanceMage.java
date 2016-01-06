@@ -69,16 +69,10 @@ public class LanceMage {
 			String ipConsole = InetAddress.getLocalHost().getHostAddress();
 			
 			logger.info("Lanceur", "Creation du personnage...");
-			
-			// caracteristiques du personnage
-			HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
-			// seule la force n'a pas sa valeur par defaut (exemple)
-			caracts.put(Caracteristique.FORCE, 
-					Calculs.valeurCaracAleatoire(Caracteristique.FORCE)); 
 
 			Point position = Calculs.positionAleatoireArene();
 			
-			new StrategieMage(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+			new StrategieMage(ipArene, port, ipConsole, nom, groupe, nbTours, position, logger);
 			logger.info("Lanceur", "Creation du personnage reussie");
 			
 		} catch (Exception e) {
