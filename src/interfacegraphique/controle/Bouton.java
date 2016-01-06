@@ -38,6 +38,7 @@ public class Bouton extends JButton implements MouseListener{
 	    super(str);
 
 	    this.name = str;
+	    if(image.length()!=0){
 	    try {
 
 	        img = ImageIO.read(new File(image));
@@ -47,6 +48,7 @@ public class Bouton extends JButton implements MouseListener{
 	        e.printStackTrace();
 
 	      }
+	    }
 
 	    //Grâce à cette instruction, notre objet va s'écouter
 

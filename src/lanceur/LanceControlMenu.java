@@ -19,8 +19,8 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	static String[] arg;
 	Panneau pan = new Panneau();
-	Bouton b=new Bouton("Partie local","images/.png");
-	Bouton b0=new Bouton("Partie reseau","images/.png");
+	Bouton b=new Bouton("Partie local","");
+	Bouton b0=new Bouton("Partie reseau","");
 	Bouton b11=new Bouton("Perso Tournois","images/Invocateur.png");
 	Bouton b1=new Bouton("potion","images/potion.png");
 	Bouton b2=new Bouton("poison","images/poison.png");
@@ -29,10 +29,10 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 	Bouton b5=new Bouton("Guerrier","images/Guerrier.png");
 	Bouton b6=new Bouton("Invocateur","images/Invocateur.png");
 	Bouton b10=new Bouton("Vampire","images/Vampire.png");
-	Bouton b7=new Bouton("armes","images/.png");
-	Bouton b8=new Bouton("Voiture","images/.png");
-	Bouton b9=new Bouton("bouclier","images/.png");
-	Bouton b12=new Bouton("Teleporteur","images/Teleporteur.png");
+	Bouton b7=new Bouton("armes","");
+	Bouton b8=new Bouton("Voiture","");
+	Bouton b9=new Bouton("bouclier","");
+	Bouton b12=new Bouton("Teleporteur","");
 	private JPanel container = new JPanel();
 /*	private JPanel syst = new JPanel();
 	private JPanel perso = new JPanel();
