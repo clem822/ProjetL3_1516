@@ -79,7 +79,7 @@ public class StrategiePersonnageTeleporteur extends StrategiePersonnage {
 					
 					if (elemPlusProche instanceof Voiture)
 					{
-						console.setPhrase("Je ne peux pas utiliser la voiture. Je suis assez cheaté comme ça.");
+						console.setPhrase("Je ne peux pas utiliser la voiture. Je suis assez assez fort comme ça.");
 						arene.deplace(refRMI, 0);		//Je pars aléatoirement.
 					}
 						
