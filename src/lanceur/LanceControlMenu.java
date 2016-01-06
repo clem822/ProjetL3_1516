@@ -32,10 +32,11 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 	Bouton b7=new Bouton("armes","images/.png");
 	Bouton b8=new Bouton("Voiture","images/.png");
 	Bouton b9=new Bouton("bouclier","images/.png");
+	Bouton b12=new Bouton("Teleporteur","images/Teleporteur.png");
 	private JPanel container = new JPanel();
-	private JPanel syst = new JPanel();
+/*	private JPanel syst = new JPanel();
 	private JPanel perso = new JPanel();
-	private JPanel item = new JPanel();
+	private JPanel item = new JPanel();*/
 	
 	 public LanceControlMenu(){
 
@@ -75,6 +76,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		    b8.addActionListener(this);
 		    b9.addActionListener(this);
 		   
+		    b12.addActionListener(this);
 		    
 		    GridLayout gl = new GridLayout(4, 2, 3, 3);
 		    pan.setLayout(gl);
@@ -86,6 +88,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		    pan.add(b6);
 		    pan.add(b10);
 		    pan.add(b11);
+		    pan.add(b12);
 		    pan.add(b1);
 		    pan.add(b2);
 		    pan.add(b7);
@@ -136,12 +139,12 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		  if(arg0.getSource() == b7){
 			//Lancearmes.main(arg);
 			  
-		  }
+		  
+		}
 		  if(arg0.getSource() == b8){
-				//Lancearmes.main(arg);
+				LanceVoiture.main(arg);  
 				  
 			  }
-
 		  if(arg0.getSource() == b9){
 				//Lancearmes.main(arg);
 				  
@@ -156,6 +159,10 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 				//Lancearmes.main(arg);
 				  
 			  }
+			   if(arg0.getSource() == b12){
+				 LancePersonnageTeleporteur.main(arg);  
+			  }
+		  
 		   
 
 		}
