@@ -70,8 +70,21 @@ public class StrategieNinja extends StrategiePersonnage {
 			int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 
 			Element elemPlusProche = arene.elementFromRef(refCible);
+			Element moi = arene.elementFromRef(refRMI);
+						
+			//Caractéristique vitesse de l'adversaire
+			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
+			
+			//Si je suis déjà invisible ou que la référence est un personnage et qu'en plus son invisibilité est à 1 alors je ne l'attaque pas car je ne peux pas attaquer en étant invisible.
+			//De plus il ne peut pas ramasser les potions en étant invisible.			
+			if (((invAdv == 1) && (elemPlusProche instanceof Personnage))  || (moi.getCaract(Caracteristique.INVISIBILITE) == 1 )) 
+			{
+				console.setPhrase("Je ne peux qu'errer.");																	
+				arene.deplaceRapidement(refRMI, 0);	
+			}
 				
-			if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
+					
+			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if(elemPlusProche instanceof Potion) { // potion
 					// ramassage
@@ -85,11 +98,9 @@ public class StrategieNinja extends StrategiePersonnage {
 						arene.lanceAttaque(refRMI, refCible);					
 					
 				}
-				
 			} else { // si voisins, mais plus eloignes
 				// je vais vers le plus proche
 				if (elemPlusProche instanceof Personnage ){
-					
 						if(elemPlusProche.getCaract(Caracteristique.FORCE ) > arene.elementFromRef(refRMI).getCaract(Caracteristique.VIE )){
 							console.setPhrase("Je m'echappe, il est trop fort pour moi . " + elemPlusProche.getNom());
 							
@@ -98,7 +109,6 @@ public class StrategieNinja extends StrategiePersonnage {
 						else{
 							console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
 							arene.deplaceRapidement(refRMI, refCible);
-			
 					}
 					
 				}

@@ -19,10 +19,7 @@ import serveur.element.Vampire;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
-/**
- * @author guillaume
- *
- */
+
 public class StrategieVampire extends StrategiePersonnage {
 	
 
@@ -80,8 +77,22 @@ public class StrategieVampire extends StrategiePersonnage {
 			int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 
 			Element elemPlusProche = arene.elementFromRef(refCible);
+			Element moi = arene.elementFromRef(refRMI);
+
 			
-			if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
+		
+			//Caract�ristique vitesse de l'adversaire
+			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
+			
+			//Si je suis d�j� invisible ou que la r�f�rence est un personnage et qu'en plus son invisibilit� est � 1 alors je ne l'attaque pas car je ne peux pas attaquer en �tant invisible.
+			//De plus il ne peut pas ramasser les potions en �tant invisible.			
+			if (((invAdv == 1) && (elemPlusProche instanceof Personnage))  || (moi.getCaract(Caracteristique.INVISIBILITE) == 1 )) 
+			{
+				console.setPhrase("Je ne peux qu'errer.");																	
+				arene.deplaceRapidement(refRMI, 0);	
+			}
+			
+			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if(elemPlusProche instanceof Potion) { // potion
 					// ramassage
@@ -91,7 +102,7 @@ public class StrategieVampire extends StrategiePersonnage {
 				} else { // personnage
 					// Vampirise
 					console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
-					arene.lanceCoupDeHache(refRMI, refCible);
+					arene.Vampirise(refRMI, refCible);
 				}
 				
 			} else { // si voisins, mais plus eloignes

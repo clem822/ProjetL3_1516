@@ -15,6 +15,7 @@ import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Guerrier;
+import serveur.element.Personnage;
 import serveur.element.Potion;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
@@ -85,7 +86,19 @@ public class StrategieGuerrier extends StrategiePersonnage {
 
 			Element elemPlusProche = arene.elementFromRef(refCible);
 			
-			if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
+			//Caract�ristique vitesse de l'adversaire
+			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
+			
+			//Si je suis d�j� invisible ou que la r�f�rence est un personnage et qu'en plus son invisibilit� est � 1 alors je ne l'attaque pas car je ne peux pas attaquer en �tant invisible.
+			//De plus il ne peut pas ramasser les potions en �tant invisible.			
+			if (((invAdv == 1) && (elemPlusProche instanceof Personnage))  || (moi.getCaract(Caracteristique.INVISIBILITE) == 1 )) 
+			{
+				console.setPhrase("Je ne peux qu'errer.");																	
+				arene.deplaceRapidement(refRMI, 0);	
+			}	
+			
+			
+			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if(elemPlusProche instanceof Potion) { // potion
 					// ramassage

@@ -38,9 +38,15 @@ public enum Caracteristique {
 	/**
 	 * Mana : nombre de points de mana.
 	 */
-	MANA("Mana", "MANA", 0, 100, 100);
+	MANA("Mana", "MANA", 0, 100, 100),
 	
+	/**
+	 * Invisibilité : Définit l'invisibilité. Lorsque la valeur est à 0 alors le personnage est visible.
+	 */
+	INVISIBILITE("Invisibilite", "INV", 0, 1, 0);
 	
+
+
 	/**
 	 * Nom complet.
 	 */
