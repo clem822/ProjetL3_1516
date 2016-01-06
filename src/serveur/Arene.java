@@ -21,6 +21,7 @@ import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Personnage;
 import serveur.element.Potion;
+import serveur.interaction.DeplacementTeleleportation;
 import serveur.interaction.Conduire;
 import serveur.interaction.Vampirise;
 import serveur.interaction.BouleDeFeu;
@@ -1091,6 +1092,56 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		
 		return res;
 	}
+	
+	
+	
+	
+	
+	
+	@Override
+	public boolean deplaceTeleportation(int refRMI, int refCible) throws RemoteException {		
+		boolean res = false;
+		
+		VuePersonnage client = personnages.get(refRMI);
+		
+		if (client.isActionExecutee()) {
+			// si une action a deja ete executee
+			logActionDejaExecutee(refRMI);
+			
+		} else {
+			// sinon, on tente de jouer l'interaction
+			new DeplacementTeleleportation(client, getVoisins(refRMI)).seDirigeVers(refCible);
+			client.executeAction();
+			
+			res = true;
+		}
+		
+		return res;
+	}
+	
+	@Override
+	public boolean deplaceTeleportation(int refRMI, Point objectif) throws RemoteException {
+		boolean res = false;
+		
+		VuePersonnage client = personnages.get(refRMI);
+		
+		if (client.isActionExecutee()) {
+			// si une action a deja ete executee
+			logActionDejaExecutee(refRMI);
+		} else {
+			// sinon, on tente de jouer l'interaction
+			new DeplacementTeleleportation(client, getVoisins(refRMI)).seDirigeVers(objectif);
+			client.executeAction();
+
+			res = true;
+		}
+		
+		return res;
+	}
+	
+	
+	
+	
 
 	@Override
 	public boolean invoquer(int refRMI, int nbSbires) throws RemoteException {
@@ -1314,6 +1365,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		
 		return res;
 	}
+	
 
 	
 }

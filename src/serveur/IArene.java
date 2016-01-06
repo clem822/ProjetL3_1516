@@ -284,8 +284,8 @@ public interface IArene extends Remote {
 	public boolean invoquer(int refRMI, int nbSbire) throws RemoteException;
 	
 	/**
-	 * DeplaceRapidement dï¿½place deux fois plus vite que deplace, le personnage correspondant a la console donne vers le point 
-	 * cible.
+	 * DeplaceRapidement se déplace plus rapidement selon sa caractéristique viesse,
+	 *  le personnage correspondant a la console donne vers le point  cible.
 	 * Le deplacement echoue si une action a deja ete executee a ce tour par 
 	 * ce personnage.
 	 * @param refRMI reference RMI du personnage voulant se deplacer
@@ -294,6 +294,8 @@ public interface IArene extends Remote {
 	 * @throws RemoteException
 	 */
 	public boolean deplaceRapidement(int refRMI, Point objectif) throws RemoteException;
+	
+	
 	
 	/**
 	 * Deplace rapidement le personnage correspondant a la console donne vers l'element 
@@ -307,6 +309,36 @@ public interface IArene extends Remote {
 	 * @throws RemoteException
 	 */
 	public boolean deplaceRapidement(int refRMI, int refCible) throws RemoteException;
+	
+	
+	/**
+	 * Teleporte le personnage correspondant a la console donne vers l'element 
+	 * correspondant a la reference RMI cible.
+	 * Le deplacement echoue si une action a deja ete executee a ce tour par 
+	 * ce personnage.
+	 * @param refRMI reference RMI du personnage voulant se deplacer
+	 * @param refCible reference RMI de l'element vers lequel on veut se 
+	 * deplacer, ou 0 si on veut se deplacer aleatoirement
+	 * @return vrai si l'action a bien eu lieu, faux sinon
+	 * @throws RemoteException
+	 */
+	public boolean deplaceTeleportation(int refRMI, int refCible) throws RemoteException;
+	
+	
+	
+	/**
+	 *Teleporte le personnage correspondant a la console donne vers le point 
+	 * cible.
+	 * Le deplacement echoue si une action a deja ete executee a ce tour par 
+	 * ce personnage.
+	 * @param refRMI reference RMI du personnage voulant se deplacer
+	 * @param objectif point vers lequel on veut se deplacer
+	 * @return vrai si l'action a bien eu lieu, faux sinon
+	 * @throws RemoteException
+	 */
+	public boolean deplaceTeleportation(int refRMI, Point objectif) throws RemoteException;
+	
+	
 
 	
 	

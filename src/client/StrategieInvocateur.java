@@ -80,7 +80,7 @@ public class StrategieInvocateur extends StrategiePersonnage {
 		}
 		else if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
 			console.setPhrase("J'erre...");
-			arene.deplace(refRMI, 0); 
+			arene.deplaceRapidement(refRMI, 0); 
 			
 		} else {
 			int refCible = Calculs.chercheElementProche(position, voisins);
@@ -91,7 +91,7 @@ public class StrategieInvocateur extends StrategiePersonnage {
 			if (elemPlusProche instanceof Sbire && ((Sbire)elemPlusProche).getMaitre() == refRMI)
 			{
 				console.setPhrase("J'erre...");
-				arene.deplace(refRMI, 0); 
+				arene.deplaceRapidement(refRMI, 0);
 			}
 			else if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
@@ -109,7 +109,7 @@ public class StrategieInvocateur extends StrategiePersonnage {
 			} else { // si voisins, mais plus eloignes
 				// je vais vers le plus proche
 				console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
-				arene.deplace(refRMI, refCible);
+				arene.deplaceRapidement(refRMI, refCible);
 			}
 		}
 	}

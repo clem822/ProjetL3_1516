@@ -23,6 +23,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 	Bouton b7=new Bouton("armes");
 	Bouton b8=new Bouton("vehicules");
 	Bouton b9=new Bouton("bouclier");
+	Bouton b10=new Bouton("PersonnageTeleporteur");
 	private JPanel container = new JPanel();
 	
 	 public LanceControlMenu(){
@@ -56,6 +57,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		    b7.addActionListener(this);
 		    b8.addActionListener(this);
 		    b9.addActionListener(this);
+		    b10.addActionListener(this);
 		    
 		    
 
@@ -75,6 +77,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		    pan.add(b7);
 		    pan.add(b8);
 		    pan.add(b9);
+		    pan.add(b10);
 		
 		    this.setContentPane(pan);               
 		    this.setVisible(true);
@@ -116,11 +119,15 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 			  LanceInvocateur.main(arg);
 		  }
 
-		  if(arg0.getSource() == b7){
-			  LanceIHM.main(arg);
-			  System.out.println("moi aussi");
-			  
+		  
+		  if(arg0.getSource() == b8){
+			 LanceVoiture.main(arg);  
 		  }
+		  
+		  if(arg0.getSource() == b10){
+				 LancePersonnageTeleporteur.main(arg);  
+			  }
+		  
 
 		   
 

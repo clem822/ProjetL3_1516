@@ -1,24 +1,32 @@
 package lanceur;
 
+import java.awt.Point;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.HashMap;
 
+
+import client.StrategiePersonnageTeleporteur;
 import logger.LoggerProjet;
-import serveur.IArene;
 import serveur.element.Caracteristique;
-import serveur.element.Potion;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
-public class LanceVoiture {
-	
-	private static String usage = "USAGE : java " + LanceVoiture.class.getName() + " [ port [ ipArene ] ]";
+public class LancePersonnageTeleporteur {
+
+	private static String usage = "USAGE : java " + LancePersonnageTeleporteur.class.getName() + " [ port [ ipArene ] ]";
 
 	public static void main(String[] args) {
-		String nom = "Voiture";
+		String nom = "Houdini";
 		
+		//new thing
 		// TODO remplacer la ligne suivante par votre numero de groupe
 		String groupe = "G" + 17; 
+		
+		// nombre de tours pour ce personnage avant d'etre deconnecte 
+		// (30 minutes par defaut)
+		// si negatif, illimite
+		int nbTours = Constantes.NB_TOURS_PERSONNAGE_DEFAUT;
 		
 		// init des arguments
 		int port = Constantes.PORT_DEFAUT;
@@ -47,31 +55,29 @@ public class LanceVoiture {
 		// creation du logger
 		LoggerProjet logger = null;
 		try {
-			logger = new LoggerProjet(true, "potion_"+nom+groupe);
+			logger = new LoggerProjet(true, "personnage_" + nom + groupe);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(ErreurLancement.suivant);
 		}
 		
-		// lancement de la potion
+		// lancement du serveur
 		try {
-			IArene arene = (IArene) java.rmi.Naming.lookup(Constantes.nomRMI(ipArene, port, "Arene"));
+			String ipConsole = InetAddress.getLocalHost().getHostAddress();
+			
+			logger.info("Lanceur", "Creation du personnage...");
+			
+			// caracteristiques du personnage
+			HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
+			// seule la force n'a pas sa valeur par defaut (exemple)
+			caracts.put(Caracteristique.FORCE,Calculs.valeurCaracAleatoire(Caracteristique.FORCE)); 
 
-			logger.info("Lanceur", "Lancement de la potion sur le serveur...");
 			
-			// caracteristiques de la potion
-			HashMap<Caracteristique, Integer> caractsPotion = new HashMap<Caracteristique, Integer>();
+			Point position = Calculs.positionAleatoireArene();
 			
-			//nombre aléatoire entre 2 et 4(vitesse max)
-			caractsPotion.put(Caracteristique.VITESSE, Calculs.nombreAleatoire(2,4));
-			caractsPotion.put(Caracteristique.FORCE, 0);
-			caractsPotion.put(Caracteristique.VIE, 0);
-			caractsPotion.put(Caracteristique.MANA, 0);
-			caractsPotion.put(Caracteristique.INITIATIVE, 0);
+			new StrategiePersonnageTeleporteur(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+			logger.info("Lanceur", "Creation du personnage reussie");
 			
-			// ajout de la potion
-			arene.ajoutePotion(new Potion(nom, groupe, caractsPotion), Calculs.positionAleatoireArene());
-			logger.info("Lanceur", "Lancement de la potion reussi");
 			
 		} catch (Exception e) {
 			logger.severe("Lanceur", "Erreur lancement :\n" + e.getCause());
@@ -79,4 +85,5 @@ public class LanceVoiture {
 			System.exit(ErreurLancement.suivant);
 		}
 	}
+
 }
