@@ -90,10 +90,10 @@ public class StrategieGuerrier extends StrategiePersonnage {
 			//Caracteristique vitesse de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI);
-			
-			
-			if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
+			// Si le voisin est invisible, on se dirige aléatoirement
+			if (voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI));
+					
+			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if(elemPlusProche instanceof Potion) { // potion
 					// ramassage

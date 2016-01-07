@@ -63,14 +63,9 @@ public class StrategieSbire extends StrategiePersonnage {
 		}
 
 		Sbire moi = (Sbire)arene.elementFromRef(refRMI);
-/*		Personnage persoMaitre = (Personnage) arene.elementFromRef(moi.getMaitre());
-//		System.out.println(persoMaitre.getNom());
-//		if (!persoMaitre.estVivant())
-//		{
-//			System.out.println("svdv");
-//			moi.tue();
-//		}
-		else*/ if (voisins.isEmpty())
+
+				
+		if (voisins.isEmpty())
 		{ // je n'ai pas de voisins, j'erre
 			console.setPhrase("J'erre...");
 			arene.deplace(refRMI, 0); 
@@ -87,14 +82,10 @@ public class StrategieSbire extends StrategiePersonnage {
 			//Caractéristique vitesse de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			//L'invocateur ne peut pas acquérir l'invisibilité mais quand même prendre les potions pour empêcher les autres adversaires de les prendre.		
-			if ((invAdv == 1) && (elemPlusProche instanceof Personnage))
-			{
-				console.setPhrase("Je ne peux qu'errer.");																	
-				arene.deplace(refRMI, 0);	
-			}	
+			// Si le voisin est invisible, on se dirige aléatoirement
+			if (voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI));
 			
-
+			
 			else if (refCible == moi.getMaitre() || (elemPlusProche instanceof Sbire && ((Sbire)elemPlusProche).getMaitre() == moi.getMaitre()))
 			{
 				console.setPhrase("J'erre...");
