@@ -90,8 +90,8 @@ public class StrategieNinja extends StrategiePersonnage {
 			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if (elemPlusProche instanceof Poison){//si c'est un poison je la fuit
-					console.setPhrase("Je fuis ce poison");
-					arene.Fuite(refRMI, refCible);
+					console.setPhrase("Je n'aime pas ce poison");
+					arene.deplaceRapidement(refRMI, 0);	
 				}//si ce n'est pas un poison et que prendre l'élément me tue pas, je le ramasse
 				else if(elemPlusProche instanceof Potion && elemPlusProche.getCaract(Caracteristique.VIE)>-(moi.getCaract(Caracteristique.VIE))) { // potion
 					// ramassage
@@ -110,8 +110,9 @@ public class StrategieNinja extends StrategiePersonnage {
 			} else { // si voisins, mais plus eloignes
 				
 				if (elemPlusProche instanceof Personnage ){// si en fonction de l'initiative et du nombre de case et de la vitesse ,je serai le premier attaquant
-					if (((distPlusProche%2 !=0 && elemPlusProche.getCaract(Caracteristique.INITIATIVE )>moi.getCaract(Caracteristique.INITIATIVE))
-						|| (distPlusProche%2 ==0 && elemPlusProche.getCaract(Caracteristique.INITIATIVE )<moi.getCaract(Caracteristique.INITIATIVE)))&& moi.getCaract(Caracteristique.VITESSE)%2!=0){
+					if ((distPlusProche%2 !=0 && moi.getCaract(Caracteristique.VITESSE)%2!=0)||
+						(elemPlusProche.getCaract(Caracteristique.INITIATIVE )>moi.getCaract(Caracteristique.INITIATIVE))
+						|| (distPlusProche%2 ==0 && elemPlusProche.getCaract(Caracteristique.INITIATIVE )<moi.getCaract(Caracteristique.INITIATIVE))){
 						
 						console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
 						arene.deplaceRapidement(refRMI, refCible);

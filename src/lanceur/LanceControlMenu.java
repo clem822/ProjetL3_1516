@@ -21,7 +21,6 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 	Panneau pan = new Panneau();
 	Bouton b=new Bouton("Partie locale","");
 	Bouton b0=new Bouton("Partie reseau","");
-	Bouton b11=new Bouton("Perso Tournois","");
 	Bouton b1=new Bouton("potion","images/potion.png");
 	Bouton b2=new Bouton("poison","images/poison.png");
 	Bouton b3=new Bouton("Ninja","images/Ninja.png");
@@ -35,6 +34,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 	Bouton b9=new Bouton("bouclier","images/Bouclier.png");
 	Bouton b12=new Bouton("Teleporteur","images/Teleporteur.png");
 	Bouton b13=new Bouton("Invisibilite","images/invisibilite.png");
+	Bouton b14=new Bouton("Match","");
 	
 
 
@@ -66,23 +66,28 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		    pan.add(item, BorderLayout.SOUTH );*/
 		    
 		   
-		    
+		    //bouton systeme
 		    b.addActionListener(this);
 		    b0.addActionListener(this);
-		    b11.addActionListener(this);
+		    //bouton potions 
 		    b1.addActionListener(this);
 		    b2.addActionListener(this);
+		    b13.addActionListener(this);
+		    //boutons personnage
 		    b3.addActionListener(this);
 		    b4.addActionListener(this);
 		    b5.addActionListener(this);
 		    b6.addActionListener(this);
 		    b10.addActionListener(this);
+		    b12.addActionListener(this);		  
+		    //boutons objets
 		    b7.addActionListener(this);
 		    b8.addActionListener(this);
 		    b9.addActionListener(this);
-		   
-		    b12.addActionListener(this);
-		    b13.addActionListener(this);
+		    //bouton match
+		    b14.addActionListener(this);
+		    
+		    
 		
 		    
 		    GridLayout gl = new GridLayout(4, 2, 3, 3);
@@ -94,7 +99,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		    pan.add(b5);
 		    pan.add(b6);
 		    pan.add(b10);
-		    pan.add(b11);
+	
 		    pan.add(b12);
 		    pan.add(b1);
 		    pan.add(b2);
@@ -102,7 +107,8 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		    pan.add(b8);
 		    pan.add(b9);
 		    pan.add(b13);
-		
+		    
+		    pan.add(b14);
 		
 		    
 		    this.setContentPane(container);               
@@ -166,16 +172,50 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 				LanceVampire.main(arg);
 				  
 			  }
-
-		  if(arg0.getSource() == b11){
-			  //LancePersoTournois.main(arg);
-				  
-			  }
 		  if(arg0.getSource() == b12){
 			  LanceTeleporteur.main(arg);  
 		  }
 		  if(arg0.getSource() == b13){
 			  LanceInvisibilite.main(arg);  
+		  }
+		  if(arg0.getSource() == b14){
+			  LancePotion.main(arg);
+			  LancePotion.main(arg);
+			  LancePotion.main(arg);
+			  LancePotion.main(arg);
+			  LancePotion.main(arg);
+			  LancePotion.main(arg);
+			  LancePotion.main(arg);
+			/*  LanceInvisibilite.main(arg);  
+			  LanceInvisibilite.main(arg);  
+			  LanceInvisibilite.main(arg);  
+			  LanceInvisibilite.main(arg);  */
+			
+				
+				LanceBouclier.main(arg);
+				LanceBouclier.main(arg);
+				LanceBouclier.main(arg);
+				LanceBouclier.main(arg);
+				LanceVoiture.main(arg);  
+				LanceVoiture.main(arg);  
+				LanceVoiture.main(arg);  
+				LanceVoiture.main(arg);  
+				 LanceArme.main(arg);
+				 LanceArme.main(arg);
+				 LanceArme.main(arg);
+				 LanceArme.main(arg);
+				 LanceArme.main(arg);
+				 LanceArme.main(arg);
+				 
+				 LanceInvocateur.main(arg);
+				  LanceTeleporteur.main(arg);
+				  LanceVampire.main(arg);
+				  LanceGuerrier.main(arg);
+				  LanceMage.main(arg);
+				  LanceNinja.main(arg);
+			  
+			  
+			  
 		  }
 	  
 	  
