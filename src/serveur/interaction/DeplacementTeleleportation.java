@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Random;
-import serveur.element.Caracteristique;
 import serveur.vuelement.VuePersonnage;
 import utilitaires.Calculs;
 
@@ -86,7 +85,7 @@ public class DeplacementTeleleportation {
 			
 		Point dest = Calculs.restreintPositionArene(nouvellePosition);
 
-		// Position aléatoire dans l'arène
+		// Position alï¿½atoire dans l'arï¿½ne
 
 
 		if (dest != null) {

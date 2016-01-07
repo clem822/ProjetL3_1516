@@ -14,8 +14,6 @@ import utilitaires.Calculs;
  */
 public class Personnage extends Element {
 	
-	// A modifier
-	private int carburant = 0;
 	private static final long serialVersionUID = 1L;
 
 	/**
