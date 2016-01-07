@@ -41,7 +41,7 @@ public class StrategieInvocateur extends StrategiePersonnage {
 		super(ipArene, port, ipConsole, new Invocateur(nom, groupe), nbTours, position, logger);
 	}
 	
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see client.StrategiePersonnage#executeStrategie(java.util.HashMap)
 	 */
 	@Override
@@ -63,17 +63,13 @@ public class StrategieInvocateur extends StrategiePersonnage {
 			e.printStackTrace();
 		}
 		Element moi = arene.elementFromRef(refRMI);
-//		System.out.println(((Personnage)moi).getCaract(Caracteristique.VIE)); // a enlever
-//		((Personnage)moi).tue();// a enlever
-//		System.out.println(((Personnage)moi).getCaract(Caracteristique.VIE)); // a enlever
-		
+
+		//Invoquer des sbires si le mana est suffisant
 		if (moi.getCaract(Caracteristique.MANA) >= 80)
 		{
 			console.setPhrase("J'invoque des sbires !");
 			arene.invoquer(refRMI, Invocateur.NB_SBIRES);
-//			System.out.println(((Personnage)moi).getNom()); // a enlever
-//			((Personnage)moi).tue();// a enlever
-//			System.out.println(((Personnage)moi).getCaract(Caracteristique.VIE)); // a enlever
+
 		}
 		else if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
 			console.setPhrase("J'erre...");
@@ -86,7 +82,6 @@ public class StrategieInvocateur extends StrategiePersonnage {
 			Element elemPlusProche = arene.elementFromRef(refCible);
 			
 			
-			
 			//Caractéristique vitesse de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
@@ -97,6 +92,7 @@ public class StrategieInvocateur extends StrategiePersonnage {
 				arene.deplaceRapidement(refRMI, 0);	
 			}	
 			
+			 //Si le voisin est un sbire ayant la même refRMI alors il erre car c'est un de ses sbires
 			else if (elemPlusProche instanceof Sbire && ((Sbire)elemPlusProche).getMaitre() == refRMI)
 			{
 				console.setPhrase("J'erre...");

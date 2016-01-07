@@ -12,7 +12,7 @@ public enum Caracteristique {
 	/**
 	 * Vitesse : Vitesse du personnage.
 	 */
-	VITESSE("Vitesse", "VIT", 0, 4, 1),
+	VITESSE("Vitesse", "VIT", 1, 4, 1),
 	
 	
 	/**
