@@ -1150,7 +1150,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 			logActionDejaExecutee(refRMI);
 		} else {
 			// sinon, on tente de jouer l'interaction
-			new Invocation(this, invocateur, nbSbires).invoquerSbires();
+			new Invocation(this, invocateur, nbSbires).invoquerSbires(refRMI);
 			invocateur.executeAction();
 
 			res = true;

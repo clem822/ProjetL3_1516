@@ -284,6 +284,17 @@ public class IHM extends JFrame implements Runnable {
 		};
 		
 		mapMenu.add(map3);
+		
+		Action map4 = new AbstractAction("Foot") {
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent ae) {
+				arenePanel.setMap(4);
+			}
+		};
+		
+		mapMenu.add(map4);
+		
 		menuBar.add(mapMenu);
 
 		
