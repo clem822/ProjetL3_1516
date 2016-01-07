@@ -15,13 +15,13 @@ import utilitaires.Constantes;
 
 /**
  * @author guillaume
- * ReprÃ©sente le lancement d'une boule de feu d'un personnage vers un autre
+ * Interaction de vampirisme utilisé par les vampires
  *
  */
 public class Vampirise extends Interaction<VuePersonnage> {
 	
 	/**
-	 * Cree une interaction de BouleDeFeu.
+	 * Cree une interaction de vampirisme.
 	 * @param arene arene
 	 * @param attaquant attaquant
 	 * @param defenseur defenseur

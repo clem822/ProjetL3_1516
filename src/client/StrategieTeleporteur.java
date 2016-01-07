@@ -36,7 +36,7 @@ public class StrategieTeleporteur extends StrategiePersonnage {
 			int nbTours, Point position, LoggerProjet logger) {
 		
 		super(ipArene, port, ipConsole, new Teleporteur(nom, groupe), nbTours, position, logger);
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	/** 

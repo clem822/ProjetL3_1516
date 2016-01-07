@@ -37,7 +37,7 @@ public class DeplacementTeleleportation {
 	}
 
 	/**
-	 * Deplace ce sujet d'une case en direction de l'element dont la reference
+	 * Deplace ce sujet de plusieur  case en jusqu'a l'element dont la reference
 	 * est donnee.
 	 * Si la reference est la reference de l'element courant, il ne bouge pas ;
 	 * si la reference est egale a 0, il erre ;

@@ -37,7 +37,7 @@ public class StrategieMage extends StrategiePersonnage {
 		
 	}
 	
-	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
+	
 	/** 
 	 * Decrit la strategie du mage
 	 * Les methodes pour evoluer dans le jeu doivent etre les methodes RMI

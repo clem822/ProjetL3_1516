@@ -44,7 +44,7 @@ public class StrategieSbire extends StrategiePersonnage {
 	 */
 	@Override
 	public void executeStrategie(HashMap<Integer, Point> voisins) throws RemoteException {
-		// TODO Auto-generated method stub
+	
 		// arene
 		IArene arene = console.getArene();
 		
