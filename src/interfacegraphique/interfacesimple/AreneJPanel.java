@@ -341,7 +341,7 @@ public class AreneJPanel extends JPanel {
 				Image logo;
 				try {
 					
-					logo = ImageIO.read(new File("images/bouclier.png"));
+					logo = ImageIO.read(new File("images/Bouclier.png"));
 					//System.out.println("width : " + logo.getWidth(this) + " / height : " + logo.getHeight(this));
 					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
 
