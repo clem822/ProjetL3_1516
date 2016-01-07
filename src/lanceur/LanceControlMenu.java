@@ -19,7 +19,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	static String[] arg;
 	Panneau pan = new Panneau();
-	Bouton b=new Bouton("Partie local","");
+	Bouton b=new Bouton("Partie locale","");
 	Bouton b0=new Bouton("Partie reseau","");
 	Bouton b11=new Bouton("Perso Tournois","");
 	Bouton b1=new Bouton("potion","images/potion.png");
@@ -33,7 +33,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 	Bouton b7=new Bouton("armes","images/epee.png");
 	Bouton b8=new Bouton("Cheval","images/cheval.png");
 	Bouton b9=new Bouton("bouclier","images/Bouclier.png");
-	Bouton b12=new Bouton("Teleporteur","");
+	Bouton b12=new Bouton("Teleporteur","images/Teleporteur.png");
 
 
 

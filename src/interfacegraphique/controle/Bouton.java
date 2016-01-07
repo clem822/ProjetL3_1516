@@ -74,7 +74,7 @@ public class Bouton extends JButton implements MouseListener{
 		    g2d.setColor(Color.white);
 		    g2d.drawString(this.name, 2, this.getHeight()-2);
 		    
-		    if (name=="Partie local" || name=="Partie reseau"){
+		    if (name=="Partie locale" || name=="Partie reseau"){
 		    	  g2d.setColor(Color.black);
 		    	 g2d.drawString("SERVEUR", this.getWidth() / 2 -25 , (this.getHeight() / 2) -10);
 		    	 g2d.drawString("ET", this.getWidth() / 2 - (this.getWidth() / 2 /4), (this.getHeight() / 2) );

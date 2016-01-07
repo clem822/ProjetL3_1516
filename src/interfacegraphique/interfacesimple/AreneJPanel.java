@@ -19,6 +19,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import serveur.element.Arme;
+import serveur.element.Bouclier;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Guerrier;
@@ -29,7 +31,7 @@ import serveur.element.Ninja;
 import serveur.element.Potion;
 
 import serveur.element.PersonnageTeleporteur;
-
+import serveur.element.Poison;
 import serveur.element.Sbire;
 import serveur.element.Vampire;
 import serveur.element.Voiture;
@@ -216,16 +218,10 @@ public class AreneJPanel extends JPanel {
 	 */
 	private void dessineElementGeometrique(Graphics g, VueElement<?> vueElement, int coordX, int coordY) {
 		if (vueElement.isSelectionne()) {
-			
-			
-			
 			g.setColor(SELECTED_COLOR);
 			g.fillOval(coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10);
 			g.setColor(vueElement.getCouleur());
-		}
-		
-		
-		
+		}		
 		if(vueElement instanceof VuePersonnage) {
 			Element perso = vueElement.getElement();
 			if(perso instanceof Mage){ // Image Mage
@@ -299,12 +295,55 @@ public class AreneJPanel extends JPanel {
 			}
 		} else {
 			/*
-			Polygon p = new Polygon(); // triangle
-			p = creeTriangle(coordX + ELEMENT_SIZE/2, coordY + ELEMENT_SIZE/2 - 1, ELEMENT_SIZE);
-			g.fillPolygon(p);
+			
 			*/
 			Element objet = vueElement.getElement();
-			if(objet instanceof Potion){ // Image Mage
+			if(objet instanceof Voiture){ // Image voiture
+				Image logo;
+				try {
+					logo = ImageIO.read(new File("images/cheval.png"));
+					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else if(objet instanceof Bouclier){ // Image bouclier
+				Image logo;
+				try {
+					
+					logo = ImageIO.read(new File("images/bouclier.png"));
+					//System.out.println("width : " + logo.getWidth(this) + " / height : " + logo.getHeight(this));
+					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}else if(objet instanceof Arme){ // Image potion
+				Image logo;
+				try {
+					
+					logo = ImageIO.read(new File("images/epee.png"));
+					//System.out.println("width : " + logo.getWidth(this) + " / height : " + logo.getHeight(this));
+					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else if(objet instanceof Poison){ // Image potion
+				Image logo;
+				try {
+					
+					logo = ImageIO.read(new File("images/poison2.png"));
+					//System.out.println("width : " + logo.getWidth(this) + " / height : " + logo.getHeight(this));
+					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else if(objet instanceof Potion){ // Image potion
 				Image logo;
 				try {
 					
@@ -315,16 +354,12 @@ public class AreneJPanel extends JPanel {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}else if(objet instanceof Voiture){ // Image Sbire
-				Image logo;
-				try {
-					logo = ImageIO.read(new File("images/cheval.png"));
-					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
-
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			} 
+			}else {
+				
+				Polygon p = new Polygon(); // triangle
+				p = creeTriangle(coordX + ELEMENT_SIZE/2, coordY + ELEMENT_SIZE/2 - 1, ELEMENT_SIZE);
+				g.fillPolygon(p);
+			}
 			
 		}
 	}
