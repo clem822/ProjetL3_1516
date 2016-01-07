@@ -27,7 +27,7 @@ public class PotionInvisibilite extends Potion {
 	 */
 	private static HashMap<Caracteristique, Integer> caract (){
 		HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
-		caracts.put(Caracteristique.INVISIBILITE, 1);
+		caracts.put(Caracteristique.INVISIBILITE, 60);
 		caracts.put(Caracteristique.VITESSE, 2);
 		caracts.put(Caracteristique.FORCE, 0);
 		caracts.put(Caracteristique.VIE, 0);

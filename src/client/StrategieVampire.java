@@ -13,7 +13,6 @@ import logger.LoggerProjet;
 import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
-import serveur.element.Personnage;
 import serveur.element.Potion;
 import serveur.element.Vampire;
 import utilitaires.Calculs;
@@ -80,13 +79,13 @@ public class StrategieVampire extends StrategiePersonnage {
 
 			
 		
-			//Caractï¿½ristique vitesse de l'adversaire
+			//Caracteristique vitesse de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			// Si le voisin est invisible, on se dirige aléatoirement
+			// Si le voisin est invisible, on se dirige aleatoirement
 			if (voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI));
 			
-			if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
+			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if(elemPlusProche instanceof Potion) { // potion
 					// ramassage
@@ -115,6 +114,8 @@ public class StrategieVampire extends StrategiePersonnage {
 				arene.deplace(refRMI, refCible);
 			}
 		}
+		if (arene.elementFromRef(refRMI).getCaract(Caracteristique.INVISIBILITE) != 0 )
+			arene.incrINVISIBILITE(refRMI, -1);
 	}
 
 }

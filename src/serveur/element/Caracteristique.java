@@ -41,9 +41,9 @@ public enum Caracteristique {
 	MANA("Mana", "MANA", 0, 100, 100),
 	
 	/**
-	 * Invisibilité : Définit l'invisibilité. Lorsque la valeur est à 0 alors le personnage est visible.
+	 * Invisibilitï¿½ : Dï¿½finit l'invisibilitï¿½. Lorsque la valeur est ï¿½ 0 alors le personnage est visible.
 	 */
-	INVISIBILITE("Invisibilite", "INV", 0, 1, 0);
+	INVISIBILITE("Invisibilite", "INV", 0, 60, 0);
 	
 
  

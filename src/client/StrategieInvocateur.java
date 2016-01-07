@@ -14,7 +14,6 @@ import serveur.element.Element;
 import serveur.element.Invocateur;
 import serveur.element.Potion;
 import serveur.element.Sbire;
-import serveur.element.Personnage;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
@@ -79,7 +78,7 @@ public class StrategieInvocateur extends StrategiePersonnage {
 			//Caracteristique vitesse de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			// Si le voisin est invisible, on se dirige aléatoirement
+			// Si le voisin est invisible, on se dirige alï¿½atoirement
 			if (voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI));	
 			
 			 //Si le voisin est un sbire ayant la meme refRMI alors il erre car c'est un de ses sbires
@@ -114,5 +113,11 @@ public class StrategieInvocateur extends StrategiePersonnage {
 				}
 			}
 		}
+		
+		// regeneration passive de mana
+				arene.regenerationMana(refRMI,3);
+		
+		if (arene.elementFromRef(refRMI).getCaract(Caracteristique.INVISIBILITE) != 0 )
+			arene.incrINVISIBILITE(refRMI, -1);
 	}
 }
