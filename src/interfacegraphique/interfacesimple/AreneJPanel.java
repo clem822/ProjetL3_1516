@@ -30,7 +30,7 @@ import serveur.element.Ninja;
 
 
 import serveur.element.Potion;
-
+import serveur.element.PotionInvisibilite;
 import serveur.element.Poison;
 
 import serveur.element.Teleporteur;
@@ -372,7 +372,7 @@ public class AreneJPanel extends JPanel {
 					e.printStackTrace();
 				}
 			}
-			/*else if(objet instanceof Invisibilite){ // Image invisibilite
+			else if(objet instanceof PotionInvisibilite){ // Image invisibilite
 				Image logo;
 				try {
 					
@@ -383,7 +383,7 @@ public class AreneJPanel extends JPanel {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}*/
+			}
 			else if(objet instanceof Potion){ // Image potion
 				Image logo;
 				try {
