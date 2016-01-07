@@ -137,7 +137,8 @@ public class StrategieMage extends StrategiePersonnage {
 		}
 			
 		// regeneration passive de mana
-		arene.regenerationMana(refRMI,3);		
+		if(arene.elementFromRef(refRMI).getCaract(Caracteristique.MANA) <  Caracteristique.MANA.getMax())
+			arene.regenerationMana(refRMI,3);		
 	
 		if (arene.elementFromRef(refRMI).getCaract(Caracteristique.INVISIBILITE) != 0 )
 			arene.incrINVISIBILITE(refRMI, -1);
