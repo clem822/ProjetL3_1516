@@ -83,7 +83,7 @@ public class StrategieNinja extends StrategiePersonnage {
 			if (voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI));
 			 if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
-				if (elemPlusProche instanceof Poison){//si c'est un poison je la fuit
+				if (elemPlusProche instanceof Poison){//si c'est un poison je'erre
 					console.setPhrase("Je n'aime pas ce poison");
 					arene.deplaceRapidement(refRMI, 0);	
 				}//si ce n'est pas un poison et que prendre l'élément me tue pas, je le ramasse
