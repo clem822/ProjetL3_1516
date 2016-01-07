@@ -38,6 +38,11 @@ public class Duel extends Interaction<VuePersonnage> {
 
 			// ejection du defenseur
 			defenseur.setPosition(positionEjection);
+			
+			if(pAttaquant.getCaract(Caracteristique.INVISIBILITE) == 1) {
+				arene.incrementeCaractElement(attaquant, Caracteristique.INVISIBILITE,-1);
+			}
+			
 
 			// degats
 			if (perteVie > 0) {

@@ -79,7 +79,7 @@ public class Invocation {
 				
 				Point position = arene.getPosition(refRMI);
 				position.x += 2;
-				position.y += (i*3)-6;
+				position.y += (i*2)-4;
 				position = Calculs.restreintPositionArene(position);
 				//Calculs.positionAleatoireArene();//a changer pour qu'ils apparaissent pres du perso
 				

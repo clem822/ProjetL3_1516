@@ -94,14 +94,18 @@ public class StrategieVampire extends StrategiePersonnage {
 
 				} else { // personnage
 					// Vampirise 
-					console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
 					
-					//si il lui reste moins de 50 hp alors il peut utiliser sa compétence active.
-					if (moi.getCaract(Caracteristique.VIE) < 50)
+					//si il lui reste moins de 50 hp alors il peut utiliser sa compï¿½tence active.
+					if (moi.getCaract(Caracteristique.VIE) < 30) {
+						console.setPhrase("J'utilise vampirisme contre " + elemPlusProche.getNom());
 						arene.Vampirise(refRMI, refCible);
+					}
+						
 					// sinon il attaque normalement
-					else
-						arene.lanceAttaque(refRMI, refCible);	
+					else {
+						console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
+						arene.lanceAttaque(refRMI, refCible);
+					}
 				}
 				
 			} else { // si voisins, mais plus eloignes

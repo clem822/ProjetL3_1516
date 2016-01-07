@@ -37,6 +37,10 @@ public class BouleDeFeu extends Interaction<VuePersonnage> {
 			int perteVie = 15;
 			int manaAttaquant = pAttaquant.getCaract(Caracteristique.MANA);
 			
+			if(pAttaquant.getCaract(Caracteristique.INVISIBILITE) == 1) {
+				arene.incrementeCaractElement(attaquant, Caracteristique.INVISIBILITE,-1);
+			}
+			
 			// verification du mana
 			if(manaAttaquant > 19) {
 				// perte de mana
