@@ -34,7 +34,8 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 	Bouton b8=new Bouton("Cheval","images/cheval.png");
 	Bouton b9=new Bouton("bouclier","images/Bouclier.png");
 	Bouton b12=new Bouton("Teleporteur","images/Teleporteur.png");
-
+	Bouton b13=new Bouton("Invisibilite","");
+	
 
 
 	private JPanel container = new JPanel();
@@ -81,6 +82,8 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		    b9.addActionListener(this);
 		   
 		    b12.addActionListener(this);
+		    b13.addActionListener(this);
+		
 		    
 		    GridLayout gl = new GridLayout(4, 2, 3, 3);
 		    pan.setLayout(gl);
@@ -98,6 +101,8 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		    pan.add(b7);
 		    pan.add(b8);
 		    pan.add(b9);
+		    pan.add(b13);
+		
 		
 		    
 		    this.setContentPane(container);               
@@ -168,6 +173,10 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		  if(arg0.getSource() == b12){
 			  LanceTeleporteur.main(arg);  
 		  }
+		  if(arg0.getSource() == b13){
+			  LanceInvisibilite.main(arg);  
+		  }
+	  
 	  
 		   
 

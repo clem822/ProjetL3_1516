@@ -10,6 +10,7 @@ import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Ninja;
 import serveur.element.Personnage;
+import serveur.element.Poison;
 import serveur.element.Potion;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
@@ -79,33 +80,37 @@ public class StrategieNinja extends StrategiePersonnage {
 			//Si je suis déjà invisible ou que la référence est un personnage et qu'en plus son invisibilité est à 1 alors je ne l'attaque pas car je ne peux pas attaquer en étant invisible.
 			//De plus il ne peut pas ramasser les potions en étant invisible.			
 			if (((invAdv == 1) && (elemPlusProche instanceof Personnage))  || (moi.getCaract(Caracteristique.INVISIBILITE) == 1 )) 
-			{
-				console.setPhrase("Je ne peux qu'errer.");																	
-				arene.deplaceRapidement(refRMI, 0);	
-			}
+				{
+					console.setPhrase("Je ne peux qu'errer.");																	
+					arene.deplaceRapidement(refRMI, 0);	
+				}
 				
 					
 			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
-				if(elemPlusProche instanceof Potion) { // potion
+				if (elemPlusProche instanceof Poison){
+					console.setPhrase("Je fuis ce poison");
+					arene.Fuite(refRMI, refCible);
+				}
+				else if(elemPlusProche instanceof Potion) { // potion
 					// ramassage
 					console.setPhrase("Je ramasse une potion");
 					arene.ramassePotion(refRMI, refCible);
 
 				} else { // personnage
 					// duel
-			
 						console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
-						arene.lanceAttaque(refRMI, refCible);					
-					
+						arene.lanceAttaque(refRMI, refCible);						
 				}
 			} else { // si voisins, mais plus eloignes
 				// je vais vers le plus proche
 				if (elemPlusProche instanceof Personnage ){
 						if(elemPlusProche.getCaract(Caracteristique.FORCE ) > arene.elementFromRef(refRMI).getCaract(Caracteristique.VIE )){
 							console.setPhrase("Je m'echappe, il est trop fort pour moi . " + elemPlusProche.getNom());
-							
-							arene.Fuite(refRMI, refCible);
+							if (arene.elementFromRef(refRMI).getCaract(Caracteristique.MANA )>20)
+								arene.deplaceTeleportation(refRMI, refCible);
+							else
+								arene.Fuite(refRMI, refCible);
 						}
 						else{
 							console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
@@ -114,8 +119,14 @@ public class StrategieNinja extends StrategiePersonnage {
 					
 				}
 				else{
-						console.setPhrase("Je vais vers cette potion " + elemPlusProche.getNom());
-						arene.deplaceRapidement(refRMI, refCible);
+						if (elemPlusProche instanceof Poison ){
+							console.setPhrase("Je fuis le poison " + elemPlusProche.getNom());
+							arene.Fuite(refRMI, refCible);
+						}
+						else{
+							console.setPhrase("Je vais vers cette potion " + elemPlusProche.getNom());
+							arene.deplaceRapidement(refRMI, refCible);
+						}
 				}
 		}	}
 	}

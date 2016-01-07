@@ -76,7 +76,7 @@ public class StrategieTeleporteur extends StrategiePersonnage {
 			Element elemPlusProche = arene.elementFromRef(refCible);
 			Element moi = arene.elementFromRef(refRMI);
 			
-			//Caracteristique vitesse de l'adversaire
+			//Caracteristique invisibilite de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
 			//Si je suis deja invisible ou que la reference est un personnage et qu'en plus son invisibilite est a 1 alors je ne l'attaque pas car je ne peux pas attaquer en �tant invisible.
