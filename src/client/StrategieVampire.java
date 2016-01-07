@@ -83,15 +83,9 @@ public class StrategieVampire extends StrategiePersonnage {
 			//Caract�ristique vitesse de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			//Si je suis d�j� invisible ou que la r�f�rence est un personnage et qu'en plus son invisibilit� est � 1 alors je ne l'attaque pas car je ne peux pas attaquer en �tant invisible.
-			//De plus il ne peut pas ramasser les potions en �tant invisible.			
-			if (((invAdv == 1) && (elemPlusProche instanceof Personnage))  || (moi.getCaract(Caracteristique.INVISIBILITE) == 1 )) 
-			{
-				console.setPhrase("Je ne peux qu'errer.");																	
-				arene.deplaceRapidement(refRMI, 0);	
-			}
+			voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI);
 			
-			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
+			if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if(elemPlusProche instanceof Potion) { // potion
 					// ramassage

@@ -86,15 +86,9 @@ public class StrategieMage extends StrategiePersonnage {
 				//Caractéristique vitesse de l'adversaire
 				int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 				
-				//Si je suis déjà invisible ou que la référence est un personnage et qu'en plus son invisibilité est à 1 alors je ne l'attaque pas car je ne peux pas attaquer en étant invisible.
-				//De plus il ne peut pas ramasser les potions en étant invisible.			
-				if (((invAdv == 1) && (elemPlusProche instanceof Personnage))  || (moi.getCaract(Caracteristique.INVISIBILITE) == 1 )) 
-				{
-					console.setPhrase("Je ne peux qu'errer.");																	
-					arene.deplaceRapidement(refRMI, 0);	
-				}	
+				voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI);
 					
-				else if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION_DIST) { // si suffisamment proches
+				if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION_DIST) { // si suffisamment proches
 
 				if(distPlusProche < 4 &&  moi.getCaract(Caracteristique.VIE) < 15) { // panique en cas de mort proche
 					console.setPhrase("A L'AIDE...");

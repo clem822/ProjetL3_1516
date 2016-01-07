@@ -74,18 +74,11 @@ public class StrategieTeleporteur extends StrategiePersonnage {
 			int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 
 			Element elemPlusProche = arene.elementFromRef(refCible);
-			Element moi = arene.elementFromRef(refRMI);
 			
 			//Caracteristique invisibilite de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			//Si je suis deja invisible ou que la reference est un personnage et qu'en plus son invisibilite est a 1 alors je ne l'attaque pas car je ne peux pas attaquer en �tant invisible.
-			//De plus il ne peut pas ramasser les potions en etant invisible.			
-			if (((invAdv == 1) && (elemPlusProche instanceof Personnage))  || (moi.getCaract(Caracteristique.INVISIBILITE) == 1 )) 
-			{
-				console.setPhrase("Je ne peux qu'errer.");																	
-				arene.deplace(refRMI, 0);	
-			} else {
+			voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI);
 			
 			if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
@@ -143,6 +136,6 @@ public class StrategieTeleporteur extends StrategiePersonnage {
 		}
 		
 	}
-}
+
 	
 		
