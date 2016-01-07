@@ -91,7 +91,7 @@ public class StrategieSbire extends StrategiePersonnage {
 			if ((invAdv == 1) && (elemPlusProche instanceof Personnage))
 			{
 				console.setPhrase("Je ne peux qu'errer.");																	
-				arene.deplaceRapidement(refRMI, 0);	
+				arene.deplace(refRMI, 0);	
 			}	
 			
 
