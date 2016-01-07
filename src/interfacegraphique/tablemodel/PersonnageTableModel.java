@@ -1,6 +1,5 @@
 package interfacegraphique.tablemodel;
 
-import javax.swing.JButton;
 import java.util.ArrayList;
 
 import serveur.element.Caracteristique;

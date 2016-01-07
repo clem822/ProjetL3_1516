@@ -39,9 +39,6 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 
 
 	private JPanel container = new JPanel();
-/*	private JPanel syst = new JPanel();
-	private JPanel perso = new JPanel();
-	private JPanel item = new JPanel();*/
 	
 	 public LanceControlMenu(){
 
