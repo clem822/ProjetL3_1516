@@ -18,7 +18,7 @@ public class LanceMage {
 	private static String usage = "USAGE : java " + LanceMage.class.getName() + " [ port [ ipArene ] ]";
 
 	public static void main(String[] args) {
-		String nom = "Luc";
+		String nom = "Mage";
 		
 		//new thing
 		// TODO remplacer la ligne suivante par votre numero de groupe

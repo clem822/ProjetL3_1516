@@ -72,6 +72,7 @@ public class DeplacementRapide {
 	 * @throws RemoteException
 	 */
 	public void seDirigeVers(Point objectif) throws RemoteException {
+		
 		Point cible = Calculs.restreintPositionArene(objectif); 											
 		//On récupère la vitesse de l'élément.
 		int vitesse = personnage.getElement().getCaract(Caracteristique.VITESSE);
