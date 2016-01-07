@@ -20,7 +20,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 	static String[] arg;
 	Panneau pan = new Panneau();
 	Bouton b=new Bouton("Partie locale","");
-	Bouton b0=new Bouton("Partie reseau","");
+
 	Bouton b1=new Bouton("potion","images/potion.png");
 	Bouton b2=new Bouton("poison","images/poison.png");
 	Bouton b3=new Bouton("Ninja","images/Ninja.png");
@@ -65,8 +65,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		   
 		    //bouton systeme
 		    b.addActionListener(this);
-		    b0.addActionListener(this);
-		    //bouton potions 
+		    //boutons potions 
 		    b1.addActionListener(this);
 		    b2.addActionListener(this);
 		    b13.addActionListener(this);
@@ -90,7 +89,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		    GridLayout gl = new GridLayout(4, 2, 3, 3);
 		    pan.setLayout(gl);
 		    pan.add(b);
-		    pan.add(b0);
+
 		    pan.add(b3);
 		    pan.add(b4);
 		    pan.add(b5);
@@ -125,11 +124,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		 if(arg0.getSource() == b){
 			  LanceArene.main(arg);
 			  LanceIHM.main(arg);
-		 }	 if(arg0.getSource() == b0){
-			  LanceAreneTournoi.main(arg);
-			  LanceIHMTournoi.main(arg);
-		 }
-		 
+		 }			 
 		 if(arg0.getSource() == b1){
 			  LancePotion.main(arg);
 			  
