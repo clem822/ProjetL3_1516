@@ -24,7 +24,6 @@ import serveur.element.Personnage;
 import serveur.element.Potion;
 import serveur.element.Sbire;
 import serveur.interaction.DeplacementTeleleportation;
-import serveur.interaction.Conduire;
 import serveur.interaction.RegenerationMana;
 import serveur.interaction.Vampirise;
 import serveur.interaction.BouleDeFeu;
@@ -1019,38 +1018,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 	
 	
 	
-	
 
-	public boolean Conduire(int refRMI, int refPotion) throws RemoteException {
-		boolean res = false;
-		
-		VuePersonnage vuePersonnage = personnages.get(refRMI);
-		VuePotion vuePotion = potions.get(refPotion);
-		
-		if (vuePersonnage.isActionExecutee()) {
-			// si une action a deja ete executee
-			logActionDejaExecutee(refRMI);
-			
-		} else {
-			// sinon, on tente de jouer l'interaction
-			int distance = Calculs.distanceChebyshev(vuePersonnage.getPosition(), vuePotion.getPosition());
-			
-			// on teste la distance entre le personnage et la potion
-			if (distance <= Constantes.DISTANCE_MIN_INTERACTION) {
-				new Conduire(this, vuePersonnage, vuePotion).interagit();
-				personnages.get(refRMI).executeAction();
-				
-				res = true;
-			} else {
-				logger.warning(Constantes.nomClasse(this), nomRaccourciClient(refRMI) + 
-						" a tente d'interagir avec " + vuePotion.getElement().getNom() + 
-						", alors qu'il est trop eloigne !\nDistance = " + distance);
-			}
-		}
-		
-		return res;
-	}
-	
 	
 	
 	
