@@ -22,6 +22,7 @@ public abstract class StrategiePersonnage {
 	protected Console console;
 	
 
+	
 	/**
 	 * Cree un personnage, la console associe et sa strategie.
 	 * @param ipArene ip de communication avec l'arene
@@ -49,6 +50,16 @@ public abstract class StrategiePersonnage {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+	
+	
 	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
 	// une proposition de strategie (simple) est donnee ci-dessous
 	/** 
