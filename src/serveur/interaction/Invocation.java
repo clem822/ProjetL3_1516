@@ -34,7 +34,7 @@ public class Invocation {
 	private VuePersonnage personnage;
 
 	/**
-	 * Nombre de sbires a� invoquer
+	 * Nombre de sbires a invoquer
 	 */
 	private int nbSbires;
 
@@ -50,7 +50,7 @@ public class Invocation {
 		try {
 			arene.incrementeCaractElement(personnage, Caracteristique.MANA, -80);
 		} catch (RemoteException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 		

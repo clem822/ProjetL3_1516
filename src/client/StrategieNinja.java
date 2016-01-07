@@ -92,8 +92,7 @@ public class StrategieNinja extends StrategiePersonnage {
 					console.setPhrase("Je ramasse une potion");
 					arene.ramassePotion(refRMI, refCible);
 
-				}
-					else { // personnage
+				}else { // personnage
 					// duel
 						console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
 						arene.lanceAttaque(refRMI, refCible);						

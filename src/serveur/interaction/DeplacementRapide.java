@@ -67,7 +67,7 @@ public class DeplacementRapide {
 	}
 
 	/**
-	 * Deplace ce sujet d'une case en direction de la case donnee.
+	 * Deplace ce sujet d'une ou plusieur(en fonction de la vitesse de celui qui ce déplace) case en direction de la case donnee.
 	 * @param objectif case cible
 	 * @throws RemoteException
 	 */
