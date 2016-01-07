@@ -86,6 +86,11 @@ public class AreneJPanel extends JPanel {
 	 * Vrai si le compte a rebours a demarre.
 	 */
 	private boolean compteARebours = false;
+	
+	/**
+	 * Numero de la carte utilisee
+	 */
+	private int map = 1;
 
 	/**
 	 * Cree un panel affichant l'arene.
@@ -128,8 +133,23 @@ public class AreneJPanel extends JPanel {
 			g.setFont(of);				
 		}
 		try {
-
-		      Image img = ImageIO.read(new File("images/fondArene.png"));
+			  
+			  Image img = ImageIO.read(new File("images/fondArene1.png")); //en cas de numero de map invalide
+			  switch(map) {
+			  	case 1 :{
+			  		img = ImageIO.read(new File("images/fondArene1.png"));
+			  		break;
+			  	}
+			  	case 2 :{
+			  		img = ImageIO.read(new File("images/areneSable.png"));
+			  		break;
+			  	}
+			  	case 3 :{
+			  		img = ImageIO.read(new File("images/arenePierre.png"));
+			  		break;
+			  	}
+			  	
+			  }
 
 
 		      //Pour une image de fond
@@ -154,7 +174,7 @@ public class AreneJPanel extends JPanel {
 		if (compteARebours) {
 			g.setColor(new Color(0, 0, 0, 255));
 			Font of = g.getFont();
-			g.setFont(new Font("Helvetica", Font.BOLD, 150));
+			g.setFont(new Font("Arial", Font.BOLD, 150));
 			
 			if (decompte <= 0) {
 				g.drawString("GO !", (rect.width / 2) - 150, (rect.height / 2) + 30);
@@ -324,6 +344,7 @@ public class AreneJPanel extends JPanel {
 		
 		// affiche au dessus du point ses informations
 		String s = vueElement.getElement().getNom();
+		g.setFont(new Font("Helvetica", Font.BOLD, 15));
 		int stringWidth = (int) g.getFontMetrics().getStringBounds(s, g).getWidth();
 		int stringHeight = (int) g.getFontMetrics().getStringBounds(s, g).getHeight();
 		int start = (stringWidth/2) - (ELEMENT_SIZE/2);
@@ -494,6 +515,15 @@ public class AreneJPanel extends JPanel {
 	public void setAffichageJauge(boolean affichage) {
 		jaugesAffichees = affichage;
 	}
+	
+	/**
+	 * Definie la carte utilisee
+	 * @param map carte choisie
+	 */
+	public void setMap(int map) {
+		this.map = map;
+	}
+
 
 	/**
 	 * Renvoie la position dans l'arene correspondant a une position cliquee 
