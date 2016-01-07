@@ -40,7 +40,8 @@ public class StrategieNinja extends StrategiePersonnage {
 	}
 
 	/** 
-	 * Decrit la strategie.
+	 * Decrit la strategie. Un ninja ne peut être ralenti par les potions.
+	 *  Sa vitesse sera toujours au moins 2.
 	 * Les methodes pour evoluer dans le jeu doivent etre les methodes RMI
 	 * de Arene et de ConsolePersonnage. 
 	 * @param voisins element voisins de cet element (elements qu'il voit)

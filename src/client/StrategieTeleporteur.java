@@ -111,13 +111,12 @@ public class StrategieTeleporteur extends StrategiePersonnage {
 				// je vais vers le plus proche personnage
 				if (elemPlusProche instanceof Personnage) {
 		
-						// Il se base selon la vie de l'adversaie et non pas sa
-						// force.
+						// Il se base selon la vie de l'adversaie et non pas sa force.
 						if (elemPlusProche.getCaract(Caracteristique.VIE) > arene.elementFromRef(refRMI).getCaract(Caracteristique.VIE)) {
 							if (arene.elementFromRef(refRMI).getCaract(Caracteristique.MANA) > 24) {
 								console.setPhrase("Il est trop fort. Je dois me teleporter ailleurs. . " + elemPlusProche.getNom());
 								arene.deplaceTeleportation(refRMI, 0);
-								arene.regenerationMana(refRMI, -25);
+								arene.regenerationMana(refRMI, -24);
 							} else {
 								console.setPhrase("Il est trop fort. Je dois fuir. " + elemPlusProche.getNom());
 								arene.Fuite(refRMI, refCible);
