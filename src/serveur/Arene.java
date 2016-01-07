@@ -25,6 +25,7 @@ import serveur.element.Invocateur;
 import serveur.element.Personnage;
 import serveur.element.Potion;
 import serveur.element.Sbire;
+import serveur.element.Teleporteur;
 import serveur.element.Ninja;
 import serveur.interaction.DeplacementTeleleportation;
 import serveur.interaction.RegenerationMana;
@@ -1256,9 +1257,14 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 			
 		} 
 		
-		// Si la caract�ristique  vitesse est inf�rieure � 2 et qu'en plus notre personnage est un ninja alors la vitesse reste � 2.
+		// Si la caracteristique  vitesse est inferieure a 2 et qu'en plus notre personnage est un ninja alors la vitesse reste a 2.
 		if (( carac == Caracteristique.VITESSE ) && (increment < 2) && (pers instanceof Ninja))
 			increment = 2;
+		
+		
+				if (( carac == Caracteristique.VITESSE )  && (pers instanceof Teleporteur))
+					increment = 1;
+		
 		
 			// increment de la caracteristique
 			pers.incrementeCaract(carac, increment);
