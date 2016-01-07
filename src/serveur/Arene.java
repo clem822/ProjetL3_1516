@@ -1198,6 +1198,15 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		
 		return true;
 	}
+	
+	@Override
+	public boolean incrINVISIBILITE(int refRMI, int i) throws RemoteException{
+		
+		VuePersonnage pCible = personnages.get(refRMI);
+		this.incrementeCaractElement(pCible, Caracteristique.INVISIBILITE, i);
+		
+		return true;
+	}
 
 	/**
 	 * Ajoute l'increment donne a la caracteristique donne de l'element 

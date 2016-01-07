@@ -11,12 +11,10 @@ import java.util.HashMap;
 
 
 import logger.LoggerProjet;
-import serveur.Arene;
 import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Guerrier;
-import serveur.element.Personnage;
 import serveur.element.Potion;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
@@ -90,7 +88,7 @@ public class StrategieGuerrier extends StrategiePersonnage {
 			//Caracteristique vitesse de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			// Si le voisin est invisible, on se dirige aléatoirement
+			// Si le voisin est invisible, on se dirige alï¿½atoirement
 			if (voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI));
 					
 			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
@@ -123,6 +121,9 @@ public class StrategieGuerrier extends StrategiePersonnage {
 				console.setPhrase("Un plaisir!");
 				arene.soin(refRMI, 40, 20);
 		}
+		
+		if (arene.elementFromRef(refRMI).getCaract(Caracteristique.INVISIBILITE) != 0 )
+			arene.incrINVISIBILITE(refRMI, -1);
 	}
 
 }

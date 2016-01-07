@@ -83,13 +83,13 @@ public class StrategieMage extends StrategiePersonnage {
 
 				
 				
-				//Caractéristique vitesse de l'adversaire
+				//Caractï¿½ristique vitesse de l'adversaire
 				int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 				
-				// Si le voisin est invisible, on se dirige aléatoirement
+				// Si le voisin est invisible, on se dirige alï¿½atoirement
 				if (voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI));
 					
-				if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION_DIST) { // si suffisamment proches
+				else if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION_DIST) { // si suffisamment proches
 
 				if(distPlusProche < 4 &&  moi.getCaract(Caracteristique.VIE) < 15) { // panique en cas de mort proche
 					console.setPhrase("A L'AIDE...");
@@ -139,6 +139,8 @@ public class StrategieMage extends StrategiePersonnage {
 		// regeneration passive de mana
 		arene.regenerationMana(refRMI,3);		
 	
+		if (arene.elementFromRef(refRMI).getCaract(Caracteristique.INVISIBILITE) != 0 )
+			arene.incrINVISIBILITE(refRMI, -1);
 
 	
 	}

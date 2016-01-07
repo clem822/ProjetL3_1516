@@ -3,15 +3,12 @@ package client;
 import java.awt.Point;
 import java.rmi.RemoteException;
 import java.util.HashMap;
-import java.util.Hashtable;
 
 import serveur.IArene;
-import serveur.Arene;
 import serveur.element.Element;
 import client.controle.Console;
 import logger.LoggerProjet;
 import serveur.element.Personnage;
-import serveur.vuelement.VuePersonnage;
 
 /**
  * Strategie d'un personnage. 
@@ -65,7 +62,8 @@ public abstract class StrategiePersonnage {
 	//Si la reference est un personnage et qu'en plus son invisibilite est a 1 alors je ne l'attaque pas car je ne peux pas attaquer en �tant invisible.		
 	public boolean voisinEstInvisible(int invisibilite, Element elemPlusProche, IArene uneArene,  int refRMI) throws RemoteException {
 	
-		if ((invisibilite == 1) && (elemPlusProche instanceof Personnage)) {	
+		
+		if ((invisibilite != 0) && (elemPlusProche instanceof Personnage)) {	
 			uneArene.deplaceRapidement(refRMI, 0);
 			console.setPhrase("Je ne peux qu'errer.");
 			return true;

@@ -11,7 +11,6 @@ import logger.LoggerProjet;
 import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
-import serveur.element.Personnage;
 import serveur.element.Potion;
 import serveur.element.Sbire;
 import utilitaires.Calculs;
@@ -79,10 +78,10 @@ public class StrategieSbire extends StrategiePersonnage {
 			Element elemPlusProche = arene.elementFromRef(refCible);
 			
 			
-			//Caractéristique vitesse de l'adversaire
+			//Caractï¿½ristique vitesse de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			// Si le voisin est invisible, on se dirige aléatoirement
+			// Si le voisin est invisible, on se dirige alï¿½atoirement
 			if (voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI));
 			
 			
@@ -114,5 +113,7 @@ public class StrategieSbire extends StrategiePersonnage {
 				
 			}
 		}
+		if (arene.elementFromRef(refRMI).getCaract(Caracteristique.INVISIBILITE) != 0 )
+			arene.incrINVISIBILITE(refRMI, -1);
 	}
 }

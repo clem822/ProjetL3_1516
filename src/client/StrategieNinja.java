@@ -40,7 +40,7 @@ public class StrategieNinja extends StrategiePersonnage {
 	}
 
 	/** 
-	 * Decrit la strategie. Un ninja ne peut être ralenti par les potions.
+	 * Decrit la strategie. Un ninja ne peut ï¿½tre ralenti par les potions.
 	 *  Sa vitesse sera toujours au moins 2.
 	 * Les methodes pour evoluer dans le jeu doivent etre les methodes RMI
 	 * de Arene et de ConsolePersonnage. 
@@ -75,18 +75,18 @@ public class StrategieNinja extends StrategiePersonnage {
 			Element elemPlusProche = arene.elementFromRef(refCible);
 			Element moi = arene.elementFromRef(refRMI);
 						
-			//Caractéristique invisibilité de l'adversaire
+			//Caractï¿½ristique invisibilitï¿½ de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
 			
-			// Si le voisin est invisible, on se dirige aléatoirement
+			// Si le voisin est invisible, on se dirige alï¿½atoirement
 			if (voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI));
-			 if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
+			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if (elemPlusProche instanceof Poison){//si c'est un poison je la fuit
 					console.setPhrase("Je n'aime pas ce poison");
 					arene.deplaceRapidement(refRMI, 0);	
-				}//si ce n'est pas un poison et que prendre l'élément me tue pas, je le ramasse
+				}//si ce n'est pas un poison et que prendre l'ï¿½lï¿½ment me tue pas, je le ramasse
 				else if(elemPlusProche instanceof Potion && elemPlusProche.getCaract(Caracteristique.VIE)>-(moi.getCaract(Caracteristique.VIE))) { // potion
 					// ramassage
 					console.setPhrase("Je ramasse une potion");
@@ -114,7 +114,7 @@ public class StrategieNinja extends StrategiePersonnage {
 					}else{
 							
 							if (moi.getCaract(Caracteristique.MANA )>=30){
-								console.setPhrase("Je me téléporte, il est trop fort pour moi . " + elemPlusProche.getNom());
+								console.setPhrase("Je me tï¿½lï¿½porte, il est trop fort pour moi . " + elemPlusProche.getNom());
 								arene.deplaceTeleportation(refRMI, 0);
 								arene.regenerationMana(refRMI, -30);
 								
@@ -143,7 +143,10 @@ public class StrategieNinja extends StrategiePersonnage {
 					
 				}
 			
-		}	}
+		}	
+		}
+		 if (arene.elementFromRef(refRMI).getCaract(Caracteristique.INVISIBILITE) != 0 )
+				arene.incrINVISIBILITE(refRMI, -1);
 		
 	}
 		

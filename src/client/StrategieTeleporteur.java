@@ -78,10 +78,10 @@ public class StrategieTeleporteur extends StrategiePersonnage {
 			//Caracteristique invisibilite de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			// Si le voisin est invisible, on se dirige aléatoirement
+			// Si le voisin est invisible, on se dirige alï¿½atoirement
 			if (voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI));
 			
-			if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
+			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if (elemPlusProche instanceof Potion) { // potion
 					// ramassage
@@ -134,6 +134,8 @@ public class StrategieTeleporteur extends StrategiePersonnage {
 			}
 			// regeneration passive de mana
 			arene.regenerationMana(refRMI, 2);
+			if (arene.elementFromRef(refRMI).getCaract(Caracteristique.INVISIBILITE) != 0 )
+				arene.incrINVISIBILITE(refRMI, -1);
 		}
 		
 	}

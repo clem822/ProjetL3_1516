@@ -228,6 +228,14 @@ public interface IArene extends Remote {
 	 */
 	public boolean regenerationMana(int refRMI, int mana) throws RemoteException;
 	
+	/**
+	 * incremente la caracteristique INVISIBILITE
+	 * @param refRMI reference RMI de la cible
+	 * @param i montant de l'incrementation
+	 * @return vrai si l'action a bien eu lieu, faux sinon
+	 * @throws RemoteException
+	 */
+	public boolean incrINVISIBILITE(int refRMI, int i) throws RemoteException;
 	
 	/**
 	 * Execute la vampirisation entre le personnage correspondant a la console donnee 

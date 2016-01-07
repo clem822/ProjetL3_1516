@@ -46,8 +46,8 @@ public class CoupDeHache extends Duel {
 			// ejection du defenseur
 			defenseur.setPosition(positionEjection);
 			
-			if(pAttaquant.getCaract(Caracteristique.INVISIBILITE) == 1) {
-				arene.incrementeCaractElement(attaquant, Caracteristique.INVISIBILITE,-1);
+			if(pAttaquant.getCaract(Caracteristique.INVISIBILITE) != 0) {
+				arene.incrementeCaractElement(attaquant, Caracteristique.INVISIBILITE,-pAttaquant.getCaract(Caracteristique.INVISIBILITE));
 			}
 
 			// degats
