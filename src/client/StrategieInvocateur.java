@@ -64,14 +64,8 @@ public class StrategieInvocateur extends StrategiePersonnage {
 		}
 		Element moi = arene.elementFromRef(refRMI);
 
-		//Invoquer des sbires si le mana est suffisant
-		if (moi.getCaract(Caracteristique.MANA) >= 80)
-		{
-			console.setPhrase("J'invoque des sbires !");
-			arene.invoquer(refRMI, Invocateur.NB_SBIRES);
-
-		}
-		else if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
+		
+		if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
 			console.setPhrase("J'erre...");
 			arene.deplaceRapidement(refRMI, 0); 
 			
@@ -82,13 +76,18 @@ public class StrategieInvocateur extends StrategiePersonnage {
 			Element elemPlusProche = arene.elementFromRef(refCible);
 			
 			
-			//Caractéristique vitesse de l'adversaire
+			//Caracteristique vitesse de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI);
+			//L'invocateur ne peut pas acquerir l'invisibilite mais quand meme prendre les potions pour empï¿½cher les autres adversaires de les prendre.		
+			if ((invAdv == 1) && (elemPlusProche instanceof Personnage))
+			{
+				console.setPhrase("Je ne peux qu'errer.");																	
+				arene.deplaceRapidement(refRMI, 0);	
+			}	
 			
-			 //Si le voisin est un sbire ayant la même refRMI alors il erre car c'est un de ses sbires
-			if (elemPlusProche instanceof Sbire && ((Sbire)elemPlusProche).getMaitre() == refRMI)
+			 //Si le voisin est un sbire ayant la meme refRMI alors il erre car c'est un de ses sbires
+			else if (elemPlusProche instanceof Sbire && ((Sbire)elemPlusProche).getMaitre() == refRMI)
 			{
 				console.setPhrase("J'erre...");
 				arene.deplaceRapidement(refRMI, 0);
@@ -106,10 +105,17 @@ public class StrategieInvocateur extends StrategiePersonnage {
 					arene.lanceAttaque(refRMI, refCible);
 				}
 				
-			} else { // si voisins, mais plus eloignes
+			} else { //Invoquer des sbires si le mana est suffisant
+				if (moi.getCaract(Caracteristique.MANA) >= 80 && distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION + 10)
+				{
+					console.setPhrase("J'invoque des sbires !");
+					arene.invoquer(refRMI, Invocateur.NB_SBIRES);
+
+				} else { // si voisins, mais plus eloignes
 				// je vais vers le plus proche
 				console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
 				arene.deplaceRapidement(refRMI, refCible);
+				}
 			}
 		}
 	}
