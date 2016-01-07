@@ -83,15 +83,9 @@ public class StrategieVampire extends StrategiePersonnage {
 			//Caractï¿½ristique vitesse de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			//Si je suis dï¿½jï¿½ invisible ou que la rï¿½fï¿½rence est un personnage et qu'en plus son invisibilitï¿½ est ï¿½ 1 alors je ne l'attaque pas car je ne peux pas attaquer en ï¿½tant invisible.
-			//De plus il ne peut pas ramasser les potions en ï¿½tant invisible.			
-			if (((invAdv == 1) && (elemPlusProche instanceof Personnage))  || (moi.getCaract(Caracteristique.INVISIBILITE) == 1 )) 
-			{
-				console.setPhrase("Je ne peux qu'errer.");																	
-				arene.deplaceRapidement(refRMI, 0);	
-			}
+			voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI);
 			
-			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
+			if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if(elemPlusProche instanceof Potion) { // potion
 					// ramassage
@@ -100,14 +94,18 @@ public class StrategieVampire extends StrategiePersonnage {
 
 				} else { // personnage
 					// Vampirise 
-					console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
 					
-					//si il lui reste moins de 50 hp alors il peut utiliser sa compétence active.
-					if (moi.getCaract(Caracteristique.VIE) < 50)
+					//si il lui reste moins de 50 hp alors il peut utiliser sa compï¿½tence active.
+					if (moi.getCaract(Caracteristique.VIE) < 30) {
+						console.setPhrase("J'utilise vampirisme contre " + elemPlusProche.getNom());
 						arene.Vampirise(refRMI, refCible);
+					}
+						
 					// sinon il attaque normalement
-					else
-						arene.lanceAttaque(refRMI, refCible);	
+					else {
+						console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
+						arene.lanceAttaque(refRMI, refCible);
+					}
 				}
 				
 			} else { // si voisins, mais plus eloignes

@@ -1126,10 +1126,10 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 			Point pMoi = this.getPosition(refRMI);
 			Point pAFuir = this.getPosition(refRMIaFuir);
 			Point objectif = pMoi;
-			if(pMoi.getX()-pAFuir.getX() > 0) objectif.x ++;
-			else objectif.x --;
-			if(pMoi.getY()-pAFuir.getY() > 0) objectif.y ++;
-			else objectif.y --;
+			if(pMoi.getX()-pAFuir.getX() > 0) objectif.x += 4;
+			else objectif.x -= 4;
+			if(pMoi.getY()-pAFuir.getY() > 0) objectif.y += 4;
+			else objectif.y -= 4;
 			// sinon, on tente de jouer l'interaction
 			new DeplacementRapide(client, getVoisins(refRMI)).seDirigeVers(objectif);
 			client.executeAction();
@@ -1229,7 +1229,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 			
 		} 
 		
-		// Si la caractéristique  vitesse est inférieure à 2 et qu'en plus notre personnage est un ninja alors la vitesse reste à 2.
+		// Si la caractï¿½ristique  vitesse est infï¿½rieure ï¿½ 2 et qu'en plus notre personnage est un ninja alors la vitesse reste ï¿½ 2.
 		if (( carac == Caracteristique.VITESSE ) && (increment < 2) && (pers instanceof Ninja))
 			increment = 2;
 		
