@@ -1132,6 +1132,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 			else objectif.y = Integer.max(objectif.y-4,0);;
 			objectif = Calculs.restreintPositionArene(objectif); 
 			// sinon, on tente de jouer l'interaction
+			
 			new DeplacementRapide(client, getVoisins(refRMI)).seDirigeVers(objectif);
 			client.executeAction();
 
