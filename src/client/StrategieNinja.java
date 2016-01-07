@@ -75,7 +75,7 @@ public class StrategieNinja extends StrategiePersonnage {
 			Element elemPlusProche = arene.elementFromRef(refCible);
 			Element moi = arene.elementFromRef(refRMI);
 						
-			//Caract�ristique invisibilit� de l'adversaire
+			//Caract�ristique invisibilite de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
 			

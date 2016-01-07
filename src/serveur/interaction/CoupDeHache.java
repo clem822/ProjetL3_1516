@@ -55,7 +55,7 @@ public class CoupDeHache extends Duel {
 				arene.incrementeCaractElement(attaquant, Caracteristique.MANA, 10);
 				arene.incrementeCaractElement(defenseur, Caracteristique.VIE, -perteVie);
 				
-				logs(Level.INFO, Constantes.nomRaccourciClient(attaquant) + " colle une beigne ("
+				logs(Level.INFO, Constantes.nomRaccourciClient(attaquant) + " decoupe ("
 						+ perteVie + " points de degats) a " + Constantes.nomRaccourciClient(defenseur));
 			}
 			

@@ -102,6 +102,8 @@ public class Calculs {
 
 		return res;
 	}
+	
+	
 
 	/**
 	 * Cherche l'element le plus proche vers lequel se didiger, dans la limite

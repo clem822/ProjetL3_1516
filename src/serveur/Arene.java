@@ -1126,10 +1126,11 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 			Point pMoi = this.getPosition(refRMI);
 			Point pAFuir = this.getPosition(refRMIaFuir);
 			Point objectif = pMoi;
-			if(pMoi.getX()-pAFuir.getX() > 0) objectif.x += 4;
-			else objectif.x -= 4;
-			if(pMoi.getY()-pAFuir.getY() > 0) objectif.y += 4;
-			else objectif.y -= 4;
+			if(pMoi.getX()-pAFuir.getX() > 0) objectif.x = Integer.min(objectif.x+4,100);
+			else objectif.x = Integer.max(objectif.y-4,0);
+			if(pMoi.getY()-pAFuir.getY() > 0) objectif.y = Integer.min(objectif.y+4,100);
+			else objectif.y = Integer.max(objectif.y-4,0);;
+			objectif = Calculs.restreintPositionArene(objectif); 
 			// sinon, on tente de jouer l'interaction
 			new DeplacementRapide(client, getVoisins(refRMI)).seDirigeVers(objectif);
 			client.executeAction();
