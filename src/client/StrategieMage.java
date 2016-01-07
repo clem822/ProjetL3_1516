@@ -68,7 +68,7 @@ public class StrategieMage extends StrategiePersonnage {
 			
 			if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
 				if(moi.getCaract(Caracteristique.MANA) > 29 && moi.getCaract(Caracteristique.ARMURE) < 21){
-					arene.ajouteArmure(refRMI, 10);
+					arene.ajouteArmure(refRMI, 30 - moi.getCaract(Caracteristique.ARMURE));
 					arene.regenerationMana(refRMI,-30);
 				} else {
 					console.setPhrase("J'erre...");
@@ -121,7 +121,7 @@ public class StrategieMage extends StrategiePersonnage {
 						console.setPhrase("Je ramasse une potion");
 						arene.ramassePotion(refRMI, refCible);
 					} else if(moi.getCaract(Caracteristique.MANA) > 29 && moi.getCaract(Caracteristique.ARMURE) < 21){
-						arene.ajouteArmure(refRMI, 10);
+						arene.ajouteArmure(refRMI, 30 - moi.getCaract(Caracteristique.ARMURE));
 						arene.regenerationMana(refRMI,-30);
 					}else{ // si voisins, mais plus eloignes
 						// je vais vers le plus proche
@@ -132,13 +132,17 @@ public class StrategieMage extends StrategiePersonnage {
 					// je vais vers le plus proche
 					console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
 					arene.deplaceRapidement(refRMI, refCible);
-				}
+				} 
+			} else { // si voisins, mais plus eloignes
+				// je vais vers le plus proche
+				console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
+				arene.deplaceRapidement(refRMI, refCible);
 			}
 			
-			// regeneration passive de mana
-			arene.regenerationMana(refRMI,3);
 		}
-	
+			
+		// regeneration passive de mana
+		arene.regenerationMana(refRMI,3);		
 	
 
 	

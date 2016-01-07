@@ -36,10 +36,9 @@ public class StrategieVampire extends StrategiePersonnage {
 	 * @param logger gestionnaire de log
 	 */
 	public StrategieVampire(String ipArene, int port, String ipConsole, 
-			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
-			int nbTours, Point position, LoggerProjet logger) {
+			String nom, String groupe, int nbTours, Point position, LoggerProjet logger) {
 		
-		super(ipArene, port, ipConsole, new Vampire(nom, groupe, caracts), nbTours, position, logger);
+		super(ipArene, port, ipConsole, new Vampire(nom, groupe), nbTours, position, logger);
 	}
 
 	// TODO etablir une strategie afin d'evoluer dans l'arene de combat

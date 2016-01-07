@@ -77,7 +77,7 @@ public class LanceVampire {
 
 			Point position = Calculs.positionAleatoireArene();
 			
-			new StrategieVampire(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+			new StrategieVampire(ipArene, port, ipConsole, nom, groupe, nbTours, position, logger);
 			logger.info("Lanceur", "Creation du personnage reussie");
 			
 		} catch (Exception e) {

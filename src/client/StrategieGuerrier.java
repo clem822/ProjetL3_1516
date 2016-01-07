@@ -86,11 +86,11 @@ public class StrategieGuerrier extends StrategiePersonnage {
 
 			Element elemPlusProche = arene.elementFromRef(refCible);
 			
-			//Caract�ristique vitesse de l'adversaire
+			//Caracteristique vitesse de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			//Si je suis d�j� invisible ou que la r�f�rence est un personnage et qu'en plus son invisibilit� est � 1 alors je ne l'attaque pas car je ne peux pas attaquer en �tant invisible.
-			//De plus il ne peut pas ramasser les potions en �tant invisible.			
+			//Si je suis deja invisible ou que la reference est un personnage et qu'en plus son invisibilite est a 1 alors je ne l'attaque pas car je ne peux pas attaquer en �tant invisible.
+			//De plus il ne peut pas ramasser les potions en etant invisible.			
 			if (((invAdv == 1) && (elemPlusProche instanceof Personnage))  || (moi.getCaract(Caracteristique.INVISIBILITE) == 1 )) 
 			{
 				console.setPhrase("Je ne peux qu'errer.");																	
@@ -108,8 +108,8 @@ public class StrategieGuerrier extends StrategiePersonnage {
 				} else { // personnage
 					//peut faire passer l'armure d'un personnage a 10 
 					if (elemPlusProche.getCaract(Caracteristique.ARMURE) > 10 && moi.getCaract(Caracteristique.MANA) > 14) {
-						arene.ajouteArmure(refRMI, elemPlusProche.getCaract(Caracteristique.ARMURE)-10);
-						arene.regenerationMana(refRMI,-14);
+						arene.ajouteArmure(refCible, -(elemPlusProche.getCaract(Caracteristique.ARMURE)-10));
+						arene.regenerationMana(refRMI,-15);
 					}else {
 						// Coup de Hache
 						console.setPhrase("Je vais ecraser " + elemPlusProche.getNom());

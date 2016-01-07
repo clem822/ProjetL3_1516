@@ -247,14 +247,49 @@ public class IHM extends JFrame implements Runnable {
 				arenePanel.setAffichageJauge(cb.isSelected());
 			}
 		});
-		
-		
-
-
 
 		affichageMenu.add(affichageJaugeVie);
-		// affichageMenu.add(controleAction);
 		menuBar.add(affichageMenu);
+		
+		
+		
+		JMenu mapMenu = new JMenu("Carte");
+		
+		Action map1 = new AbstractAction("Verdure") {
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent ae) {
+				arenePanel.setMap(1);
+			}
+		};
+		
+		mapMenu.add(map1);
+		
+		Action map2 = new AbstractAction("Sable") {
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent ae) {
+				arenePanel.setMap(2);
+			}
+		};
+		
+		mapMenu.add(map2);
+		
+		Action map3 = new AbstractAction("Pierre") {
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent ae) {
+				arenePanel.setMap(3);
+			}
+		};
+		
+		mapMenu.add(map3);
+		menuBar.add(mapMenu);
+
+		
+		
+		// affichageMenu.add(controleAction);
+		
 		setJMenuBar(menuBar);
 	}
 

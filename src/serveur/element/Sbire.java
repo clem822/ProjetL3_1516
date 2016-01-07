@@ -18,6 +18,12 @@ public class Sbire extends Personnage{
 	private static final long serialVersionUID = 1L;
 	int maitre;
 
+	/**
+	 * Cree un sbire avec un nom et un groupe.
+	 * @param nom du sbire
+	 * @param groupe d'etudiants du personnage
+	 * @param maitre ref du maitre
+	 */
 	public Sbire(String nom, String groupe, int maitre) {
 		super(nom, groupe, caract());
 		// TODO Auto-generated constructor stub

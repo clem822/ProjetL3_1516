@@ -27,6 +27,8 @@ import serveur.element.Sbire;
 import serveur.interaction.DeplacementTeleleportation;
 
 
+import serveur.interaction.RegenerationMana;
+import serveur.interaction.Vampirise;
 import serveur.interaction.BouleDeFeu;
 import serveur.interaction.CoupDeHache;
 import serveur.interaction.Deplacement;
@@ -941,6 +943,86 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		return res;
 	}
 	
+
+	
+	
+	
+	public boolean Vampirise(int refRMI, int refRMIAdv) throws RemoteException {
+		boolean res = false;
+		
+		VuePersonnage client = personnages.get(refRMI);
+		VuePersonnage clientAdv = personnages.get(refRMIAdv);
+		
+		if (personnages.get(refRMI).isActionExecutee()) {
+			// si une action a deja ete executee
+			logActionDejaExecutee(refRMI);
+			
+		} else {
+			// sinon, on tente de jouer l'interaction
+			IConsole console = consoleFromRef(refRMI);
+			IConsole consoleAdv = consoleFromRef(refRMIAdv);
+			
+			int distance = Calculs.distanceChebyshev(personnages.get(refRMI).getPosition(), 
+					personnages.get(refRMIAdv).getPosition());
+
+			// on teste la distance entre les personnages
+			if (distance <= Constantes.DISTANCE_MIN_INTERACTION) {
+				Personnage pers = (Personnage) elementFromRef(refRMI);
+				Personnage persAdv = (Personnage) elementFromRef(refRMIAdv);
+				
+				// on teste que les deux personnages soient en vie
+				if (pers.estVivant() && persAdv.estVivant()) {
+					console.log(Level.INFO, Constantes.nomClasse(this), 
+							"Je decoupe " + nomRaccourciClient(refRMIAdv));
+					consoleAdv.log(Level.INFO, Constantes.nomClasse(this), 
+							"Je me fait massacrer par " + nomRaccourciClient(refRMI));
+					
+					logger.info(Constantes.nomClasse(this), nomRaccourciClient(refRMI) + 
+							" attaque " + nomRaccourciClient(consoleAdv.getRefRMI()));
+			
+					new Vampirise(this, client, clientAdv).interagit();
+					personnages.get(refRMI).executeAction();
+					
+					// si l'adversaire est mort
+					if (!persAdv.estVivant()) {
+						setPhrase(refRMI, "Je tue " + nomRaccourciClient(consoleAdv.getRefRMI()));
+						console.log(Level.INFO, Constantes.nomClasse(this), 
+								"Je tue " + nomRaccourciClient(refRMI));
+						
+						logger.info(Constantes.nomClasse(this), nomRaccourciClient(refRMI) + 
+								" tue " + nomRaccourciClient(consoleAdv.getRefRMI()));
+					}
+					
+					res = true;
+				} else {
+					logger.warning(Constantes.nomClasse(this), nomRaccourciClient(refRMI) + 
+							" a tente d'interagir avec "+nomRaccourciClient(refRMIAdv)+", alors qu'il est mort...");
+					
+					console.log(Level.WARNING, Constantes.nomClasse(this), 
+							nomRaccourciClient(refRMIAdv) + " est deja mort !");
+				}
+			} else {
+				logger.warning(Constantes.nomClasse(this), nomRaccourciClient(refRMI) + 
+						" a tente d'interagir avec "+nomRaccourciClient(refRMIAdv) + 
+						", alors qu'il est trop eloigne... Distance de chebyshev = " + distance);
+				
+				console.log(Level.WARNING, "AVERTISSEMENT ARENE", 
+						nomRaccourciClient(refRMIAdv) + " est trop eloigne !\nDistance = " + distance);
+			}
+		}
+		
+		return res;
+	}
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
 	@Override
 	public boolean deplace(int refRMI, int refCible) throws RemoteException {		
 		boolean res = false;
@@ -1062,15 +1144,15 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		// TODO Auto-generated method stub
 		boolean res = false;
 		
-		VuePersonnage invoqueur = personnages.get(refRMI);
+		VuePersonnage invocateur = personnages.get(refRMI);
 		
-		if (invoqueur.isActionExecutee()) {
+		if (invocateur.isActionExecutee()) {
 			// si une action a deja ete executee
 			logActionDejaExecutee(refRMI);
 		} else {
 			// sinon, on tente de jouer l'interaction
-			new Invocation(this, invoqueur, nbSbires).invoquerSbires();
-			invoqueur.executeAction();
+			new Invocation(this, invocateur, nbSbires).invoquerSbires();
+			invocateur.executeAction();
 
 			res = true;
 		}
@@ -1274,11 +1356,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		return res;
 	}
 
-	@Override
-	public boolean Conduire(int refRMI, int refPotion) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	@Override
 	public boolean soin(int refRMI, int mana, int pv) throws RemoteException {
@@ -1292,11 +1370,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		return false;
 	}
 
-	@Override
-	public boolean Vampirise(int refRMI, int refRMIAdv) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 
 	@Override
