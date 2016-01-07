@@ -17,7 +17,7 @@ import utilitaires.Constantes;
 
 public class StrategieNinja extends StrategiePersonnage {
 
-		boolean teleportation=false;
+		
 
 	/**
 	 * Cree un Ninja, la console associe et sa strategie.
@@ -118,7 +118,7 @@ public class StrategieNinja extends StrategiePersonnage {
 						
 					}else{
 							
-							if (moi.getCaract(Caracteristique.MANA )>30){
+							if (moi.getCaract(Caracteristique.MANA )>=30){
 								console.setPhrase("Je me téléporte, il est trop fort pour moi . " + elemPlusProche.getNom());
 								arene.deplaceTeleportation(refRMI, 0);
 								arene.regenerationMana(refRMI, -30);

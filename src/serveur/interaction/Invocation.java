@@ -34,7 +34,7 @@ public class Invocation {
 	private VuePersonnage personnage;
 
 	/**
-	 * Nombre de sbires a  invoquer
+	 * Nombre de sbires aï¿½ invoquer
 	 */
 	private int nbSbires;
 
@@ -45,7 +45,7 @@ public class Invocation {
 		this.nbSbires = nbSbires;
 	}
 	
-	public void invoquerSbires()
+	public void invoquerSbires(int refRMI)
 	{
 		try {
 			arene.incrementeCaractElement(personnage, Caracteristique.MANA, -80);
@@ -77,7 +77,11 @@ public class Invocation {
 				
 				logger.info("Lanceur", "Creation du personnage...");
 				
-				Point position = Calculs.positionAleatoireArene();//a changer pour qu'ils apparaissent pres du perso
+				Point position = arene.getPosition(refRMI);
+				position.x += 2;
+				position.y += (i*3)-6;
+				position = Calculs.restreintPositionArene(position);
+				//Calculs.positionAleatoireArene();//a changer pour qu'ils apparaissent pres du perso
 				
 				new ThreadInvocation(arene, ipArene, port, ipConsole, nom, groupe, nbTours, position, logger, personnage.getRefRMI());
 				logger.info("Lanceur", "Creation du personnage reussie");

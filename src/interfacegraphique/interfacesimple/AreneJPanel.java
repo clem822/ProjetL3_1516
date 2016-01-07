@@ -158,6 +158,10 @@ public class AreneJPanel extends JPanel {
 			  		img = ImageIO.read(new File("images/arenePierre.png"));
 			  		break;
 			  	}
+			  	case 4 :{
+			  		img = ImageIO.read(new File("images/areneFoot.jpg"));
+			  		break;
+			  	}
 			  	
 			  }
 
@@ -305,7 +309,9 @@ public class AreneJPanel extends JPanel {
 			} else if(perso instanceof Sbire){ // Image Sbire
 				Image logo;
 				try {
-					logo = ImageIO.read(new File("images/Sbire.png"));
+					if(map == 4) logo = ImageIO.read(new File("images/Ballon.png"));
+					else logo = ImageIO.read(new File("images/Sbire.png"));
+					
 					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
 
 				} catch (IOException e) {

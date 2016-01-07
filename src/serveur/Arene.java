@@ -1,3 +1,5 @@
+
+
 package serveur;
 
 import java.awt.Point;
@@ -23,6 +25,7 @@ import serveur.element.Invocateur;
 import serveur.element.Personnage;
 import serveur.element.Potion;
 import serveur.element.Sbire;
+import serveur.element.Ninja;
 import serveur.interaction.DeplacementTeleleportation;
 import serveur.interaction.RegenerationMana;
 import serveur.interaction.Vampirise;
@@ -81,7 +84,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 	
 	/**
 	 * Liste des personnages morts. Permet de garder une trace des personnages
-	 * qui ont joué et qui sont maintenant deconnectes. 
+	 * qui ont jouÃ© et qui sont maintenant deconnectes. 
 	 */
 	protected List<VuePersonnage> personnagesMorts = null;
 
@@ -1128,7 +1131,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 			if(pMoi.getY()-pAFuir.getY() > 0) objectif.y ++;
 			else objectif.y --;
 			// sinon, on tente de jouer l'interaction
-			new DeplacementRapide(client, getVoisins(refRMI)).seDirigeVers(objectif);
+			new Deplacement(client, getVoisins(refRMI)).seDirigeVers(objectif);
 			client.executeAction();
 
 			res = true;
@@ -1150,7 +1153,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 			logActionDejaExecutee(refRMI);
 		} else {
 			// sinon, on tente de jouer l'interaction
-			new Invocation(this, invocateur, nbSbires).invoquerSbires();
+			new Invocation(this, invocateur, nbSbires).invoquerSbires(refRMI);
 			invocateur.executeAction();
 
 			res = true;
@@ -1213,13 +1216,22 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		IConsole console = consoleFromRef(refRMI);
 		Personnage pers = vuePersonnage.getElement();
 		
+		
+		
 		if(carac == Caracteristique.VIE && increment < 0) {
 			increment = (increment*(100-pers.getCaract(Caracteristique.ARMURE)))/100;
 		}
 		
-		if (carac == Caracteristique.INVISIBILITE && ((pers instanceof Invocateur ) || (pers instanceof Sbire))) {
+		
+		//Pour pas que l'invocateur ou le sbire puissent devenir invisible
+		if ((carac == Caracteristique.INVISIBILITE) && ((pers instanceof Invocateur ) || (pers instanceof Sbire))) {
+			increment = 0;
 			
-		} else {
+		} 
+		
+		// Si la caractéristique  vitesse est inférieure à 2 et qu'en plus notre personnage est un ninja alors la vitesse reste à 2.
+		if (( carac == Caracteristique.VITESSE ) && (increment < 2) && (pers instanceof Ninja))
+			increment = 2;
 		
 			// increment de la caracteristique
 			pers.incrementeCaract(carac, increment);
@@ -1237,7 +1249,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 							"J'ai gagne " + increment + " points de " + carac);
 				}
 			}
-		}
+		
 	}
 	
 	public LoggerProjet getLogger() {
@@ -1397,3 +1409,4 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 
 	
 }
+
