@@ -126,8 +126,8 @@ public class StrategieNinja extends StrategiePersonnage {
 				}
 				else{
 						if (elemPlusProche instanceof Poison ){
-							console.setPhrase("Je fuis le poison " + elemPlusProche.getNom());
-							arene.Fuite(refRMI, refCible);
+							console.setPhrase("Je ne veux de poison " + elemPlusProche.getNom());
+							arene.deplaceRapidement(refRMI, 0);
 						}
 						else if(elemPlusProche instanceof Potion && elemPlusProche.getCaract(Caracteristique.VIE)>-(moi.getCaract(Caracteristique.VIE))) { // potion
 							// ramassage
@@ -135,8 +135,8 @@ public class StrategieNinja extends StrategiePersonnage {
 							arene.deplaceRapidement(refRMI, refCible);
 						} 
 						else{
-							console.setPhrase("Je fuis cette potion, elle n'est pas bonne pour moi ! " + elemPlusProche.getNom());
-							arene.Fuite(refRMI, refCible);
+							console.setPhrase("Cette potion, elle n'est pas bonne pour moi ! " + elemPlusProche.getNom());
+							arene.deplaceRapidement(refRMI, 0);
 						}
 						
 					
