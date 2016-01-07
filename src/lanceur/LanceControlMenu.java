@@ -58,9 +58,7 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 
 		    container.add(pan, BorderLayout.CENTER );
 		    
-		 /*   pan.add(syst, BorderLayout.NORTH );
-		    pan.add(perso, BorderLayout.CENTER );
-		    pan.add(item, BorderLayout.SOUTH );*/
+		
 		    
 		   
 		    //bouton systeme
