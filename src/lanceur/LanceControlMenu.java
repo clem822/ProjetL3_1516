@@ -186,10 +186,10 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 			  LancePotion.main(arg);
 			  LancePotion.main(arg);
 			  LancePotion.main(arg);
-			/*  LanceInvisibilite.main(arg);  
 			  LanceInvisibilite.main(arg);  
 			  LanceInvisibilite.main(arg);  
-			  LanceInvisibilite.main(arg);  */
+			  LanceInvisibilite.main(arg);  
+			  LanceInvisibilite.main(arg);  
 			
 				
 				LanceBouclier.main(arg);
