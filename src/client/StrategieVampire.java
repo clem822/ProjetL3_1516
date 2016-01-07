@@ -40,7 +40,7 @@ public class StrategieVampire extends StrategiePersonnage {
 		super(ipArene, port, ipConsole, new Vampire(nom, groupe), nbTours, position, logger);
 	}
 
-	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
+
 	// une proposition de strategie (simple) est donnee ci-dessous
 	/** 
 	 * Decrit la strategie.

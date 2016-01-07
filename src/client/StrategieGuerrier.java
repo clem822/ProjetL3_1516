@@ -45,8 +45,7 @@ public class StrategieGuerrier extends StrategiePersonnage {
 		super(ipArene, port, ipConsole, new Guerrier(nom, groupe), nbTours, position, logger);
 	}
 
-	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
-	// une proposition de strategie (simple) est donnee ci-dessous
+
 	/** 
 	 * Decrit la strategie.
 	 * Les methodes pour evoluer dans le jeu doivent etre les methodes RMI
