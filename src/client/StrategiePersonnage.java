@@ -62,16 +62,17 @@ public abstract class StrategiePersonnage {
 	 * 
 	 * 
 	 */
-	//Si je suis deja invisible ou que la reference est un personnage et qu'en plus son invisibilite est a 1 alors je ne l'attaque pas car je ne peux pas attaquer en �tant invisible.
-	//De plus il ne peut pas ramasser les potions en etant invisible.		
-	public void voisinEstInvisible(int invisibilite, Element elemPlusProche, IArene uneArene,  int refRMI) throws RemoteException {
-
-		
-		
+	//Si la reference est un personnage et qu'en plus son invisibilite est a 1 alors je ne l'attaque pas car je ne peux pas attaquer en �tant invisible.		
+	public boolean voisinEstInvisible(int invisibilite, Element elemPlusProche, IArene uneArene,  int refRMI) throws RemoteException {
+	
 		if ((invisibilite == 1) && (elemPlusProche instanceof Personnage)) {	
 			uneArene.deplaceRapidement(refRMI, 0);
 			console.setPhrase("Je ne peux qu'errer.");
+			return true;
 		}
+		
+		else
+			return false;
 
 	}
 	

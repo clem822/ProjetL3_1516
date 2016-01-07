@@ -79,12 +79,8 @@ public class StrategieInvocateur extends StrategiePersonnage {
 			//Caracteristique vitesse de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			//L'invocateur ne peut pas acquerir l'invisibilite mais quand meme prendre les potions pour empï¿½cher les autres adversaires de les prendre.		
-			if ((invAdv == 1) && (elemPlusProche instanceof Personnage))
-			{
-				console.setPhrase("Je ne peux qu'errer.");																	
-				arene.deplaceRapidement(refRMI, 0);	
-			}	
+			// Si le voisin est invisible, on se dirige aléatoirement
+			if (voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI));	
 			
 			 //Si le voisin est un sbire ayant la meme refRMI alors il erre car c'est un de ses sbires
 			else if (elemPlusProche instanceof Sbire && ((Sbire)elemPlusProche).getMaitre() == refRMI)

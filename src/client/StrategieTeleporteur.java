@@ -78,7 +78,8 @@ public class StrategieTeleporteur extends StrategiePersonnage {
 			//Caracteristique invisibilite de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI);
+			// Si le voisin est invisible, on se dirige aléatoirement
+			if (voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI));
 			
 			if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
