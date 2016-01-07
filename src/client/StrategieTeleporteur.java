@@ -133,7 +133,8 @@ public class StrategieTeleporteur extends StrategiePersonnage {
 				}
 			}
 			// regeneration passive de mana
-			arene.regenerationMana(refRMI, 2);
+			if(arene.elementFromRef(refRMI).getCaract(Caracteristique.MANA) <  (Caracteristique.MANA.getMax()*3)/4)
+				arene.regenerationMana(refRMI, 2);
 			if (arene.elementFromRef(refRMI).getCaract(Caracteristique.INVISIBILITE) != 0 )
 				arene.incrINVISIBILITE(refRMI, -1);
 		}

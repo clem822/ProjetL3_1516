@@ -78,10 +78,10 @@ public class StrategieSbire extends StrategiePersonnage {
 			Element elemPlusProche = arene.elementFromRef(refCible);
 			
 			
-			//Caract�ristique vitesse de l'adversaire
+			//Caracteristique vitesse de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			// Si le voisin est invisible, on se dirige al�atoirement
+			// Si le voisin est invisible, on se dirige aleatoirement
 			if (voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI));
 			
 			

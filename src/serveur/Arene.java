@@ -25,6 +25,7 @@ import serveur.element.Invocateur;
 import serveur.element.Personnage;
 import serveur.element.Potion;
 import serveur.element.Sbire;
+import serveur.element.Teleporteur;
 import serveur.element.Ninja;
 import serveur.interaction.DeplacementTeleleportation;
 import serveur.interaction.RegenerationMana;
@@ -1126,11 +1127,29 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 			Point pMoi = this.getPosition(refRMI);
 			Point pAFuir = this.getPosition(refRMIaFuir);
 			Point objectif = pMoi;
-			if(pMoi.getX()-pAFuir.getX() > 0) objectif.x += 4;
-			else objectif.x -= 4;
-			if(pMoi.getY()-pAFuir.getY() > 0) objectif.y += 4;
-			else objectif.y -= 4;
+			if(pMoi.getX()-pAFuir.getX() > 0){ 
+				//objectif.x = Integer.min(objectif.x+4,100); ne marche pas sur certain pc du groupe
+				if(objectif.x +4 > 100) objectif.x = 100;
+				else objectif.x += 4;
+			} else {
+				//objectif.x = Integer.max(objectif.y-4,0);
+				if(objectif.x -4 < 0) objectif.x = 0;
+				else objectif.x -= 4;
+			}
+			if(pMoi.getY()-pAFuir.getY() > 0) { 
+				//objectif.y = Integer.min(objectif.y+4,100);
+				if(objectif.y +4 > 100) objectif.y = 100;
+				else objectif.y += 4;
+			}
+			else{
+				//objectif.y = Integer.max(objectif.y-4,0);
+				if(objectif.y -4 < 0) objectif.y = 0;
+				else objectif.y -= 4;
+				
+			}
+			objectif = Calculs.restreintPositionArene(objectif); 
 			// sinon, on tente de jouer l'interaction
+			
 			new DeplacementRapide(client, getVoisins(refRMI)).seDirigeVers(objectif);
 			client.executeAction();
 
@@ -1238,9 +1257,14 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 			
 		} 
 		
-		// Si la caract�ristique  vitesse est inf�rieure � 2 et qu'en plus notre personnage est un ninja alors la vitesse reste � 2.
+		// Si la caracteristique  vitesse est inferieure a 2 et qu'en plus notre personnage est un ninja alors la vitesse reste a 2.
 		if (( carac == Caracteristique.VITESSE ) && (increment < 2) && (pers instanceof Ninja))
 			increment = 2;
+		
+		
+				if (( carac == Caracteristique.VITESSE )  && (pers instanceof Teleporteur))
+					increment = 1;
+		
 		
 			// increment de la caracteristique
 			pers.incrementeCaract(carac, increment);
