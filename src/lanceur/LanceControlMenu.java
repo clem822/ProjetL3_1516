@@ -125,6 +125,9 @@ public class LanceControlMenu extends JFrame implements ActionListener{
 		 if(arg0.getSource() == b){
 			  LanceArene.main(arg);
 			  LanceIHM.main(arg);
+		 }	 if(arg0.getSource() == b0){
+			  LanceAreneTournoi.main(arg);
+			  LanceIHMTournoi.main(arg);
 		 }
 		 
 		 if(arg0.getSource() == b1){
