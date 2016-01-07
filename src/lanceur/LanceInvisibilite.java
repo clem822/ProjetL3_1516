@@ -1,12 +1,9 @@
 package lanceur;
 
 import java.io.IOException;
-import java.util.HashMap;
-
 import logger.LoggerProjet;
 import serveur.IArene;
-import serveur.element.Caracteristique;
-import serveur.element.Potion;
+import serveur.element.PotionInvisibilite;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
@@ -59,19 +56,9 @@ public class LanceInvisibilite{
 
 			logger.info("Lanceur", "Lancement de la potion sur le serveur...");
 			
-			// caracteristiques de la potion
-			HashMap<Caracteristique, Integer> caractsPotion = new HashMap<Caracteristique, Integer>();
-			
-			//Invisibilité à 1. Les autres caractéristiques à 0
-			caractsPotion.put(Caracteristique.VITESSE, 0);
-			caractsPotion.put(Caracteristique.FORCE, 0);
-			caractsPotion.put(Caracteristique.VIE, 0);
-			caractsPotion.put(Caracteristique.MANA, 0);
-			caractsPotion.put(Caracteristique.INITIATIVE, 0);
-			caractsPotion.put(Caracteristique.INVISIBILITE, 1);
 			
 			// ajout de la potion
-			arene.ajoutePotion(new Potion(nom, groupe, caractsPotion), Calculs.positionAleatoireArene());
+			arene.ajoutePotion(new PotionInvisibilite(nom, groupe), Calculs.positionAleatoireArene());
 			logger.info("Lanceur", "Lancement de la potion reussi");
 			
 		} catch (Exception e) {
