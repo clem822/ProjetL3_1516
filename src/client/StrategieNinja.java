@@ -36,7 +36,7 @@ public class StrategieNinja extends StrategiePersonnage {
 
 		super(ipArene, port, ipConsole, new Ninja(nom, groupe), nbTours, position, logger);
 
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/** 
@@ -62,12 +62,9 @@ public class StrategieNinja extends StrategiePersonnage {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		if (this.teleportation==true){//si il s'est teleporté au tour précédent
-			this.teleportation=false;
-			arene.soin(refRMI, -20,0);
-		}
+		
 		//si il n'a pas de voisins
-		else if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
+		 if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
 			console.setPhrase("J'erre...");
 			arene.deplaceRapidement(refRMI, 0); 
 		} else {//si un element est dans son champ de vision
@@ -120,10 +117,10 @@ public class StrategieNinja extends StrategiePersonnage {
 						
 					}else{
 							
-							if (moi.getCaract(Caracteristique.MANA )>20){
+							if (moi.getCaract(Caracteristique.MANA )>30){
 								console.setPhrase("Je me téléporte, il est trop fort pour moi . " + elemPlusProche.getNom());
 								arene.deplaceTeleportation(refRMI, 0);
-								this.teleportation=true;
+								arene.regenerationMana(refRMI, -30);
 								
 							}
 							else{
