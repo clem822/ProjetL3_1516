@@ -1261,8 +1261,8 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		if (( carac == Caracteristique.VITESSE ) && (increment < 2) && (pers instanceof Ninja))
 			increment = 2;
 		
-		
-				if (( carac == Caracteristique.VITESSE )  && (pers instanceof Teleporteur))
+		// Si la caractéristique est la vitesse et que le l'element est le teleporteur alors on laisse la viesse à 1
+		if (( carac == Caracteristique.VITESSE )  && (pers instanceof Teleporteur))
 					increment = 1;
 		
 		
