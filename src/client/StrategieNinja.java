@@ -102,22 +102,18 @@ public class StrategieNinja extends StrategiePersonnage {
 			
 			} else { // si voisins, mais plus eloignes
 				
-				if (elemPlusProche instanceof Personnage ){// si en fonction de l'initiative et du nombre de case et de la vitesse ,je serai le premier attaquant
-					if ((distPlusProche%2 !=0 && moi.getCaract(Caracteristique.VITESSE)%2!=0)||
-						(elemPlusProche.getCaract(Caracteristique.INITIATIVE )>moi.getCaract(Caracteristique.INITIATIVE))
-						|| (distPlusProche%2 ==0 && elemPlusProche.getCaract(Caracteristique.INITIATIVE )<moi.getCaract(Caracteristique.INITIATIVE))){
-						
+				if (elemPlusProche instanceof Personnage ){// si mon adversaire ne peut pas me tuer en seul coup je me dirige vers lui
+					if (elemPlusProche.getCaract(Caracteristique.FORCE )<moi.getCaract(Caracteristique.VIE)){						
 						console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
 						arene.deplaceRapidement(refRMI, refCible);
 						
-					}else{
-							
+					}else{//sinon je fuis en teleportation si j'ai assez de mana							
 							if (moi.getCaract(Caracteristique.MANA )>=30){
 								console.setPhrase("Je me t�l�porte, il est trop fort pour moi . " + elemPlusProche.getNom());
 								arene.deplaceTeleportation(refRMI, 0);
 								arene.regenerationMana(refRMI, -30);
 								
-							}
+							}// ou en utilisant la fuite 
 							else{
 								console.setPhrase("Je m'echappe, il est trop fort pour moi . " + elemPlusProche.getNom());
 								arene.Fuite(refRMI, refCible);

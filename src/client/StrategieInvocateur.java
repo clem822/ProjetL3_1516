@@ -75,10 +75,10 @@ public class StrategieInvocateur extends StrategiePersonnage {
 			Element elemPlusProche = arene.elementFromRef(refCible);
 			
 			
-			//Caracteristique vitesse de l'adversaire
+			//Caracteristique invisibilite de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
-			// Si le voisin est invisible, on se dirige al�atoirement
+			// Si le voisin est invisible, on se dirige aleatoirement
 			if (voisinEstInvisible(invAdv, elemPlusProche, arene,refRMI));	
 			
 			 //Si le voisin est un sbire ayant la meme refRMI alors il erre car c'est un de ses sbires
