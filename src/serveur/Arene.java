@@ -22,21 +22,18 @@ import serveur.element.Element;
 import serveur.element.Invocateur;
 import serveur.element.Personnage;
 import serveur.element.Potion;
-
 import serveur.element.Sbire;
 import serveur.interaction.DeplacementTeleleportation;
-
-
 import serveur.interaction.RegenerationMana;
 import serveur.interaction.Vampirise;
 import serveur.interaction.BouleDeFeu;
 import serveur.interaction.CoupDeHache;
 import serveur.interaction.Deplacement;
 import serveur.interaction.DeplacementRapide;
-import serveur.interaction.DeplacementTeleleportation;
 import serveur.interaction.Duel;
 import serveur.interaction.Invocation;
 import serveur.interaction.Ramassage;
+import serveur.interaction.Soin;
 import serveur.vuelement.VueElement;
 import serveur.vuelement.VuePersonnage;
 import serveur.vuelement.VuePotion;
@@ -84,7 +81,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 	
 	/**
 	 * Liste des personnages morts. Permet de garder une trace des personnages
-	 * qui ont jouÃ© et qui sont maintenant deconnectes. 
+	 * qui ont joué et qui sont maintenant deconnectes. 
 	 */
 	protected List<VuePersonnage> personnagesMorts = null;
 
@@ -708,6 +705,8 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		
 		logElements();
 	}
+	
+
 
 	@Override
 	public boolean ramassePotion(int refRMI, int refPotion) throws RemoteException {
@@ -739,6 +738,8 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		
 		return res;
 	}
+	
+	
 	
 	@Override
 	public boolean lanceAttaque(int refRMI, int refRMIAdv) throws RemoteException {
@@ -904,7 +905,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 					console.log(Level.INFO, Constantes.nomClasse(this), 
 							"Je decoupe " + nomRaccourciClient(refRMIAdv));
 					consoleAdv.log(Level.INFO, Constantes.nomClasse(this), 
-							"Je me fait massacrer par " + nomRaccourciClient(refRMI));
+							"Je me fait decouper par " + nomRaccourciClient(refRMI));
 					
 					logger.info(Constantes.nomClasse(this), nomRaccourciClient(refRMI) + 
 							" attaque " + nomRaccourciClient(consoleAdv.getRefRMI()));
@@ -943,7 +944,6 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		return res;
 	}
 	
-
 	
 	
 	
@@ -1064,7 +1064,6 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		return res;
 	}
 
-
 	
 	
 	@Override
@@ -1159,6 +1158,43 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		
 		return res;
 	}
+	
+	@Override
+	public boolean soin(int refRMI, int mana, int pv) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+		VuePersonnage pASoigner = personnages.get(refRMI);
+		IConsole console = consoleFromRef(refRMI);
+		console.log(Level.INFO, Constantes.nomClasse(this), 
+				"Je me soigne de " + pv + " contre " + mana);
+		new Soin(this, pASoigner).soigner(mana,pv);
+		
+		return true;
+	}
+	
+	@Override
+	public boolean regenerationMana(int refRMI, int mana) throws RemoteException{
+		
+		VuePersonnage pCible = personnages.get(refRMI);
+		IConsole console = consoleFromRef(refRMI);
+		console.log(Level.INFO, Constantes.nomClasse(this), 
+				"Je regagne " + mana + " Mana ");
+		new RegenerationMana(this, pCible).regenMana(mana);
+		
+		return true;
+	}
+	
+	@Override
+	public boolean ajouteArmure(int refRMI, int armure) throws RemoteException{
+		
+		VuePersonnage pCible = personnages.get(refRMI);
+		IConsole console = consoleFromRef(refRMI);
+		console.log(Level.INFO, Constantes.nomClasse(this), 
+				"Je gagne " + armure + " armure ");
+		this.incrementeCaractElement(pCible, Caracteristique.ARMURE, armure);
+		
+		return true;
+	}
 
 	/**
 	 * Ajoute l'increment donne a la caracteristique donne de l'element 
@@ -1176,9 +1212,11 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		int refRMI = vuePersonnage.getRefRMI();
 		IConsole console = consoleFromRef(refRMI);
 		Personnage pers = vuePersonnage.getElement();
+		
 		if(carac == Caracteristique.VIE && increment < 0) {
 			increment = (increment*(100-pers.getCaract(Caracteristique.ARMURE)))/100;
 		}
+		
 		if (carac == Caracteristique.INVISIBILITE && ((pers instanceof Invocateur ) || (pers instanceof Sbire))) {
 			
 		} else {
@@ -1355,29 +1393,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		
 		return res;
 	}
-
 	
-
-	@Override
-	public boolean soin(int refRMI, int mana, int pv) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean regenerationMana(int refRMI, int mana) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-
-
-	@Override
-	public boolean ajouteArmure(int refRMI, int armure) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	
 }
