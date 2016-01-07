@@ -29,7 +29,7 @@ public class Ninja extends Personnage{
 	private static HashMap<Caracteristique, Integer> caract (){
 		HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
 		caracts.put(Caracteristique.VIE, 80);
-		caracts.put(Caracteristique.MANA, 0);
+		caracts.put(Caracteristique.MANA, 60);
 		caracts.put(Caracteristique.INITIATIVE, 130);
 		caracts.put(Caracteristique.VITESSE, 2);
 		caracts.put(Caracteristique.FORCE, Calculs.nombreAleatoire(40,50));

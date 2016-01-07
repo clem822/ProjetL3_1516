@@ -17,7 +17,7 @@ import utilitaires.Constantes;
 
 public class StrategieNinja extends StrategiePersonnage {
 
-	
+		boolean teleportation=false;
 
 	/**
 	 * Cree un Ninja, la console associe et sa strategie.
@@ -62,19 +62,22 @@ public class StrategieNinja extends StrategiePersonnage {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
-		if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
+		if (this.teleportation==true){//si il s'est teleporté au tour précédent
+			this.teleportation=false;
+			arene.soin(refRMI, -20,0);
+		}
+		//si il n'a pas de voisins
+		else if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
 			console.setPhrase("J'erre...");
 			arene.deplaceRapidement(refRMI, 0); 
-			
-		} else {
+		} else {//si un element est dans son champ de vision
 			int refCible = Calculs.chercheElementProche(position, voisins);
 			int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 
 			Element elemPlusProche = arene.elementFromRef(refCible);
 			Element moi = arene.elementFromRef(refRMI);
 						
-			//Caractéristique vitesse de l'adversaire
+			//Caractéristique invisibilité de l'adversaire
 			int invAdv = elemPlusProche.getCaract(Caracteristique.INVISIBILITE); 
 			
 			//Si je suis déjà invisible ou que la référence est un personnage et qu'en plus son invisibilité est à 1 alors je ne l'attaque pas car je ne peux pas attaquer en étant invisible.
@@ -88,47 +91,67 @@ public class StrategieNinja extends StrategiePersonnage {
 					
 			else if (distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
-				if (elemPlusProche instanceof Poison){
+				if (elemPlusProche instanceof Poison){//si c'est un poison je la fuit
 					console.setPhrase("Je fuis ce poison");
 					arene.Fuite(refRMI, refCible);
-				}
-				else if(elemPlusProche instanceof Potion) { // potion
+				}//si ce n'est pas un poison et que prendre l'élément me tue pas, je le ramasse
+				else if(elemPlusProche instanceof Potion && elemPlusProche.getCaract(Caracteristique.VIE)>-(moi.getCaract(Caracteristique.VIE))) { // potion
 					// ramassage
 					console.setPhrase("Je ramasse une potion");
 					arene.ramassePotion(refRMI, refCible);
 
-				} else { // personnage
+				}
+					else { // personnage
 					// duel
 						console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
 						arene.lanceAttaque(refRMI, refCible);						
 				}
+			
+			
+			
 			} else { // si voisins, mais plus eloignes
-				// je vais vers le plus proche
-				if (elemPlusProche instanceof Personnage ){
-						if(elemPlusProche.getCaract(Caracteristique.FORCE ) > arene.elementFromRef(refRMI).getCaract(Caracteristique.VIE )){
-							console.setPhrase("Je m'echappe, il est trop fort pour moi . " + elemPlusProche.getNom());
-							if (arene.elementFromRef(refRMI).getCaract(Caracteristique.MANA )>20)
-								arene.deplaceTeleportation(refRMI, refCible);
-							else
+				
+				if (elemPlusProche instanceof Personnage ){// si en fonction de l'initiative et du nombre de case et de la vitesse ,je serai le premier attaquant
+					if (((distPlusProche%2 !=0 && elemPlusProche.getCaract(Caracteristique.INITIATIVE )>moi.getCaract(Caracteristique.INITIATIVE))
+						|| (distPlusProche%2 ==0 && elemPlusProche.getCaract(Caracteristique.INITIATIVE )<moi.getCaract(Caracteristique.INITIATIVE)))&& moi.getCaract(Caracteristique.VITESSE)%2!=0){
+						
+						console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
+						arene.deplaceRapidement(refRMI, refCible);
+						
+					}else{
+							
+							if (moi.getCaract(Caracteristique.MANA )>20){
+								console.setPhrase("Je me téléporte, il est trop fort pour moi . " + elemPlusProche.getNom());
+								arene.deplaceTeleportation(refRMI, 0);
+								this.teleportation=true;
+								
+							}
+							else{
+								console.setPhrase("Je m'echappe, il est trop fort pour moi . " + elemPlusProche.getNom());
 								arene.Fuite(refRMI, refCible);
-						}
-						else{
-							console.setPhrase("Je vais vers mon voisin " + elemPlusProche.getNom());
-							arene.deplaceRapidement(refRMI, refCible);
-					}
-					
+							}
+						}					
 				}
 				else{
 						if (elemPlusProche instanceof Poison ){
 							console.setPhrase("Je fuis le poison " + elemPlusProche.getNom());
 							arene.Fuite(refRMI, refCible);
 						}
-						else{
-							console.setPhrase("Je vais vers cette potion " + elemPlusProche.getNom());
+						else if(elemPlusProche instanceof Potion && elemPlusProche.getCaract(Caracteristique.VIE)>-(moi.getCaract(Caracteristique.VIE))) { // potion
+							// ramassage
+							console.setPhrase("J'arrive potion");
 							arene.deplaceRapidement(refRMI, refCible);
+						} 
+						else{
+							console.setPhrase("Je fuis cette potion, elle n'est pas bonne pour moi ! " + elemPlusProche.getNom());
+							arene.Fuite(refRMI, refCible);
 						}
+						
+					
 				}
+			
 		}	}
+		
 	}
 		
 }

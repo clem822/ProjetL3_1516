@@ -2,6 +2,8 @@ package serveur.element;
 
 import java.util.HashMap;
 
+import utilitaires.Calculs;
+
 
 /**
  * Un poison sera une extension de la classe Potion. On utilisera l'upcasting
@@ -27,12 +29,12 @@ public class Poison extends Potion {
 	 */
 	private static HashMap<Caracteristique, Integer> caract (){
 		HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
-		caracts.put(Caracteristique.VITESSE, 0);
-		caracts.put(Caracteristique.FORCE, 0);
-		caracts.put(Caracteristique.VIE, -80);
-		caracts.put(Caracteristique.MANA, 0);
-		caracts.put(Caracteristique.INITIATIVE, 0);
-		caracts.put(Caracteristique.ARMURE,0);
+		caracts.put(Caracteristique.VITESSE,-( Calculs.valeurCaracAleatoire(Caracteristique.VITESSE)));
+		caracts.put(Caracteristique.FORCE, -( Calculs.valeurCaracAleatoire(Caracteristique.FORCE)));
+		caracts.put(Caracteristique.VIE, -( Calculs.valeurCaracAleatoire(Caracteristique.VIE)));
+		caracts.put(Caracteristique.MANA, -( Calculs.valeurCaracAleatoire(Caracteristique.MANA)));
+		caracts.put(Caracteristique.INITIATIVE, -( Calculs.valeurCaracAleatoire(Caracteristique.INITIATIVE)));
+		caracts.put(Caracteristique.ARMURE,-( Calculs.valeurCaracAleatoire(Caracteristique.ARMURE)));
 		return caracts;
 	}
 }

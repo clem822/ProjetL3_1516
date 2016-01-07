@@ -342,7 +342,7 @@ public class AreneJPanel extends JPanel {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}else if(objet instanceof Arme){ // Image potion
+			}else if(objet instanceof Arme){ // Image arme
 				Image logo;
 				try {
 					
@@ -354,7 +354,7 @@ public class AreneJPanel extends JPanel {
 					e.printStackTrace();
 				}
 			}
-			else if(objet instanceof Poison){ // Image potion
+			else if(objet instanceof Poison){ // Image poison
 				Image logo;
 				try {
 					
@@ -366,6 +366,18 @@ public class AreneJPanel extends JPanel {
 					e.printStackTrace();
 				}
 			}
+			/*else if(objet instanceof Invisibilite){ // Image invisibilite
+				Image logo;
+				try {
+					
+					logo = ImageIO.read(new File("images/invisibilite.png"));
+					//System.out.println("width : " + logo.getWidth(this) + " / height : " + logo.getHeight(this));
+					g.drawImage(logo, coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10, null);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}*/
 			else if(objet instanceof Potion){ // Image potion
 				Image logo;
 				try {
